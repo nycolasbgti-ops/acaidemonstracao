@@ -40,7 +40,7 @@ function OrderItemLine({ item }) {
     <div className="py-1.5 border-b border-white/5 last:border-0">
       <div className="flex justify-between text-sm">
         <span className="text-gray-300 pr-2">{qty}× {item.name}</span>
-        <span className="text-[#DB2777] font-semibold flex-shrink-0">
+        <span className="text-acai-accent font-semibold flex-shrink-0">
           {fmt(item.price * qty)}
         </span>
       </div>
@@ -84,7 +84,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
   // ── Fluxo Pix: aguardando pagamento ───────────────────────────
   if (order.payment_method === 'pix') {
     return (
-      <div className="min-h-screen bg-[#07011A] text-white flex flex-col items-center justify-center px-5 py-10">
+      <div className="min-h-screen bg-acai-dark text-white flex flex-col items-center justify-center px-5 py-10">
         <div className="max-w-sm w-full text-center">
 
           <div className={`w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-7
@@ -94,40 +94,40 @@ export default function ConfirmationView({ order, onNewOrder }) {
             </span>
           </div>
 
-          <h1 className="text-3xl font-extrabold mb-2 text-[#DB2777]">Aguardando Pagamento!</h1>
+          <h1 className="text-3xl font-extrabold mb-2 text-acai-accent">Aguardando Pagamento!</h1>
           <p className="text-gray-400 text-[15px] mb-8 leading-relaxed">
             Para que o seu pedido seja confirmado e vá para<br />
             o preparo, pague a chave Pix abaixo e envie o<br />
             comprovante no nosso WhatsApp.
           </p>
 
-          <div className="bg-[#0F0320] rounded-2xl p-4 mb-5 text-left border border-purple-800/20">
+          <div className="bg-acai-surface rounded-2xl p-4 mb-5 text-left border border-acai-border">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Seu pedido</p>
             {(order.items || []).map((item, i) => (
               <OrderItemLine key={i} item={item} />
             ))}
             <div className="flex justify-between pt-3 mt-1 border-t border-white/5 font-bold">
               <span>Total</span>
-              <span className="text-xl text-[#DB2777]">{fmt(order.total)}</span>
+              <span className="text-xl text-acai-accent">{fmt(order.total)}</span>
             </div>
             <div className="mt-3 pt-3 border-t border-white/5 flex flex-wrap gap-2">
-              <span className="text-xs bg-[#1A0B2E] px-2.5 py-1 rounded-full text-gray-400">
+              <span className="text-xs bg-acai-raised px-2.5 py-1 rounded-full text-gray-400">
                 {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
               </span>
-              <span className="text-xs bg-[#1A0B2E] px-2.5 py-1 rounded-full text-gray-400">💠 Pix</span>
+              <span className="text-xs bg-acai-raised px-2.5 py-1 rounded-full text-gray-400">💠 Pix</span>
             </div>
           </div>
 
-          <div className="bg-[#0F0320] border border-[#DB2777]/40 rounded-2xl p-4 mb-5 text-left">
-            <p className="text-xs font-semibold text-[#DB2777] uppercase tracking-widest mb-3">Chave Pix</p>
+          <div className="bg-acai-surface border border-acai-accent/40 rounded-2xl p-4 mb-5 text-left">
+            <p className="text-xs font-semibold text-acai-accent uppercase tracking-widest mb-3">Chave Pix</p>
             <div className="flex items-center gap-2 mb-2.5">
-              <p className="flex-1 font-mono text-sm bg-[#1A0B2E] rounded-xl px-3 py-2.5 text-white truncate select-all">
+              <p className="flex-1 font-mono text-sm bg-acai-raised rounded-xl px-3 py-2.5 text-white truncate select-all">
                 {settings.pix_key || '—'}
               </p>
               <button
                 onClick={handleCopy}
                 className={`flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 ${
-                  copied ? 'bg-green-500 text-white' : 'bg-[#DB2777] text-white shadow-lg shadow-[#DB2777]/40'
+                  copied ? 'bg-green-500 text-white' : 'bg-[#DB2777] text-white shadow-lg shadow-acai-accent/40'
                 }`}
               >
                 {copied ? '✓ Copiado!' : 'Copiar'}
@@ -135,7 +135,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
             </div>
             <p className="text-xs text-gray-500 leading-relaxed">
               Acesse seu banco, escolha Pix e cole a chave acima.
-              O valor a pagar é <span className="text-[#DB2777] font-semibold">{fmt(order.total)}</span>.
+              O valor a pagar é <span className="text-acai-accent font-semibold">{fmt(order.total)}</span>.
             </p>
           </div>
 
@@ -153,7 +153,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
           <button
             onClick={onNewOrder}
-            className="w-full py-3.5 bg-[#0F0320] rounded-2xl font-semibold text-gray-400 border border-purple-800/20
+            className="w-full py-3.5 bg-acai-surface rounded-2xl font-semibold text-gray-400 border border-acai-border
                        active:scale-[0.98] transition-all text-sm"
           >
             Fazer novo pedido
@@ -165,7 +165,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
   // ── Fluxo padrão: pedido confirmado ───────────────────────────
   return (
-    <div className="min-h-screen bg-[#07011A] text-white flex flex-col items-center justify-center px-5 py-10">
+    <div className="min-h-screen bg-acai-dark text-white flex flex-col items-center justify-center px-5 py-10">
       <div className="max-w-sm w-full text-center">
         <div className={`w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-7
                          transition-all duration-500 ${tick ? 'bg-green-500/20 scale-100' : 'scale-50 opacity-0'}`}>
@@ -182,7 +182,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
           Recebemos seu pedido e já estamos<br />preparando tudo com muito carinho.
         </p>
 
-        <div className="bg-[#0F0320] rounded-2xl p-4 mb-5 text-left border border-purple-800/20">
+        <div className="bg-acai-surface rounded-2xl p-4 mb-5 text-left border border-acai-border">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Seu pedido</p>
           {(order.items || []).map((item, i) => (
             <OrderItemLine key={i} item={item} />
@@ -192,10 +192,10 @@ export default function ConfirmationView({ order, onNewOrder }) {
             <span className="text-xl">{fmt(order.total)}</span>
           </div>
           <div className="mt-3 pt-3 border-t border-white/5 flex flex-wrap gap-2">
-            <span className="text-xs bg-[#1A0B2E] px-2.5 py-1 rounded-full text-gray-400">
+            <span className="text-xs bg-acai-raised px-2.5 py-1 rounded-full text-gray-400">
               {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
             </span>
-            <span className="text-xs bg-[#1A0B2E] px-2.5 py-1 rounded-full text-gray-400">
+            <span className="text-xs bg-acai-raised px-2.5 py-1 rounded-full text-gray-400">
               {PAYMENT_LABELS[order.payment_method] || order.payment_method}
             </span>
           </div>
@@ -215,7 +215,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
         <button
           onClick={onNewOrder}
-          className="w-full py-3.5 bg-[#0F0320] rounded-2xl font-semibold text-gray-400 border border-purple-800/20
+          className="w-full py-3.5 bg-acai-surface rounded-2xl font-semibold text-gray-400 border border-acai-border
                      active:scale-[0.98] transition-all text-sm"
         >
           Fazer novo pedido

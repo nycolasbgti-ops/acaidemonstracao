@@ -94,8 +94,8 @@ function PrintModal({ order, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-      <div className="bg-[#1A1A1A] rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh]">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/5 flex-shrink-0">
+      <div className="bg-acai-surface rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh]">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-acai-border flex-shrink-0">
           <div>
             <p className="font-bold text-base">🖨️ Imprimir Comanda</p>
             <p className="text-xs text-gray-500 mt-0.5">Edite antes de imprimir se necessário</p>
@@ -145,7 +145,7 @@ function OrderCard({ order, onAdvance, onPrint }) {
   }
 
   return (
-    <div className={`bg-[#1A1A1A] rounded-2xl p-4 mb-3 ${order.status === 'new' ? 'ring-1 ring-blue-500/40' : ''}`}>
+    <div className={`bg-acai-surface rounded-2xl p-4 mb-3 ${order.status === 'new' ? 'ring-1 ring-blue-500/40' : ''}`}>
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="font-bold text-base leading-snug">{order.customer_name}</p>
@@ -166,7 +166,7 @@ function OrderCard({ order, onAdvance, onPrint }) {
         ))}
       </div>
 
-      <div className="flex items-center justify-between py-2.5 border-t border-b border-white/5 mb-3">
+      <div className="flex items-center justify-between py-2.5 border-t border-b border-acai-border mb-3">
         <div className="flex gap-1.5 flex-wrap">
           <span className="text-xs bg-[#242424] px-2 py-0.5 rounded-full text-gray-400">
             {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
@@ -216,7 +216,7 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
 
   return (
     <>
-      <div className="flex border-b border-white/5 bg-[#0A0A0A]">
+      <div className="flex border-b border-acai-border bg-[#0A0A0A]">
         {ORDER_TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             className={`flex-1 py-3.5 text-sm font-semibold relative transition-colors whitespace-nowrap ${
@@ -249,7 +249,7 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
             <p className="text-gray-300 font-semibold mb-1">Erro de conexão</p>
             <p className="text-gray-500 text-sm mb-5">Não foi possível conectar à API.</p>
             <button onClick={onRefetch}
-              className="px-5 py-2.5 bg-[#1A1A1A] rounded-xl text-sm font-semibold">
+              className="px-5 py-2.5 bg-acai-surface rounded-xl text-sm font-semibold">
               Tentar novamente
             </button>
           </div>
@@ -316,7 +316,7 @@ function SettingsPanel() {
 
       {error && <p className="text-red-400 text-sm bg-red-500/10 rounded-xl px-4 py-2">{error}</p>}
 
-      <div className="bg-[#1A1A1A] rounded-2xl p-4">
+      <div className="bg-acai-surface rounded-2xl p-4">
         <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">💠 Chave Pix</label>
         <input
           type="text"
@@ -327,7 +327,7 @@ function SettingsPanel() {
         />
       </div>
 
-      <div className="bg-[#1A1A1A] rounded-2xl p-4">
+      <div className="bg-acai-surface rounded-2xl p-4">
         <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">📱 Número do WhatsApp</label>
         <input
           type="text"
@@ -423,7 +423,7 @@ export default function AdminPanel({ onBack }) {
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5
+      <div className="sticky top-0 z-10 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-acai-border
                       px-4 h-16 flex items-center gap-3">
         <div className="flex-1">
           <h1 className="text-lg font-bold leading-tight">Painel Admin</h1>
@@ -440,7 +440,7 @@ export default function AdminPanel({ onBack }) {
       </div>
 
       {/* Main tabs */}
-      <div className="flex border-b border-white/5 bg-[#0A0A0A]">
+      <div className="flex border-b border-acai-border bg-[#0A0A0A]">
         {MAIN_TABS.map(tab => (
           <button key={tab.key} onClick={() => setMainTab(tab.key)}
             className={`flex-1 py-3.5 text-sm font-semibold relative transition-colors ${

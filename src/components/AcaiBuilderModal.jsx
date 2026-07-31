@@ -93,7 +93,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
       />
 
       {/* Modal */}
-      <div className="relative bg-[#100528] rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-2xl">
+      <div className="relative bg-acai-surface rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-2xl">
 
         {/* Barra de progresso */}
         <div className="w-full h-1 bg-gray-800 rounded-t-3xl overflow-hidden flex-shrink-0">
@@ -132,7 +132,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
             <StepHeader number={1} title="Escolha a Massa" subtitle="Obrigatório · Seleção única" amber />
 
             {bases.length === 0 ? (
-              <p className="text-xs text-gray-500 bg-[#1A0B2E] rounded-xl px-4 py-3">
+              <p className="text-xs text-gray-500 bg-acai-raised rounded-xl px-4 py-3">
                 Nenhuma massa cadastrada. Adicione no painel admin → Adicionais.
               </p>
             ) : (
@@ -146,7 +146,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
                       className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all border text-left group ${
                         isSelected
                           ? 'bg-gradient-to-r from-amber-400/20 to-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
-                          : 'bg-[#1A0B2E] border-purple-800/30 hover:border-purple-700/50'
+                          : 'bg-acai-raised border-purple-800/30 hover:border-purple-700/50'
                       }`}
                     >
                       <div className={`w-6 h-6 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all ${
@@ -182,7 +182,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
                       className={`flex items-center gap-2.5 p-3.5 rounded-2xl transition-all border text-left group ${
                         isSelected
                           ? 'bg-gradient-to-r from-amber-400/20 to-amber-500/20 border-amber-400/50'
-                          : 'bg-[#1A0B2E] border-purple-800/30 hover:border-purple-700/50'
+                          : 'bg-acai-raised border-purple-800/30 hover:border-purple-700/50'
                       }`}
                     >
                       <div className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all ${
@@ -253,7 +253,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
             )}
 
             {toppings.length === 0 ? (
-              <p className="text-xs text-gray-500 bg-[#1A0B2E] rounded-xl px-4 py-3">
+              <p className="text-xs text-gray-500 bg-acai-raised rounded-xl px-4 py-3">
                 Nenhum acompanhamento cadastrado.
               </p>
             ) : (
@@ -270,8 +270,8 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
                         isSelected
                           ? 'bg-gradient-to-r from-amber-400/20 to-amber-500/20 border-amber-400/50'
                           : isDisabled
-                            ? 'bg-[#0F0320] border-gray-700/30 opacity-40 cursor-not-allowed'
-                            : 'bg-[#1A0B2E] border-purple-800/30 hover:border-purple-700/50'
+                            ? 'bg-acai-dark border-gray-700/30 opacity-40 cursor-not-allowed'
+                            : 'bg-acai-raised border-purple-800/30 hover:border-purple-700/50'
                       }`}
                     >
                       <div className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all ${
@@ -313,13 +313,13 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
                       onClick={() => toggleExtra(extra)}
                       className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all border text-left group ${
                         isSelected
-                          ? 'bg-gradient-to-r from-[#DB2777]/20 to-[#DB2777]/10 border-[#DB2777]/50 shadow-lg shadow-[#DB2777]/20'
-                          : 'bg-[#1A0B2E] border-purple-800/30 hover:border-purple-700/50'
+                          ? 'bg-gradient-to-r from-[#DB2777]/20 to-[#DB2777]/10 border-acai-accent/50 shadow-lg shadow-acai-accent/20'
+                          : 'bg-acai-raised border-purple-800/30 hover:border-purple-700/50'
                       }`}
                     >
                       <div className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all ${
                         isSelected
-                          ? 'bg-[#DB2777] border-[#DB2777] shadow-lg shadow-[#DB2777]/40'
+                          ? 'bg-gradient-to-r from-acai-accent to-acai-accent-lt border-acai-accent shadow-lg shadow-acai-accent/40'
                           : 'border-gray-600 group-hover:border-gray-500'
                       }`}>
                         {isSelected && (
@@ -333,7 +333,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
                           {extra.label}
                         </p>
                       </div>
-                      <span className={`font-bold text-sm flex-shrink-0 ${isSelected ? 'text-[#DB2777]' : 'text-[#DB2777]/70'}`}>
+                      <span className={`font-bold text-sm flex-shrink-0 ${isSelected ? 'text-[#DB2777]' : 'text-acai-accent/70'}`}>
                         + {fmt(extra.price)}
                       </span>
                     </button>
@@ -347,7 +347,7 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
         </div>
 
         {/* ── Rodapé fixo ─────────────────────────────────────── */}
-        <div className="px-5 pt-4 pb-8 border-t border-white/5 flex-shrink-0 bg-[#100528] space-y-3">
+        <div className="px-5 pt-4 pb-8 border-t border-white/5 flex-shrink-0 bg-acai-surface space-y-3">
 
           {(caldaTotal > 0 || extrasTotal > 0) && (
             <div className="bg-amber-400/10 border border-amber-400/25 rounded-2xl px-4 py-3 text-center">
@@ -361,13 +361,13 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
           )}
 
           {/* Quantidade */}
-          <div className="flex items-center justify-between bg-[#1A0B2E] rounded-2xl px-4 py-3 border border-purple-800/20">
+          <div className="flex items-center justify-between bg-acai-raised rounded-2xl px-4 py-3 border border-purple-800/20">
             <span className="text-sm text-gray-400 font-medium">Quantidade</span>
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setQty(q => Math.max(1, q - 1))}
-                className="w-9 h-9 rounded-full bg-[#0F0320] flex items-center justify-center text-lg
-                           text-gray-400 active:scale-90 transition-transform hover:bg-[#2A0F40]"
+                className="w-9 h-9 rounded-full bg-acai-dark flex items-center justify-center text-lg
+                           text-gray-400 active:scale-90 transition-transform hover:bg-acai-surface"
               >
                 −
               </button>
@@ -388,8 +388,8 @@ export default function AcaiBuilderModal({ product, addons = {}, onClose, onAdd 
             className={`w-full py-4 rounded-2xl font-bold text-[15px] flex items-center justify-between px-6
                         transition-all active:scale-[0.98] shadow-lg ${
               canAdd
-                ? 'bg-gradient-to-r from-[#DB2777] to-[#C41F63] text-white shadow-[#DB2777]/40'
-                : 'bg-[#1A0B2E] text-gray-600 cursor-not-allowed opacity-50'
+                ? 'bg-gradient-to-r from-acai-accent to-acai-accent-lt text-white shadow-acai-accent/40'
+                : 'bg-acai-raised text-gray-600 cursor-not-allowed opacity-50'
             }`}
           >
             <span>{canAdd ? 'Adicionar ao Carrinho' : 'Escolha a massa primeiro'}</span>

@@ -32,14 +32,14 @@ export default function AdminLogin({ onLogin, onClose }) {
     <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative bg-[#161616] rounded-t-3xl p-6 pb-10 w-full max-w-sm mx-auto animate-slideUp">
+      <div className="relative bg-acai-surface rounded-t-3xl p-6 pb-10 w-full max-w-sm mx-auto animate-slideUp">
         <div className="flex justify-center mb-1">
           <div className="w-10 h-1 bg-white/15 rounded-full" />
         </div>
 
         {/* Icon + title */}
         <div className="text-center mt-4 mb-8">
-          <div className="w-16 h-16 bg-[#232323] rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-acai-raised rounded-2xl flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -56,8 +56,8 @@ export default function AdminLogin({ onLogin, onClose }) {
               key={i}
               className={`w-4 h-4 rounded-full transition-all duration-200 ${
                 i < pin.length
-                  ? error ? 'bg-red-500 scale-110' : 'bg-[#D4AF37] scale-110'
-                  : 'bg-[#2C2C2E]'
+                  ? error ? 'bg-red-500 scale-110' : 'bg-acai-gold scale-110'
+                  : 'bg-acai-border'
               }`}
             />
           ))}
@@ -73,8 +73,8 @@ export default function AdminLogin({ onLogin, onClose }) {
                 onClick={() => key === '⌫' ? handleDel() : handleDigit(String(key))}
                 className={`h-14 rounded-2xl text-lg font-semibold transition-all active:scale-90
                   ${key === '⌫'
-                    ? 'bg-[#232323] text-gray-400'
-                    : 'bg-[#232323] text-white hover:bg-[#2C2C2E]'
+                    ? 'bg-acai-raised text-gray-400'
+                    : 'bg-acai-raised text-white hover:bg-acai-border'
                   }`}
               >
                 {key}

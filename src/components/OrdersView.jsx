@@ -51,12 +51,12 @@ export default function OrdersView() {
             value={phone}
             onChange={e => setPhone(e.target.value)}
             placeholder="(00) 00000-0000"
-            className="flex-1 bg-[#1A0B2E] border border-purple-800/40 rounded-2xl px-4 py-3 text-white placeholder-gray-600 outline-none focus:ring-2 focus:ring-[#DB2777] text-sm transition-all"
+            className="flex-1 bg-acai-raised border border-acai-border rounded-2xl px-4 py-3 text-white placeholder-acai-text-dim outline-none focus:ring-2 focus:ring-acai-accent text-sm transition-all"
           />
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-3 bg-[#DB2777] rounded-2xl text-sm font-bold text-white active:scale-95 transition-all disabled:opacity-50 flex-shrink-0"
+            className="px-5 py-3 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-2xl text-sm font-bold text-white active:scale-95 transition-all disabled:opacity-50 flex-shrink-0"
           >
             {loading ? (
               <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ export default function OrdersView() {
                 hour: '2-digit', minute: '2-digit',
               })
               return (
-                <div key={order.id} className="bg-[#1A0B2E] rounded-2xl p-4 border border-purple-800/20">
+                <div key={order.id} className="bg-acai-raised rounded-2xl p-4 border border-purple-800/20">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div>
                       <p className="text-xs text-gray-500">{date}</p>
@@ -111,7 +111,7 @@ export default function OrdersView() {
                     <span className="text-xs text-gray-500">
                       {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
                     </span>
-                    <span className="text-sm font-bold text-[#DB2777]">{fmt(order.total)}</span>
+                    <span className="text-sm font-bold text-acai-accent">{fmt(order.total)}</span>
                   </div>
                 </div>
               )

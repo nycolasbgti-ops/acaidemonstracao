@@ -36,7 +36,7 @@ export default function StoreInfoModal({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-[#100528] rounded-t-3xl max-h-[85vh] overflow-y-auto animate-slide-up"
+        className="w-full max-w-lg bg-acai-surface rounded-t-3xl max-h-[85vh] overflow-y-auto animate-slide-up"
         onClick={e => e.stopPropagation()}
       >
         {/* Handle */}
@@ -45,10 +45,10 @@ export default function StoreInfoModal({ onClose }) {
         </div>
 
         {/* Logo + nome */}
-        <div className="flex flex-col items-center pt-4 pb-5 px-6 border-b border-purple-800/30">
+        <div className="flex flex-col items-center pt-4 pb-5 px-6 border-b border-acai-border">
           <AcaiLogo />
           <h2 className="text-xl font-bold text-white tracking-tight mt-2">Açaí Concept</h2>
-          <p className="text-xs text-purple-400 mt-0.5">Sorveteria & Açaiteria</p>
+          <p className="text-xs text-acai-text-muted mt-0.5">Sorveteria & Açaiteria</p>
         </div>
 
         <div className="px-6 pt-4 pb-2 space-y-5">
@@ -105,14 +105,14 @@ export default function StoreInfoModal({ onClose }) {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <div className="w-10 h-10 flex-shrink-0 bg-purple-500/15 rounded-2xl flex items-center justify-center">
-                <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-acai-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <p className="text-sm font-semibold text-white">Horário de Funcionamento</p>
             </div>
-            <div className="bg-[#1A0B2E] rounded-2xl overflow-hidden divide-y divide-purple-800/20">
+            <div className="bg-acai-raised rounded-2xl overflow-hidden divide-y divide-purple-800/20">
               {HOURS.map(({ day, slots }) => (
                 <div key={day} className="flex items-center justify-between px-4 py-2.5">
                   <span className="text-xs text-gray-400 w-16 flex-shrink-0">{day}</span>

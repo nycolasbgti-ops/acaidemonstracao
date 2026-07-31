@@ -7,12 +7,12 @@ export default function ProductCard({ product, isBuilder, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="w-full bg-[#100528] rounded-2xl overflow-hidden flex flex-col text-left
+      className="w-full bg-acai-surface rounded-2xl overflow-hidden flex flex-col text-left
                  active:scale-[0.97] transition-all duration-150
                  border border-white/5 hover:border-purple-800/30"
     >
       {/* Image */}
-      <div className="w-full aspect-square bg-gradient-to-br from-[#190844] via-[#2D0059] to-[#190844]
+      <div className="w-full aspect-square bg-gradient-to-br from-acai-primary/20 via-acai-accent/10 to-acai-primary/20
                       flex items-center justify-center">
         {product.image_url ? (
           <img
@@ -39,7 +39,7 @@ export default function ProductCard({ product, isBuilder, onClick }) {
             {fmt(basePrice)}
           </span>
           <span
-            className="w-7 h-7 bg-[#DB2777] rounded-full flex items-center justify-center
+            className="w-7 h-7 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-full flex items-center justify-center
                        text-white text-xl leading-none font-light"
             style={{ boxShadow: '0 3px 12px rgba(219,39,119,.35)' }}
           >

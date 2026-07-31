@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ────────────────────────────────────────────────────────────────────────── */
+/* BASE STYLES - GLOBAL CUSTOMIZATION                                        */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 * {
   -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
@@ -9,11 +13,14 @@
 
 html, body {
   overscroll-behavior: none;
-  background-color: #0A0A0A;
-  color: white;
+  background-color: #0A0806;
+  color: #F3F4F6;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Scrollbar customizado */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -30,4 +37,127 @@ input, textarea, button {
 input[type="tel"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* COMPONENT CLASSES - REUTILIZÁVEIS                                        */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Botão Primário - Verde Menta Vibrante (Ações principais) */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-acai-accent to-acai-accent-lt text-white font-bold rounded-2xl 
+         transition-all duration-200 active:scale-95 shadow-lg shadow-acai-accent/40 
+         hover:shadow-xl hover:shadow-acai-accent/50;
+}
+
+.btn-primary:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Botão Secundário - Roxo Premium */
+.btn-secondary {
+  @apply px-6 py-3 bg-gradient-to-r from-acai-primary to-acai-primary-lt text-white font-bold rounded-2xl 
+         transition-all duration-200 active:scale-95 shadow-lg shadow-acai-primary/40 
+         hover:shadow-xl hover:shadow-acai-primary/50;
+}
+
+.btn-secondary:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Botão Tertiary - Contorno */
+.btn-tertiary {
+  @apply px-6 py-3 bg-acai-surface border-2 border-acai-primary text-acai-accent font-bold rounded-2xl 
+         transition-all duration-200 active:scale-95 
+         hover:bg-acai-raised hover:border-acai-accent;
+}
+
+/* Card Premium */
+.card-premium {
+  @apply bg-acai-surface rounded-2xl border border-acai-border shadow-md-premium 
+         transition-all duration-200 hover:shadow-lg-premium hover:border-acai-primary/50;
+}
+
+/* Badge Status */
+.badge-success {
+  @apply inline-flex items-center px-3 py-1 rounded-full bg-acai-success/15 text-acai-success text-xs font-semibold;
+}
+
+.badge-warning {
+  @apply inline-flex items-center px-3 py-1 rounded-full bg-acai-gold/15 text-acai-gold text-xs font-semibold;
+}
+
+.badge-error {
+  @apply inline-flex items-center px-3 py-1 rounded-full bg-acai-error/15 text-acai-error text-xs font-semibold;
+}
+
+/* Input Field Premium */
+.input-premium {
+  @apply w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-acai-text-dim 
+         outline-none border border-acai-border transition-all duration-200
+         focus:ring-2 focus:ring-acai-accent focus:border-acai-accent;
+}
+
+.input-premium:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Divider com gradiente */
+.divider-gradient {
+  @apply h-px bg-gradient-to-r from-transparent via-acai-primary to-transparent;
+}
+
+/* Glass Morphism Effect */
+.glass-effect {
+  @apply backdrop-blur-xl bg-acai-bg/40 border border-white/5;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-acai-accent to-acai-gold bg-clip-text text-transparent;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* UTILITY CLASSES - EFEITOS ESPECIAIS                                      */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Hover lift effect */
+.hover-lift {
+  @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-lg-premium;
+}
+
+/* Focus ring premium */
+.focus-ring-premium {
+  @apply focus:outline-none focus:ring-2 focus:ring-acai-accent focus:ring-offset-2 focus:ring-offset-acai-bg;
+}
+
+/* Disabled state */
+.disabled-state {
+  @apply opacity-50 cursor-not-allowed pointer-events-none;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* RESPONSIVE - MOBILE FIRST ADJUSTMENTS                                    */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  * {
+    border-color: #9CA3AF;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

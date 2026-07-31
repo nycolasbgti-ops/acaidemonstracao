@@ -141,7 +141,7 @@ export default function App() {
 
   // ── Menu principal ────────────────────────────────────────────
   return (
-    <div className="h-screen bg-[#07011A] text-white flex flex-col overflow-hidden">
+    <div className="h-screen bg-acai-dark text-acai-text flex flex-col overflow-hidden">
       <Header
         cartCount={cartCount}
         cartTotal={cartTotal}
@@ -159,7 +159,7 @@ export default function App() {
         <>
           {/* Banner de modo demonstração */}
           {error && (
-            <div className="px-4 py-2 text-xs text-center text-amber-400 bg-amber-500/10 border-b border-amber-500/20">
+            <div className="px-4 py-2 text-xs text-center text-acai-gold bg-acai-gold/10 border-b border-acai-gold/20">
               {error}
             </div>
           )}
@@ -239,8 +239,8 @@ export default function App() {
 function LoadingState() {
   return (
     <div className="flex flex-col items-center justify-center pt-24 gap-4">
-      <div className="w-10 h-10 border-2 border-[#DB2777] border-t-transparent rounded-full animate-spin" />
-      <p className="text-sm text-gray-500">Carregando cardápio...</p>
+      <div className="w-10 h-10 border-2 border-acai-accent border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm text-acai-text-muted">Carregando cardápio...</p>
     </div>
   )
 }
@@ -249,9 +249,9 @@ function ErrorState({ message }) {
   return (
     <div className="px-6 pt-24 text-center">
       <span className="text-5xl block mb-4">⚠️</span>
-      <p className="text-gray-300 font-semibold mb-2">Não foi possível carregar o cardápio</p>
+      <p className="text-acai-text font-semibold mb-2">Não foi possível carregar o cardápio</p>
       {message && (
-        <p className="text-gray-600 text-xs font-mono bg-[#1A0B2E] rounded-xl px-4 py-3 mt-3 text-left break-all">
+        <p className="text-acai-text-muted text-xs font-mono bg-acai-surface rounded-xl px-4 py-3 mt-3 text-left break-all">
           {message}
         </p>
       )}

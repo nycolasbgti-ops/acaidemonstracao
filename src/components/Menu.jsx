@@ -61,10 +61,10 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
                 ? <img src={cat.icon} alt={cat.name} className="w-7 h-7 object-contain flex-shrink-0" />
                 : <span className="text-xl leading-none">{cat.icon}</span>
               }
-              <h2 className="font-bold text-white text-sm tracking-widest uppercase">
+              <h2 className="font-bold text-acai-text text-sm tracking-widest uppercase">
                 {cat.name}
               </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-purple-700/40 to-transparent ml-1" />
+              <div className="flex-1 h-px bg-gradient-to-r from-acai-primary/40 to-transparent ml-1" />
             </div>
 
             {/* Grid de produtos */}
@@ -90,12 +90,13 @@ function ProductGridCard({ product, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="flex flex-col bg-[#190844] rounded-xl overflow-hidden
+      className="flex flex-col bg-acai-surface rounded-2xl overflow-hidden
                  active:scale-[0.96] transition-all duration-150 text-left
-                 border border-purple-700/20 hover:border-purple-600/40 group"
+                 border border-acai-border hover:border-acai-primary/50 group
+                 hover:shadow-lg-premium hover:shadow-acai-primary/20"
     >
       {/* Imagem */}
-      <div className="w-full aspect-square bg-gradient-to-br from-gray-700 to-gray-900
+      <div className="w-full aspect-square bg-gradient-to-br from-acai-primary/30 to-acai-accent/10
                       flex items-center justify-center overflow-hidden relative">
         {product.image_url ? (
           <img
@@ -105,7 +106,7 @@ function ProductGridCard({ product, onClick }) {
             loading="lazy"
           />
         ) : (
-          <div className="flex items-center justify-center w-full h-full bg-[#0F0320]">
+          <div className="flex items-center justify-center w-full h-full bg-acai-raised">
             <span className="text-4xl opacity-40">{product.emoji ?? '🍧'}</span>
           </div>
         )}
@@ -114,22 +115,23 @@ function ProductGridCard({ product, onClick }) {
 
       {/* Conteúdo */}
       <div className="flex-1 flex flex-col p-3">
-        <h3 className="font-bold text-sm text-white leading-snug line-clamp-2 mb-1">
+        <h3 className="font-bold text-sm text-acai-text leading-snug line-clamp-2 mb-1">
           {product.name}
         </h3>
-        <p className="text-xs text-gray-400 line-clamp-1 flex-1">
+        <p className="text-xs text-acai-text-muted line-clamp-1 flex-1">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-purple-700/20">
-          <span className="text-fuchsia-400 font-bold text-sm">
+        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-acai-border">
+          <span className="text-acai-gold font-bold text-sm">
             {fmt(basePrice)}
           </span>
           <button
             onClick={(e) => { e.stopPropagation(); onClick() }}
-            className="w-7 h-7 bg-[#DB2777] rounded-full flex items-center justify-center
-                       text-white text-lg leading-none shadow-md shadow-[#DB2777]/40
-                       font-light active:scale-90 transition-transform flex-shrink-0"
+            className="w-7 h-7 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-full flex items-center justify-center
+                       text-white text-lg leading-none shadow-lg shadow-acai-accent/40
+                       font-light active:scale-90 transition-transform flex-shrink-0
+                       hover:shadow-xl hover:shadow-acai-accent/50"
           >
             +
           </button>

@@ -17,7 +17,7 @@ function ItemSummaryLine({ item }) {
         <span className="text-gray-300 pr-2">
           {qty}× {item.name}
         </span>
-        <span className="text-[#DB2777] font-semibold flex-shrink-0">
+        <span className="text-acai-gold font-semibold flex-shrink-0">
           {fmt(item.price * qty)}
         </span>
       </div>
@@ -94,11 +94,11 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#07011A] text-white flex flex-col">
+    <div className="min-h-screen bg-acai-dark text-white flex flex-col">
       {/* Nav */}
-      <div className="sticky top-0 z-10 bg-[#07011A]/95 backdrop-blur-xl border-b border-white/5
+      <div className="sticky top-0 z-10 bg-acai-dark/95 backdrop-blur-xl border-b border-white/5
                       px-4 h-16 flex items-center gap-3">
-        <button onClick={onBack} className="w-10 h-10 flex items-center justify-center -ml-1 text-[#DB2777]">
+        <button onClick={onBack} className="w-10 h-10 flex items-center justify-center -ml-1 text-acai-gold">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
@@ -113,7 +113,7 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
       <div className="flex-1 overflow-y-auto px-4 py-5 space-y-5 max-w-lg mx-auto w-full pb-36">
 
         {/* Summary */}
-        <section className="bg-[#0F0320] rounded-2xl p-4 border border-purple-800/20">
+        <section className="bg-acai-surface rounded-2xl p-4 border border-acai-border">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Resumo</p>
           {cart.map(item => (
             <ItemSummaryLine key={item.cartId} item={item} />
@@ -125,7 +125,7 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
         </section>
 
         {/* Personal data */}
-        <section className="bg-[#0F0320] rounded-2xl p-4 space-y-4 border border-purple-800/20">
+        <section className="bg-acai-surface rounded-2xl p-4 space-y-4 border border-acai-border">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Seus dados</p>
 
           <div>
@@ -136,8 +136,8 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
               value={form.name}
               onChange={e => set('name', e.target.value)}
               placeholder="João Silva"
-              className="w-full bg-[#1A0B2E] rounded-xl px-4 py-3.5 text-white placeholder-gray-600
-                         outline-none focus:ring-2 focus:ring-[#DB2777] transition-all text-sm border border-purple-800/20"
+              className="w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-gray-600
+                         outline-none focus:ring-2 focus:ring-acai-accent transition-all text-sm border border-acai-border"
             />
           </div>
 
@@ -149,14 +149,14 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
               value={form.phone}
               onChange={e => set('phone', e.target.value)}
               placeholder="(11) 99999-9999"
-              className="w-full bg-[#1A0B2E] rounded-xl px-4 py-3.5 text-white placeholder-gray-600
-                         outline-none focus:ring-2 focus:ring-[#DB2777] transition-all text-sm border border-purple-800/20"
+              className="w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-gray-600
+                         outline-none focus:ring-2 focus:ring-acai-accent transition-all text-sm border border-acai-border"
             />
           </div>
         </section>
 
         {/* Delivery */}
-        <section className="bg-[#0F0320] rounded-2xl p-4 space-y-4 border border-purple-800/20">
+        <section className="bg-acai-surface rounded-2xl p-4 space-y-4 border border-acai-border">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Entrega</p>
 
           <div className="grid grid-cols-2 gap-2">
@@ -169,8 +169,8 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
                 onClick={() => set('deliveryType', opt.value)}
                 className={`py-3.5 px-4 rounded-2xl text-left transition-all border ${
                   form.deliveryType === opt.value
-                    ? 'bg-[#DB2777]/20 border-[#DB2777]'
-                    : 'bg-[#1A0B2E] border-purple-800/20'
+                    ? 'bg-acai-accent/20 border-acai-accent'
+                    : 'bg-acai-raised border-acai-border'
                 }`}
               >
                 <p className="font-semibold text-sm">{opt.label}</p>
@@ -187,15 +187,15 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
                 onChange={e => set('address', e.target.value)}
                 placeholder="Rua, número, bairro, complemento..."
                 rows={3}
-                className="w-full bg-[#1A0B2E] rounded-xl px-4 py-3.5 text-white placeholder-gray-600
-                           outline-none focus:ring-2 focus:ring-[#DB2777] transition-all resize-none text-sm border border-purple-800/20"
+                className="w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-gray-600
+                           outline-none focus:ring-2 focus:ring-acai-accent transition-all resize-none text-sm border border-acai-border"
               />
             </div>
           )}
         </section>
 
         {/* Payment */}
-        <section className="bg-[#0F0320] rounded-2xl p-4 space-y-3 border border-purple-800/20">
+        <section className="bg-acai-surface rounded-2xl p-4 space-y-3 border border-acai-border">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Pagamento</p>
 
           <div className="grid grid-cols-2 gap-2">
@@ -205,8 +205,8 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
                 onClick={() => set('payment', opt.value)}
                 className={`py-3.5 px-4 rounded-2xl text-left transition-all border ${
                   form.payment === opt.value
-                    ? 'bg-[#DB2777]/20 border-[#DB2777]'
-                    : 'bg-[#1A0B2E] border-purple-800/20'
+                    ? 'bg-acai-accent/20 border-acai-accent'
+                    : 'bg-acai-raised border-acai-border'
                 }`}
               >
                 <p className="font-semibold text-sm">{opt.label}</p>
@@ -222,15 +222,15 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
                 value={form.changeFor}
                 onChange={e => set('changeFor', e.target.value)}
                 placeholder="Ex: R$ 100,00"
-                className="w-full bg-[#1A0B2E] rounded-xl px-4 py-3.5 text-white placeholder-gray-600
-                           outline-none focus:ring-2 focus:ring-[#DB2777] transition-all text-sm border border-purple-800/20"
+                className="w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-gray-600
+                           outline-none focus:ring-2 focus:ring-acai-accent transition-all text-sm border border-acai-border"
               />
             </div>
           )}
         </section>
 
         {/* Notes */}
-        <section className="bg-[#0F0320] rounded-2xl p-4 border border-purple-800/20">
+        <section className="bg-acai-surface rounded-2xl p-4 border border-acai-border">
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-3">
             Observações (opcional)
           </label>
@@ -239,8 +239,8 @@ export default function CheckoutView({ cart, total, onBack, onConfirm }) {
             onChange={e => set('notes', e.target.value)}
             placeholder="Alguma alergia, sem granola, ponto específico..."
             rows={2}
-            className="w-full bg-[#1A0B2E] rounded-xl px-4 py-3.5 text-white placeholder-gray-600
-                       outline-none focus:ring-2 focus:ring-[#DB2777] transition-all resize-none text-sm border border-purple-800/20"
+            className="w-full bg-acai-raised rounded-xl px-4 py-3.5 text-white placeholder-gray-600
+                       outline-none focus:ring-2 focus:ring-acai-accent transition-all resize-none text-sm border border-acai-border"
           />
         </section>
       </div>

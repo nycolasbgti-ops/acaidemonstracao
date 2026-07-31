@@ -13,7 +13,7 @@ function CartItem({ item, onUpdateQty, onRemove }) {
         {item.type === 'acai' && (
           <div className="mt-1 space-y-0.5">
             {item.base && (
-              <p className="text-xs text-[#DB2777]">🍧 {item.base.label}</p>
+              <p className="text-xs text-acai-accent">🍧 {item.base.label}</p>
             )}
             {item.caldas?.length > 0 && (
               <p className="text-xs text-amber-400 leading-relaxed">
@@ -41,7 +41,7 @@ function CartItem({ item, onUpdateQty, onRemove }) {
           </div>
         )}
 
-        <p className="text-[#DB2777] font-bold mt-1.5 text-sm">{fmt(item.price * qty)}</p>
+        <p className="text-acai-accent font-bold mt-1.5 text-sm">{fmt(item.price * qty)}</p>
       </div>
 
       <div className="flex items-center gap-2.5 flex-shrink-0">
@@ -66,7 +66,7 @@ function CartItem({ item, onUpdateQty, onRemove }) {
         <button
           onClick={() => onUpdateQty(item.cartId, 1)}
           className="w-8 h-8 rounded-full bg-[#DB2777] flex items-center justify-center text-sm
-                     text-white active:scale-90 transition-transform shadow-md shadow-[#DB2777]/40"
+                     text-white active:scale-90 transition-transform shadow-md shadow-acai-accent/40"
         >
           +
         </button>
@@ -85,7 +85,7 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
         onClick={onClose}
       />
 
-      <div className="relative bg-[#0F0320] rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp">
+      <div className="relative bg-acai-raised rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp">
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
           <div className="w-10 h-1 bg-white/15 rounded-full" />
@@ -112,7 +112,7 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
             <button
               onClick={onClose}
               className="mt-6 px-6 py-2.5 bg-[#DB2777] rounded-full text-sm font-bold
-                         text-white active:scale-95 transition-transform shadow-lg shadow-[#DB2777]/40"
+                         text-white active:scale-95 transition-transform shadow-lg shadow-acai-accent/40"
             >
               Ver cardápio
             </button>
@@ -130,7 +130,7 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
               ))}
             </div>
 
-            <div className="px-5 pt-4 pb-8 border-t border-white/5 flex-shrink-0 bg-[#0F0320]">
+            <div className="px-5 pt-4 pb-8 border-t border-white/5 flex-shrink-0 bg-acai-raised">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-400 font-medium">Total do pedido</span>
                 <span className="text-2xl font-bold text-white">{fmt(total)}</span>
@@ -138,7 +138,7 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
               <button
                 onClick={onCheckout}
                 className="w-full py-4 bg-[#DB2777] rounded-2xl font-bold text-[15px]
-                           text-white active:scale-[0.98] transition-all shadow-lg shadow-[#DB2777]/40
+                           text-white active:scale-[0.98] transition-all shadow-lg shadow-acai-accent/40
                            flex items-center justify-center gap-2"
               >
                 <span>Finalizar Pedido</span>
