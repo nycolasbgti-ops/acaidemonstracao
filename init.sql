@@ -1,6 +1,7 @@
 -- ============================================================
--- IMPÉRIO PIZZARIA — Inicialização do Banco de Dados
+-- AÇAÍ CONCEPT — Inicialização do Banco de Dados
 -- Executado automaticamente pelo Docker na primeira subida.
+-- NOTA: Este arquivo é genérico para QUALQUER implementação
 -- ============================================================
 
 -- ────────────────────────────────────────────────────────────
@@ -26,9 +27,9 @@ CREATE TABLE IF NOT EXISTS categories (
   created_at      TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   name            TEXT        NOT NULL,
   slug            TEXT        NOT NULL UNIQUE,
-  icon            TEXT        NOT NULL DEFAULT '🍽️',
+  icon            TEXT        NOT NULL DEFAULT '🍧',
   order_position  SMALLINT    NOT NULL DEFAULT 0,
-  is_pizza        BOOLEAN     NOT NULL DEFAULT false,
+  is_builder      BOOLEAN     NOT NULL DEFAULT false,
   active          BOOLEAN     NOT NULL DEFAULT true
 );
 
@@ -39,10 +40,6 @@ CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(active);
 -- ────────────────────────────────────────────────────────────
 -- TABELA: products
 -- ────────────────────────────────────────────────────────────
--- prices (JSONB):
---   Preço único:   { "unique": 15.90 }
---   Por tamanho:   { "P": 30.00, "M": 40.00, "G": 50.00 }
--- ────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS products (
   id              UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at      TIMESTAMPTZ DEFAULT NOW() NOT NULL,
@@ -50,7 +47,8 @@ CREATE TABLE IF NOT EXISTS products (
   name            TEXT        NOT NULL,
   description     TEXT,
   prices          JSONB       NOT NULL DEFAULT '{"unique": 0}',
-  is_sweet        BOOLEAN     NOT NULL DEFAULT false,
+  free_toppings   SMALLINT    NOT NULL DEFAULT 0,
+  emoji           TEXT,
   image_url       TEXT,
   active          BOOLEAN     NOT NULL DEFAULT true,
   order_position  SMALLINT    NOT NULL DEFAULT 0
@@ -85,10 +83,10 @@ CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
 
 
 -- ────────────────────────────────────────────────────────────
--- SEED: categorias iniciais
+-- SEED: categorias genéricas iniciais
 -- ────────────────────────────────────────────────────────────
-INSERT INTO categories (name, slug, icon, order_position, is_pizza) VALUES
-  ('Pizzas',     'pizzas',     '🍕', 1, true),
-  ('Bebidas',    'bebidas',    '🥤', 2, false),
-  ('Sobremesas', 'sobremesas', '🍰', 3, false)
+INSERT INTO categories (name, slug, icon, order_position, is_builder, active) VALUES
+  ('Açaís no Copo',      'copos-acai',       '🍧', 1, true,  true),
+  ('Bebidas',            'bebidas',          '🧃', 2, false, true),
+  ('Lanches',            'lanches',          '🥐', 3, false, true)
 ON CONFLICT (slug) DO NOTHING;

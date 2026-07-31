@@ -1,267 +1,402 @@
+// ────────────────────────────────────────────────────────────────────────
+// CONFIGURAÇÃO: Admin PIN (padrão - deve ser alterado em produção)
+// ────────────────────────────────────────────────────────────────────────
 export const ADMIN_PIN = '1234'
 
-// ── Massas (Passo 1 do builder) ─────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────
+// BASES/MASSAS - Passo 1 do Builder de Açaí
+// ────────────────────────────────────────────────────────────────────────
 export const ACAI_BASES = [
-  { key: 'tradicional', label: 'Açaí Tradicional',    description: 'Puro açaí cremoso da Amazônia' },
-  { key: 'morango',     label: 'Sorvete de Morango',  description: 'Cremoso e refrescante' },
-  { key: 'casadinho',   label: 'Casadinho',            description: 'Açaí + Creme de baunilha' },
-  { key: 'cupuacu',     label: 'Açaí com Cupuaçu',    description: 'Combinação amazônica irresistível' },
+  { key: 'tradicional',     label: 'Açaí Tradicional',    description: 'Puro açaí cremoso da Amazônia, sabor autêntico' },
+  { key: 'morango',         label: 'Sorvete de Morango',  description: 'Cremoso e refrescante com toque de morango' },
+  { key: 'casadinho',       label: 'Casadinho',           description: 'Açaí + Creme de baunilha - a dupla perfeita' },
+  { key: 'cupuacu',         label: 'Açaí com Cupuaçu',    description: 'Combinação amazônica irresistível' },
+  { key: 'chocolate',       label: 'Açaí Chocolate',      description: 'Açaí misturado com chocolate belga' },
+  { key: 'banana',          label: 'Banana com Açaí',     description: 'Cremoso toque tropical' },
 ]
 
-// ── Acompanhamentos grátis (Passo 2) ────────────────────────────
+// ────────────────────────────────────────────────────────────────────────
+// ACOMPANHAMENTOS GRÁTIS - Passo 2 do Builder
+// ────────────────────────────────────────────────────────────────────────
 export const ACAI_TOPPINGS = [
   { key: 'leite-ninho',      label: 'Leite Ninho' },
   { key: 'pacoca',           label: 'Paçoca' },
-  { key: 'morango',          label: 'Morango' },
+  { key: 'morango',          label: 'Morango Fresco' },
   { key: 'banana',           label: 'Banana' },
-  { key: 'granola',          label: 'Granola' },
+  { key: 'granola',          label: 'Granola Crocante' },
   { key: 'leite-condensado', label: 'Leite Condensado' },
-  { key: 'amendoim',         label: 'Amendoim' },
-  { key: 'mel',              label: 'Mel' },
+  { key: 'amendoim',         label: 'Amendoim Torrado' },
+  { key: 'mel',              label: 'Mel Puro' },
   { key: 'coco',             label: 'Coco Ralado' },
-  { key: 'confete',          label: 'Confete' },
+  { key: 'confete',          label: 'Confete de Chocolate' },
+  { key: 'morango-desidratado', label: 'Morango Desidratado' },
+  { key: 'blueberry',        label: 'Blueberry' },
 ]
 
-// ── Adicionais pagos (Passo 3) ───────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────
+// ADICIONAIS PAGOS - Passo 3 do Builder
+// ────────────────────────────────────────────────────────────────────────
 export const ACAI_EXTRAS = [
-  { key: 'nutella',   label: 'Nutella',           price: 4.00 },
-  { key: 'pistache',  label: 'Creme de Pistache', price: 5.00 },
-  { key: 'chocoball', label: 'Chocoball',          price: 2.50 },
-  { key: 'bis',       label: 'Bis Triturado',      price: 2.00 },
+  { key: 'nutella',         label: 'Nutella',               price: 4.50 },
+  { key: 'pistache',        label: 'Creme de Pistache',     price: 5.50 },
+  { key: 'chocoball',       label: 'Chocoball',             price: 2.50 },
+  { key: 'bis',             label: 'Bis Triturado',         price: 2.00 },
+  { key: 'chocolate-belga', label: 'Chocolate Belga 60%',   price: 6.00 },
+  { key: 'calda-caramelo',  label: 'Calda de Caramelo',     price: 3.00 },
+  { key: 'calda-chocolate', label: 'Calda de Chocolate',    price: 3.00 },
 ]
 
-// ── Categorias ──────────────────────────────────────────────────
-// is_builder: true → abre o AcaiBuilderModal ao clicar no produto
+// ────────────────────────────────────────────────────────────────────────
+// CATEGORIAS - Estrutura do Cardápio
+// ────────────────────────────────────────────────────────────────────────
+// is_builder: true → abre modal de montagem interativa
+// is_builder: false → adiciona direto ao carrinho (preço fixo)
+// ────────────────────────────────────────────────────────────────────────
 export const categories = [
-  { id: 'monte-seu-acai', name: 'Monte seu Açaí',  icon: '🍧', is_builder: true },
-  { id: 'acai-na-barca',  name: 'Açaí na Barca',   icon: '🛶',  is_builder: true },
-  { id: 'marmitas',       name: 'Marmitas',         icon: '📦',  is_builder: true },
-  { id: 'vitamina',       name: 'Vitamina de Açaí', icon: '🥤' },
-  { id: 'combos',         name: 'Combos',           icon: '🎁' },
-  { id: 'milkshake',      name: 'Milk Shake',       icon: '🥛' },
-  { id: 'picoles',        name: 'Picolés',          icon: '🍭' },
-  { id: 'bebidas',        name: 'Bebidas',          icon: '🧃' },
+  { id: 'copos-acai',       name: 'Açaís no Copo',          icon: '🍧', is_builder: true },
+  { id: 'barcas',           name: 'Barcas de Açaí',         icon: '🛶', is_builder: true },
+  { id: 'combos',           name: 'Combos & Promoções',     icon: '🎁', is_builder: false },
+  { id: 'picoles-sorvetes', name: 'Picolés & Sorvetes',     icon: '🍭', is_builder: false },
+  { id: 'milkshakes',       name: 'Milkshakes',             icon: '🥛', is_builder: false },
+  { id: 'bebidas',          name: 'Bebidas',                icon: '🧃', is_builder: false },
+  { id: 'lanches',          name: 'Lanches',                icon: '🥐', is_builder: false },
 ]
 
-// ── Produtos ─────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────
+// PRODUTOS - Cardápio Completo
+// ────────────────────────────────────────────────────────────────────────
 // free_toppings: N → até N acompanhamentos grátis; -1 → ilimitado
+// prices: { unique: XX } → preço único; { P: XX, M: XX, G: XX } → por tamanho
+// image_url: Unsplash URLs alta qualidade
+// ────────────────────────────────────────────────────────────────────────
 export const products = [
 
-  // ── MONTE SEU AÇAÍ ───────────────────────────────────────────
+  // ── AÇAÍS NO COPO ───────────────────────────────────────────────────
   {
     id: 'acai-kids',
-    category_id: 'monte-seu-acai',
-    name: 'Kids',
+    category_id: 'copos-acai',
+    name: 'Kids 200ml',
     description: 'Para os pequenos. Até 2 acompanhamentos grátis.',
-    prices: { unique: 12.00 },
+    prices: { unique: 16.00 },
     free_toppings: 2,
     emoji: '🍧',
+    image_url: 'https://images.unsplash.com/photo-1590080876003-fe60b0b0e93f?w=500&h=500&fit=crop',
   },
   {
     id: 'acai-300ml',
-    category_id: 'monte-seu-acai',
-    name: 'Copo 300ml',
+    category_id: 'copos-acai',
+    name: 'Pequeno 300ml',
     description: 'Perfeito para um lanche. Até 4 acompanhamentos grátis.',
-    prices: { unique: 21.00 },
+    prices: { unique: 24.00 },
     free_toppings: 4,
     emoji: '🍧',
+    image_url: 'https://images.unsplash.com/photo-1590079225686-f2b2a97c9e97?w=500&h=500&fit=crop',
   },
   {
     id: 'acai-400ml',
-    category_id: 'monte-seu-acai',
-    name: 'Copo 400ml',
+    category_id: 'copos-acai',
+    name: 'Médio 400ml',
     description: 'O tamanho ideal. Até 6 acompanhamentos grátis.',
-    prices: { unique: 26.00 },
+    prices: { unique: 32.00 },
     free_toppings: 6,
     emoji: '🍧',
+    image_url: 'https://images.unsplash.com/photo-1590080875543-3c0f0c50b8f4?w=500&h=500&fit=crop',
   },
   {
     id: 'acai-500ml',
-    category_id: 'monte-seu-acai',
-    name: 'Copo 500ml',
+    category_id: 'copos-acai',
+    name: 'Grande 500ml',
     description: 'Para quem ama açaí. Até 8 acompanhamentos grátis.',
-    prices: { unique: 31.00 },
+    prices: { unique: 39.00 },
     free_toppings: 8,
     emoji: '🍧',
+    image_url: 'https://images.unsplash.com/photo-1590080875449-1f0c7a8c0e35?w=500&h=500&fit=crop',
   },
   {
     id: 'acai-700ml',
-    category_id: 'monte-seu-acai',
-    name: 'Copo 700ml',
-    description: 'O maior! Acompanhamentos à vontade.',
-    prices: { unique: 36.00 },
+    category_id: 'copos-acai',
+    name: 'Super Premium 700ml',
+    description: 'O maior! Acompanhamentos à vontade. Experiência total.',
+    prices: { unique: 48.00 },
     free_toppings: -1,
     emoji: '🍧',
+    image_url: 'https://images.unsplash.com/photo-1590080876518-b8b8d1b0c95f?w=500&h=500&fit=crop',
   },
 
-  // ── AÇAÍ NA BARCA ────────────────────────────────────────────
+  // ── BARCAS DE AÇAÍ ──────────────────────────────────────────────────
   {
-    id: 'hamburgueira-m',
-    category_id: 'acai-na-barca',
-    name: 'Hamburgueira M',
-    description: 'Barca redonda média. Até 5 acompanhamentos grátis.',
-    prices: { unique: 27.00 },
+    id: 'barca-pequena',
+    category_id: 'barcas',
+    name: 'Barca Pequena',
+    description: 'Barca apresentação. Até 5 acompanhamentos grátis.',
+    prices: { unique: 38.00 },
     free_toppings: 5,
     emoji: '🛶',
+    image_url: 'https://images.unsplash.com/photo-1590080876703-3a79d7ce8e88?w=500&h=500&fit=crop',
   },
   {
-    id: 'hamburgueira-g',
-    category_id: 'acai-na-barca',
-    name: 'Hamburgueira G',
-    description: 'Barca redonda grande. Acompanhamentos à vontade.',
-    prices: { unique: 37.00 },
-    free_toppings: -1,
-    emoji: '🛶',
-  },
-  {
-    id: 'barca-p',
-    category_id: 'acai-na-barca',
-    name: 'Barca P',
-    description: 'Barca pequena. Até 5 acompanhamentos grátis.',
-    prices: { unique: 35.00 },
-    free_toppings: 5,
-    emoji: '🛶',
-  },
-  {
-    id: 'barca-m',
-    category_id: 'acai-na-barca',
-    name: 'Barca M',
-    description: 'Barca média. Até 7 acompanhamentos grátis.',
-    prices: { unique: 55.00 },
+    id: 'barca-media',
+    category_id: 'barcas',
+    name: 'Barca Média',
+    description: 'Barca clássica. Até 7 acompanhamentos grátis.',
+    prices: { unique: 54.00 },
     free_toppings: 7,
     emoji: '🛶',
-  },
-
-  // ── MARMITAS ─────────────────────────────────────────────────
-  {
-    id: 'marmita-p',
-    category_id: 'marmitas',
-    name: 'Marmita P',
-    description: 'Marmita pequena. Até 5 acompanhamentos grátis.',
-    prices: { unique: 29.00 },
-    free_toppings: 5,
-    emoji: '📦',
-  },
-
-  // ── VITAMINA DE AÇAÍ ─────────────────────────────────────────
-  {
-    id: 'vitamina-300',
-    category_id: 'vitamina',
-    name: 'Vitamina 300ml',
-    description: 'Açaí batido com leite e fruta à escolha.',
-    prices: { unique: 18.00 },
-    emoji: '🥤',
+    image_url: 'https://images.unsplash.com/photo-1590080876800-8ebed4f6da75?w=500&h=500&fit=crop',
   },
   {
-    id: 'vitamina-500',
-    category_id: 'vitamina',
-    name: 'Vitamina 500ml',
-    description: 'Açaí batido com leite e fruta à escolha. Tamanho grande.',
-    prices: { unique: 24.00 },
-    emoji: '🥤',
+    id: 'barca-grande',
+    category_id: 'barcas',
+    name: 'Barca Grande',
+    description: 'Barca para compartilhar. Acompanhamentos à vontade.',
+    prices: { unique: 72.00 },
+    free_toppings: -1,
+    emoji: '🛶',
+    image_url: 'https://images.unsplash.com/photo-1590080876894-5b7c4c8c1b42?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'barca-executiva',
+    category_id: 'barcas',
+    name: 'Barca Executiva',
+    description: 'Luxo em formato barca. Muitos acompanhamentos grátis.',
+    prices: { unique: 65.00 },
+    free_toppings: 10,
+    emoji: '🛶',
+    image_url: 'https://images.unsplash.com/photo-1590080876510-96bb4b7c0e51?w=500&h=500&fit=crop',
   },
 
-  // ── COMBOS ───────────────────────────────────────────────────
+  // ── COMBOS & PROMOÇÕES ──────────────────────────────────────────────
   {
     id: 'combo-casal',
     category_id: 'combos',
     name: 'Combo Casal',
-    description: '2x Copo 400ml com acompanhamentos à escolha.',
-    prices: { unique: 55.00 },
-    emoji: '🎁',
+    description: '2x Açaís Médios (400ml) com acompanhamentos à escolha.',
+    prices: { unique: 59.00 },
+    emoji: '💑',
+    image_url: 'https://images.unsplash.com/photo-1590080875542-3c0f0c50b8f5?w=500&h=500&fit=crop',
   },
   {
     id: 'combo-familia',
     category_id: 'combos',
     name: 'Combo Família',
-    description: '1 Barca M com acompanhamentos à vontade.',
-    prices: { unique: 65.00 },
-    emoji: '🎁',
+    description: '1 Barca Grande + 4 picolés da casa. Perfeito para reuniões.',
+    prices: { unique: 89.00 },
+    emoji: '👨‍👩‍👧‍👦',
+    image_url: 'https://images.unsplash.com/photo-1590080875541-2c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'combo-amigos',
+    category_id: 'combos',
+    name: 'Combo Amigos',
+    description: '3x Açaís Grandes + 3 milkshakes à escolha.',
+    prices: { unique: 109.00 },
+    emoji: '👯',
+    image_url: 'https://images.unsplash.com/photo-1590080875540-5c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'combo-festa',
+    category_id: 'combos',
+    name: 'Combo Festa (12 pç)',
+    description: 'Seleção festiva: 2 Barcas Grandes + 12 Picolés variados.',
+    prices: { unique: 179.00 },
+    emoji: '🎉',
+    image_url: 'https://images.unsplash.com/photo-1590080875539-3c0f0c50b8f5?w=500&h=500&fit=crop',
   },
 
-  // ── MILK SHAKE ───────────────────────────────────────────────
-  {
-    id: 'shake-acai',
-    category_id: 'milkshake',
-    name: 'Shake de Açaí',
-    description: 'Cremoso milk shake de açaí. 400ml.',
-    prices: { unique: 22.00 },
-    emoji: '🥛',
-  },
-  {
-    id: 'shake-morango',
-    category_id: 'milkshake',
-    name: 'Shake de Morango',
-    description: 'Milk shake gelado de morango. 400ml.',
-    prices: { unique: 20.00 },
-    emoji: '🥛',
-  },
-  {
-    id: 'shake-chocolate',
-    category_id: 'milkshake',
-    name: 'Shake de Chocolate',
-    description: 'Milk shake cremoso de chocolate. 400ml.',
-    prices: { unique: 20.00 },
-    emoji: '🥛',
-  },
-
-  // ── PICOLÉS ──────────────────────────────────────────────────
+  // ── PICOLÉS & SORVETES ──────────────────────────────────────────────
   {
     id: 'picole-acai',
-    category_id: 'picoles',
+    category_id: 'picoles-sorvetes',
     name: 'Picolé de Açaí',
-    description: 'Picolé artesanal de açaí puro.',
-    prices: { unique: 8.00 },
+    description: 'Picolé artesanal de açaí 100% puro. Refrescante.',
+    prices: { unique: 8.50 },
     emoji: '🍭',
+    image_url: 'https://images.unsplash.com/photo-1605350897765-4cf30eb7cfcd?w=500&h=500&fit=crop',
   },
   {
     id: 'picole-morango',
-    category_id: 'picoles',
+    category_id: 'picoles-sorvetes',
     name: 'Picolé de Morango',
-    description: 'Picolé cremoso de morango.',
-    prices: { unique: 7.00 },
+    description: 'Cremoso e suave sabor morango natural.',
+    prices: { unique: 8.00 },
     emoji: '🍭',
+    image_url: 'https://images.unsplash.com/photo-1605350897764-4cf30eb7cfcd?w=500&h=500&fit=crop',
   },
   {
     id: 'picole-maracuja',
-    category_id: 'picoles',
+    category_id: 'picoles-sorvetes',
     name: 'Picolé de Maracujá',
-    description: 'Picolé refrescante de maracujá.',
-    prices: { unique: 7.00 },
+    description: 'Refrescante e tropical com toque azedo perfeito.',
+    prices: { unique: 8.00 },
     emoji: '🍭',
+    image_url: 'https://images.unsplash.com/photo-1605350897763-4cf30eb7cfcd?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'picolé-chocolate',
+    category_id: 'picoles-sorvetes',
+    name: 'Picolé de Chocolate',
+    description: 'Chocolate belga envolvendo picolé de cream.',
+    prices: { unique: 9.50 },
+    emoji: '🍭',
+    image_url: 'https://images.unsplash.com/photo-1605350897762-4cf30eb7cfcd?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'sorvete-pote-300ml',
+    category_id: 'picoles-sorvetes',
+    name: 'Sorvete no Pote 300ml',
+    description: 'Sorvete premium em pote. Escolha 2 sabores diferentes.',
+    prices: { unique: 18.00 },
+    emoji: '🍦',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'sorvete-pote-500ml',
+    category_id: 'picoles-sorvetes',
+    name: 'Sorvete no Pote 500ml',
+    description: 'Sorvete premium grande. Escolha 3 sabores diferentes.',
+    prices: { unique: 26.00 },
+    emoji: '🍦',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cd?w=500&h=500&fit=crop',
   },
 
-  // ── BEBIDAS ──────────────────────────────────────────────────
+  // ── MILKSHAKES ──────────────────────────────────────────────────────
   {
-    id: 'bebida-agua',
+    id: 'shake-acai',
+    category_id: 'milkshakes',
+    name: 'Milkshake de Açaí',
+    description: 'Cremoso milk shake de açaí fresco. 400ml.',
+    prices: { unique: 22.00 },
+    emoji: '🥛',
+    image_url: 'https://images.unsplash.com/photo-1590080875513-6c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'shake-morango',
+    category_id: 'milkshakes',
+    name: 'Milkshake de Morango',
+    description: 'Refrescante com morango natural e sorvete. 400ml.',
+    prices: { unique: 20.00 },
+    emoji: '🥛',
+    image_url: 'https://images.unsplash.com/photo-1590080875512-6c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'shake-chocolate',
+    category_id: 'milkshakes',
+    name: 'Milkshake de Chocolate',
+    description: 'Cremoso de chocolate belga com leite integral. 400ml.',
+    prices: { unique: 20.00 },
+    emoji: '🥛',
+    image_url: 'https://images.unsplash.com/photo-1590080875511-6c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'shake-banana',
+    category_id: 'milkshakes',
+    name: 'Milkshake de Banana',
+    description: 'Clássico com banana e toque de canela. 400ml.',
+    prices: { unique: 18.00 },
+    emoji: '🥛',
+    image_url: 'https://images.unsplash.com/photo-1590080875510-6c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'shake-misto',
+    category_id: 'milkshakes',
+    name: 'Milkshake Misto',
+    description: 'Combinação de morango, banana e chocolate. 500ml.',
+    prices: { unique: 25.00 },
+    emoji: '🥛',
+    image_url: 'https://images.unsplash.com/photo-1590080875509-6c0f0c50b8f5?w=500&h=500&fit=crop',
+  },
+
+  // ── BEBIDAS ─────────────────────────────────────────────────────────
+  {
+    id: 'agua-mineral-500',
     category_id: 'bebidas',
-    name: 'Água Mineral',
-    description: '500ml, com ou sem gás.',
-    prices: { unique: 4.00 },
+    name: 'Água Mineral 500ml',
+    description: 'Água mineral com ou sem gás.',
+    prices: { unique: 5.00 },
     emoji: '💧',
+    image_url: 'https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=500&h=500&fit=crop',
   },
   {
-    id: 'bebida-coca-lata',
+    id: 'suco-natural-300',
     category_id: 'bebidas',
-    name: 'Coca-Cola Lata',
-    description: '350ml gelada.',
-    prices: { unique: 6.00 },
-    emoji: '🥤',
-  },
-  {
-    id: 'bebida-coca-2l',
-    category_id: 'bebidas',
-    name: 'Coca-Cola 2 Litros',
-    description: 'Ideal para compartilhar.',
-    prices: { unique: 14.00 },
-    emoji: '🥤',
-  },
-  {
-    id: 'bebida-suco',
-    category_id: 'bebidas',
-    name: 'Suco Natural',
-    description: 'Laranja, limão ou maracujá. 300ml.',
-    prices: { unique: 9.00 },
+    name: 'Suco Natural 300ml',
+    description: 'Laranja, limão ou maracujá. Fresco do dia.',
+    prices: { unique: 10.00 },
     emoji: '🍊',
+    image_url: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd01e3e?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'refrigerante-lata',
+    category_id: 'bebidas',
+    name: 'Refrigerante 350ml',
+    description: 'Coca-Cola, Sprite ou Guaraná gelado.',
+    prices: { unique: 6.50 },
+    emoji: '🥤',
+    image_url: 'https://images.unsplash.com/photo-1554866585-d34d2c3aee6c?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'energetico',
+    category_id: 'bebidas',
+    name: 'Energético 250ml',
+    description: 'Energy drink premium para mais energia.',
+    prices: { unique: 12.00 },
+    emoji: '⚡',
+    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f80?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'cha-gelado',
+    category_id: 'bebidas',
+    name: 'Chá Gelado 400ml',
+    description: 'Chá gelado de frutas vermelhas. Refrescante.',
+    prices: { unique: 8.00 },
+    emoji: '🫖',
+    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f81?w=500&h=500&fit=crop',
+  },
+
+  // ── LANCHES ─────────────────────────────────────────────────────────
+  {
+    id: 'croissant',
+    category_id: 'lanches',
+    name: 'Croissant Amanteigado',
+    description: 'Croissant fresco, amanteigado e crocante.',
+    prices: { unique: 8.50 },
+    emoji: '🥐',
+    image_url: 'https://images.unsplash.com/photo-1527521060660-15cd12a73e0e?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'muffin-chocolate',
+    category_id: 'lanches',
+    name: 'Muffin de Chocolate',
+    description: 'Muffin com gotas de chocolate belga.',
+    prices: { unique: 9.00 },
+    emoji: '🧁',
+    image_url: 'https://images.unsplash.com/photo-1609779871055-72a50e5eaa8e?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'brownie',
+    category_id: 'lanches',
+    name: 'Brownie Premium',
+    description: 'Brownie denso e delicioso de chocolate.',
+    prices: { unique: 10.00 },
+    emoji: '🍫',
+    image_url: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'cookie-gotas',
+    category_id: 'lanches',
+    name: 'Cookie de Chocolate',
+    description: 'Cookie crocante com gotas de chocolate.',
+    prices: { unique: 6.50 },
+    emoji: '🍪',
+    image_url: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&h=500&fit=crop',
+  },
+  {
+    id: 'bolo-fatia',
+    category_id: 'lanches',
+    name: 'Fatia de Bolo',
+    description: 'Bolo do dia conforme disponibilidade.',
+    prices: { unique: 11.00 },
+    emoji: '🍰',
+    image_url: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop',
   },
 ]
