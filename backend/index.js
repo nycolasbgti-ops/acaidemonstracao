@@ -269,5 +269,5 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 // ── Start ─────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
-  console.log(`🍧 Açaiteria API rodando na porta ${PORT}`)
+  console.log(`Açaí Concept API rodando na porta ${PORT}`)
 })

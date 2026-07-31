@@ -57,7 +57,7 @@ function buildComanda(order) {
 
   const parts = [
     sep,
-    '          AÇAITERIA',
+    '          AÇAÍ CONCEPT',
     sep,
     `Pedido: #${id4}`,
     '',

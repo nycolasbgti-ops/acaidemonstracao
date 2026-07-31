@@ -20,7 +20,7 @@ function buildWAMessage(order) {
   }).join('\n')
 
   return encodeURIComponent(
-    `🍧 *Pedido Confirmado!*\n` +
+    `*Pedido Confirmado!*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
     `👤 *Cliente:* ${order.customer_name}\n` +
     `📱 *Telefone:* ${order.customer_phone}\n` +
@@ -46,7 +46,7 @@ function OrderItemLine({ item }) {
       </div>
       {item.type === 'acai' && (
         <div className="mt-0.5 space-y-0.5">
-          {item.base && <p className="text-xs text-gray-500">🍧 {item.base.label}</p>}
+          {item.base && <p className="text-xs text-gray-500">{item.base.label}</p>}
           {item.toppings?.length > 0 && (
             <p className="text-xs text-gray-600">+ {item.toppings.map(t => t.label).join(', ')}</p>
           )}
@@ -179,7 +179,7 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
         <h1 className="text-3xl font-extrabold mb-2">Pedido Confirmado!</h1>
         <p className="text-gray-400 text-[15px] mb-8 leading-relaxed">
-          Recebemos seu pedido e já estamos<br />preparando tudo com muito carinho. 🍧
+          Recebemos seu pedido e já estamos<br />preparando tudo com muito carinho.
         </p>
 
         <div className="bg-[#0F0320] rounded-2xl p-4 mb-5 text-left border border-purple-800/20">

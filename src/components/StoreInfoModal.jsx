@@ -1,5 +1,4 @@
 import React from 'react'
-import logoImg from '../assets/logo.png'
 
 const HOURS = [
   { day: 'Segunda',  slots: ['13:00 - 17:30', '19:00 - 22:00'] },
@@ -11,7 +10,24 @@ const HOURS = [
   { day: 'Domingo',  slots: ['13:00 - 17:30', '19:00 - 22:30'] },
 ]
 
-const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Av+Ant%C3%B4nio+Francisco+dos+Santos+410+Sant%C3%B3polis+do+Aguape%C3%AD+SP'
+const MAPS_URL = 'https://www.google.com/maps'
+
+// SVG Logo inline - Bowl de açaí genérico
+const AcaiLogo = () => (
+  <svg width="64" height="64" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    {/* Bowl */}
+    <path d="M 20 40 L 25 85 L 75 85 L 80 40 Z" fill="#8B4789" stroke="#D4A5D4" strokeWidth="2"/>
+    {/* Acai filling */}
+    <ellipse cx="50" cy="45" rx="28" ry="12" fill="#9D3F7F"/>
+    {/* Shine effect */}
+    <ellipse cx="50" cy="42" rx="22" ry="8" fill="#C04FA8" opacity="0.6"/>
+    {/* Toppings - granola circles */}
+    <circle cx="35" cy="50" r="3" fill="#D4AF37"/>
+    <circle cx="55" cy="52" r="2.5" fill="#D4AF37"/>
+    <circle cx="65" cy="48" r="3" fill="#D4AF37"/>
+    <circle cx="45" cy="55" r="2" fill="#E8C050"/>
+  </svg>
+)
 
 export default function StoreInfoModal({ onClose }) {
   return (
@@ -30,9 +46,9 @@ export default function StoreInfoModal({ onClose }) {
 
         {/* Logo + nome */}
         <div className="flex flex-col items-center pt-4 pb-5 px-6 border-b border-purple-800/30">
-          <img src={logoImg} alt="Luma Açaí" className="w-16 h-16 object-contain mx-auto mb-2 rounded-xl" />
-          <h2 className="text-xl font-bold text-white tracking-tight">Luma Açaí</h2>
-          <p className="text-xs text-purple-400 mt-0.5">Santópolis do Aguapeí, SP</p>
+          <AcaiLogo />
+          <h2 className="text-xl font-bold text-white tracking-tight mt-2">Açaí Concept</h2>
+          <p className="text-xs text-purple-400 mt-0.5">Sorveteria & Açaiteria</p>
         </div>
 
         <div className="px-6 pt-4 pb-2 space-y-5">
@@ -48,12 +64,12 @@ export default function StoreInfoModal({ onClose }) {
             <div className="flex-1 min-w-0">
               <p className="text-xs text-gray-500 mb-0.5">WhatsApp</p>
               <a
-                href="https://wa.me/5518996919527"
+                href="https://wa.me/5511999999999"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-semibold text-green-400 active:opacity-70"
               >
-                (18) 99691-9527
+                (11) 99999-9999
               </a>
             </div>
           </div>
@@ -71,8 +87,8 @@ export default function StoreInfoModal({ onClose }) {
             <div className="flex-1 min-w-0">
               <p className="text-xs text-gray-500 mb-0.5">Endereço</p>
               <p className="text-sm text-white leading-snug">
-                Av. Antônio Francisco dos Santos, 410<br />
-                Centro, Santópolis do Aguapeí – SP
+                Rua Exemplo, 123<br />
+                Centro, Sua Cidade – SP
               </p>
               <a
                 href={MAPS_URL}

@@ -1,7 +1,23 @@
 import React from 'react'
-import logoImg from '../assets/logo.png'
 
 const fmt = (v) => `R$ ${Number(v || 0).toFixed(2).replace('.', ',')}`
+
+// SVG Logo inline - Bowl de açaí genérico
+const AcaiLogo = () => (
+  <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-9 h-9">
+    {/* Bowl */}
+    <path d="M 20 40 L 25 85 L 75 85 L 80 40 Z" fill="#8B4789" stroke="#D4A5D4" strokeWidth="2"/>
+    {/* Acai filling */}
+    <ellipse cx="50" cy="45" rx="28" ry="12" fill="#9D3F7F"/>
+    {/* Shine effect */}
+    <ellipse cx="50" cy="42" rx="22" ry="8" fill="#C04FA8" opacity="0.6"/>
+    {/* Toppings - granola circles */}
+    <circle cx="35" cy="50" r="3" fill="#D4AF37"/>
+    <circle cx="55" cy="52" r="2.5" fill="#D4AF37"/>
+    <circle cx="65" cy="48" r="3" fill="#D4AF37"/>
+    <circle cx="45" cy="55" r="2" fill="#E8C050"/>
+  </svg>
+)
 
 export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick }) {
   return (
@@ -10,8 +26,8 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
 
         {/* Logo — esquerda */}
         <div className="flex items-center gap-2 flex-1">
-          <img src={logoImg} alt="Luma Açaí" className="h-9 w-auto object-contain rounded-lg" />
-          <span className="font-bold text-white text-base tracking-tight">Luma Açaí</span>
+          <AcaiLogo />
+          <span className="font-bold text-white text-base tracking-tight">Açaí Concept</span>
         </div>
 
         {/* Ações — direita */}
