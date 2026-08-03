@@ -185,7 +185,7 @@ export default function AddonsManager() {
       <div>
         <button
           onClick={() => { setScreen('list'); setEditing(null) }}
-          className="flex items-center gap-1.5 text-sm text-gray-400 mb-5 active:text-white transition-colors">
+          className="flex items-center gap-1.5 text-sm text-gray-400 mb-4 active:text-white transition-colors -ml-1 px-1 py-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
@@ -263,10 +263,10 @@ export default function AddonsManager() {
                   }
                 </p>
               </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1 flex-shrink-0">
                 <button
                   onClick={() => toggleActive(addon)}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs transition-colors ${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-xs transition-colors ${
                     addon.active ? 'bg-green-500/15 text-green-400' : 'bg-[#2C2C2E] text-gray-500'
                   }`}
                   title={addon.active ? 'Desativar' : 'Ativar'}>
@@ -274,7 +274,7 @@ export default function AddonsManager() {
                 </button>
                 <button
                   onClick={() => { setEditing(addon); setScreen('form') }}
-                  className="w-8 h-8 bg-[#2C2C2E] rounded-full flex items-center justify-center">
+                  className="w-10 h-10 bg-[#2C2C2E] rounded-full flex items-center justify-center">
                   <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                       d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -282,7 +282,7 @@ export default function AddonsManager() {
                 </button>
                 <button
                   onClick={() => del(addon)}
-                  className="w-8 h-8 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
+                  className="w-10 h-10 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
                   title="Excluir">
                   <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

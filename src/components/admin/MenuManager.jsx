@@ -283,11 +283,11 @@ function ProductForm({ initial, categories, defaultCategoryId, onSave, onCancel,
             onChange={handlePriceChange('priceUnique')}
             placeholder="0,00" className={inputCls} />
         ) : (
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1.5">
             {[
-              { key: 'priceP', labelKey: 'sizeLabel1', ph: 'Ex: 300ml' },
-              { key: 'priceM', labelKey: 'sizeLabel2', ph: 'Ex: 500ml' },
-              { key: 'priceG', labelKey: 'sizeLabel3', ph: 'Ex: 700ml' },
+              { key: 'priceP', labelKey: 'sizeLabel1', ph: '300ml' },
+              { key: 'priceM', labelKey: 'sizeLabel2', ph: '500ml' },
+              { key: 'priceG', labelKey: 'sizeLabel3', ph: '700ml' },
             ].map(({ key, labelKey, ph }) => (
               <div key={key} className="space-y-1">
                 <input
@@ -295,12 +295,12 @@ function ProductForm({ initial, categories, defaultCategoryId, onSave, onCancel,
                   value={form[labelKey]}
                   onChange={e => set(labelKey, e.target.value)}
                   placeholder={ph}
-                  className="w-full bg-[#2C2C2E] rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:ring-1 focus:ring-[#FF3B30] transition-all placeholder-gray-700 text-center"
+                  className="w-full bg-[#2C2C2E] rounded-lg px-1.5 py-2 text-white text-xs outline-none focus:ring-1 focus:ring-[#FF3B30] transition-all placeholder-gray-700 text-center"
                 />
                 <input type="text" inputMode="numeric" value={form[key]}
                   onChange={handlePriceChange(key)}
                   placeholder="0,00"
-                  className="w-full bg-[#242424] rounded-xl px-3 py-2.5 text-white text-sm outline-none focus:ring-2 focus:ring-[#FF3B30] transition-all placeholder-gray-600" />
+                  className="w-full bg-[#242424] rounded-xl px-2 py-3 text-white text-sm outline-none focus:ring-2 focus:ring-[#FF3B30] transition-all placeholder-gray-600 text-center" />
               </div>
             ))}
           </div>
@@ -639,7 +639,7 @@ export default function MenuManager() {
 
   const BackButton = ({ label, onClick }) => (
     <button onClick={onClick}
-      className="flex items-center gap-1.5 text-sm text-gray-400 mb-5 active:text-white transition-colors">
+      className="flex items-center gap-1.5 text-sm text-gray-400 mb-4 active:text-white transition-colors -ml-1 px-1 py-2">
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
       </svg>
@@ -751,10 +751,10 @@ export default function MenuManager() {
                   <p className="text-xs text-[#FF9500] mt-0.5">{formatPrices(prod.prices)}</p>
                   {!prod.active && <span className="text-[10px] text-gray-600">● Inativo</span>}
                 </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex items-center gap-1 flex-shrink-0">
                   <button
                     onClick={() => toggleProdActive(prod)}
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs transition-colors ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-xs transition-colors ${
                       prod.active ? 'bg-green-500/15 text-green-400' : 'bg-[#2C2C2E] text-gray-500'
                     }`}
                     title={prod.active ? 'Desativar' : 'Ativar'}>
@@ -762,7 +762,7 @@ export default function MenuManager() {
                   </button>
                   <button
                     onClick={() => { setEditingProd(prod); setScreen('prod-form') }}
-                    className="w-8 h-8 bg-[#2C2C2E] rounded-full flex items-center justify-center">
+                    className="w-10 h-10 bg-[#2C2C2E] rounded-full flex items-center justify-center">
                     <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -770,7 +770,7 @@ export default function MenuManager() {
                   </button>
                   <button
                     onClick={() => deleteProduct(prod)}
-                    className="w-8 h-8 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
+                    className="w-10 h-10 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
                     title="Excluir produto">
                     <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -833,10 +833,10 @@ export default function MenuManager() {
                 </svg>
               </button>
 
-              <div className="flex items-center gap-1 pr-3">
+              <div className="flex items-center gap-1 pr-2">
                 <button
                   onClick={() => toggleCatActive(cat)}
-                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors ${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-xs transition-colors ${
                     cat.active ? 'bg-green-500/15 text-green-400' : 'bg-[#2C2C2E] text-gray-500'
                   }`}
                   title={cat.active ? 'Desativar' : 'Ativar'}>
@@ -844,17 +844,17 @@ export default function MenuManager() {
                 </button>
                 <button
                   onClick={() => { setEditingCat(cat); setScreen('cat-form') }}
-                  className="w-7 h-7 bg-[#2C2C2E] rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  className="w-10 h-10 bg-[#2C2C2E] rounded-full flex items-center justify-center">
+                  <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                       d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </button>
                 <button
                   onClick={() => deleteCategory(cat)}
-                  className="w-7 h-7 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
+                  className="w-10 h-10 bg-red-500/15 rounded-full flex items-center justify-center active:bg-red-500/30 transition-colors"
                   title="Excluir categoria">
-                  <svg className="w-3 h-3 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>

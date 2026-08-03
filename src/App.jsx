@@ -157,12 +157,6 @@ export default function App() {
         <ErrorState message={error} />
       ) : (
         <>
-          {/* Banner de modo demonstração */}
-          {error && (
-            <div className="px-4 py-2 text-xs text-center text-acai-gold bg-acai-gold/10 border-b border-acai-gold/20">
-              {error}
-            </div>
-          )}
 
           <CategoryTabs
             categories={categories}

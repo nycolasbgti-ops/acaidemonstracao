@@ -101,7 +101,7 @@ function PrintModal({ order, onClose }) {
             <p className="text-xs text-gray-500 mt-0.5">Edite antes de imprimir se necessário</p>
           </div>
           <button onClick={onClose}
-            className="w-8 h-8 bg-[#242424] rounded-full flex items-center justify-center text-gray-400 text-sm active:scale-95 transition-all">
+            className="w-10 h-10 bg-[#242424] rounded-full flex items-center justify-center text-gray-400 text-sm active:scale-95 transition-all flex-shrink-0">
             ✕
           </button>
         </div>
@@ -219,7 +219,7 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
       <div className="flex border-b border-acai-border bg-[#0A0A0A]">
         {ORDER_TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 py-3.5 text-sm font-semibold relative transition-colors whitespace-nowrap ${
+            className={`flex-1 py-3 text-xs sm:text-sm font-semibold relative transition-colors whitespace-nowrap ${
               activeTab === tab.key ? 'text-white' : 'text-gray-600'
             }`}>
             {tab.label}
@@ -443,7 +443,7 @@ export default function AdminPanel({ onBack }) {
       <div className="flex border-b border-acai-border bg-[#0A0A0A]">
         {MAIN_TABS.map(tab => (
           <button key={tab.key} onClick={() => setMainTab(tab.key)}
-            className={`flex-1 py-3.5 text-sm font-semibold relative transition-colors ${
+            className={`flex-1 py-3 text-[11px] sm:text-sm font-semibold relative transition-colors ${
               mainTab === tab.key ? 'text-white' : 'text-gray-500'
             }`}>
             {tab.label}
