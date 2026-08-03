@@ -48,25 +48,25 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
             key={cat.id}
             data-cat-id={cat.id}
             ref={el => { sectionRefs.current[cat.id] = el }}
-            className={`${idx === 0 ? 'pt-4' : 'pt-8'}`}
+            className={`${idx === 0 ? 'pt-5' : 'pt-9'}`}
           >
             {/* Cabeçalho da categoria */}
-            <div className="max-w-6xl mx-auto px-4 mb-5">
-              <div className="flex items-center gap-3">
+            <div className="max-w-6xl mx-auto px-4 mb-4">
+              <div className="flex items-center gap-2.5">
                 {cat.icon && (cat.icon.startsWith('http') || cat.icon.startsWith('/'))
-                  ? <img src={cat.icon} alt={cat.name} className="w-7 h-7 object-contain flex-shrink-0" />
-                  : <span className="text-2xl leading-none">{cat.icon}</span>
+                  ? <img src={cat.icon} alt={cat.name} className="w-5 h-5 object-contain flex-shrink-0 opacity-80" />
+                  : <span className="text-xl leading-none">{cat.icon}</span>
                 }
-                <h2 className="font-bold text-acai-text text-base tracking-widest uppercase">
+                <h2 className="font-semibold text-white/80 text-sm tracking-normal">
                   {cat.name}
                 </h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-acai-primary/40 to-transparent ml-1" />
+                <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-1" />
               </div>
             </div>
 
-            {/* Grid de produtos - Centralizado com max-width */}
+            {/* Grid de produtos */}
             <div className="max-w-6xl mx-auto px-4">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {products.map(product => (
                   <ProductCard
                     key={product.id}
@@ -89,51 +89,44 @@ function ProductCard({ product, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="flex flex-col h-full bg-[#1A0B2E] rounded-2xl overflow-hidden
-                 active:scale-[0.96] transition-all duration-150 text-left
-                 border border-white/5 hover:border-lime-400/30 group
-                 hover:shadow-lg hover:shadow-lime-400/10"
+      className="flex flex-col h-full bg-zinc-900 rounded-2xl overflow-hidden
+                 active:scale-[0.97] transition-all duration-150 text-left
+                 border border-white/5 hover:border-white/10 group"
     >
-      {/* Imagem com aspect ratio 1:1 compacto */}
-      <div className="w-full aspect-square bg-gradient-to-br from-acai-primary/20 to-acai-accent/10
-                      flex items-center justify-center overflow-hidden relative flex-shrink-0">
+      {/* Imagem */}
+      <div className="w-full aspect-square overflow-hidden relative flex-shrink-0">
         <ImageWithFallback
           src={product.image_url || ''}
           alt={product.name}
+          emoji={product.emoji ?? '🍧'}
           className="w-full h-full"
         />
-        <div className="absolute inset-0 bg-black/0 group-active:bg-black/20 transition-all" />
+        <div className="absolute inset-0 bg-black/0 group-active:bg-black/15 transition-all" />
       </div>
 
-      {/* Conteúdo - Compacto e elegante */}
-      <div className="flex-1 flex flex-col p-3 md:p-3.5">
-        {/* Título */}
-        <h3 className="font-semibold text-acai-text text-sm leading-snug line-clamp-2 mb-1">
+      {/* Conteúdo */}
+      <div className="flex-1 flex flex-col p-3">
+        <h3 className="font-semibold text-white text-[13px] leading-snug line-clamp-2 mb-1">
           {product.name}
         </h3>
 
-        {/* Descrição */}
-        <p className="text-xs text-gray-300 line-clamp-2 flex-1 mb-2">
+        <p className="text-[11px] text-zinc-400 line-clamp-2 flex-1 mb-2.5 leading-relaxed">
           {product.description}
         </p>
 
-        {/* Rodapé: Preço e Botão */}
-        <div className="flex items-center justify-between pt-2 border-t border-white/5">
-          {/* Preço - Verde suave ou dourado elegante */}
-          <span className="text-lime-400 font-bold text-sm leading-none">
+        <div className="flex items-center justify-between">
+          <span className="text-violet-300 font-semibold text-sm leading-none">
             {fmt(basePrice)}
           </span>
 
-          {/* Botão + Compacto */}
-          <button
-            onClick={(e) => { e.stopPropagation(); onClick() }}
-            className="w-7 h-7 bg-lime-400 hover:bg-lime-500 rounded-lg flex items-center justify-center
-                       text-black text-base leading-none shadow-md shadow-lime-400/30
-                       font-semibold active:scale-90 transition-all flex-shrink-0
-                       hover:shadow-lg hover:shadow-lime-400/50"
+          <span
+            className="w-7 h-7 rounded-full bg-white/5 border border-white/12
+                       flex items-center justify-center text-white/50 text-[18px]
+                       leading-none font-light group-hover:border-white/20
+                       group-hover:text-white/70 transition-all flex-shrink-0"
           >
             +
-          </button>
+          </span>
         </div>
       </div>
     </button>
