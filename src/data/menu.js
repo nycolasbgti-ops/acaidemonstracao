@@ -80,7 +80,7 @@ export const products = [
     prices: { unique: 16.00 },
     free_toppings: 2,
     emoji: '🍧',
-    image_url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&h=300&fit=crop',
   },
   {
     id: 'acai-300ml',
@@ -90,7 +90,7 @@ export const products = [
     prices: { unique: 24.00 },
     free_toppings: 4,
     emoji: '🍧',
-    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop',
   },
   {
     id: 'acai-400ml',
@@ -100,7 +100,7 @@ export const products = [
     prices: { unique: 32.00 },
     free_toppings: 6,
     emoji: '🍧',
-    image_url: 'https://images.unsplash.com/photo-1490474504059-5c07eac04bd2?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&h=300&fit=crop&crop=entropy',
   },
   {
     id: 'acai-500ml',
@@ -110,7 +110,7 @@ export const products = [
     prices: { unique: 39.00 },
     free_toppings: 8,
     emoji: '🍧',
-    image_url: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=300&h=300&fit=crop',
   },
   {
     id: 'acai-700ml',
@@ -120,7 +120,7 @@ export const products = [
     prices: { unique: 48.00 },
     free_toppings: -1,
     emoji: '🍧',
-    image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop&crop=entropy',
   },
 
   // ── BARCAS DE AÇAÍ ──────────────────────────────────────────────────
@@ -132,7 +132,7 @@ export const products = [
     prices: { unique: 38.00 },
     free_toppings: 5,
     emoji: '🛶',
-    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&h=300&fit=crop',
   },
   {
     id: 'barca-media',
@@ -142,7 +142,7 @@ export const products = [
     prices: { unique: 54.00 },
     free_toppings: 7,
     emoji: '🛶',
-    image_url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop',
   },
   {
     id: 'barca-grande',
@@ -152,7 +152,7 @@ export const products = [
     prices: { unique: 72.00 },
     free_toppings: -1,
     emoji: '🛶',
-    image_url: 'https://images.unsplash.com/photo-1490474504059-5c07eac04bd2?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=300&h=300&fit=crop',
   },
   {
     id: 'barca-executiva',
@@ -162,7 +162,7 @@ export const products = [
     prices: { unique: 65.00 },
     free_toppings: 10,
     emoji: '🛶',
-    image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&h=300&fit=crop&crop=top',
   },
 
   // ── COMBOS & PROMOÇÕES ──────────────────────────────────────────────
@@ -173,7 +173,6 @@ export const products = [
     description: '2x Açaís Médios (400ml) com acompanhamentos à escolha.',
     prices: { unique: 59.00 },
     emoji: '💑',
-    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=500&h=500&fit=crop',
   },
   {
     id: 'combo-familia',
@@ -182,7 +181,6 @@ export const products = [
     description: '1 Barca Grande + 4 picolés da casa. Perfeito para reuniões.',
     prices: { unique: 89.00 },
     emoji: '👨‍👩‍👧‍👦',
-    image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=500&fit=crop',
   },
   {
     id: 'combo-amigos',
@@ -191,7 +189,6 @@ export const products = [
     description: '3x Açaís Grandes + 3 milkshakes à escolha.',
     prices: { unique: 109.00 },
     emoji: '👯',
-    image_url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop',
   },
   {
     id: 'combo-festa',
@@ -200,7 +197,6 @@ export const products = [
     description: 'Seleção festiva: 2 Barcas Grandes + 12 Picolés variados.',
     prices: { unique: 179.00 },
     emoji: '🎉',
-    image_url: 'https://images.unsplash.com/photo-1490474504059-5c07eac04bd2?w=500&h=500&fit=crop',
   },
 
   // ── PICOLÉS & SORVETES ──────────────────────────────────────────────
@@ -211,7 +207,7 @@ export const products = [
     description: 'Picolé artesanal de açaí 100% puro. Refrescante.',
     prices: { unique: 8.50 },
     emoji: '🍭',
-    image_url: 'https://images.unsplash.com/photo-1605350897765-4cf30eb7cfcd?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1605350897765-4cf30eb7cfcd?w=300&h=300&fit=crop',
   },
   {
     id: 'picole-morango',
@@ -220,7 +216,7 @@ export const products = [
     description: 'Cremoso e suave sabor morango natural.',
     prices: { unique: 8.00 },
     emoji: '🍭',
-    image_url: 'https://images.unsplash.com/photo-1605350897764-4cf30eb7cfcd?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop&crop=top',
   },
   {
     id: 'picole-maracuja',
@@ -229,7 +225,7 @@ export const products = [
     description: 'Refrescante e tropical com toque azedo perfeito.',
     prices: { unique: 8.00 },
     emoji: '🍭',
-    image_url: 'https://images.unsplash.com/photo-1605350897763-4cf30eb7cfcd?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1605350897765-4cf30eb7cfcd?w=300&h=300&fit=crop&crop=entropy',
   },
   {
     id: 'picolé-chocolate',
@@ -238,7 +234,7 @@ export const products = [
     description: 'Chocolate belga envolvendo picolé de cream.',
     prices: { unique: 9.50 },
     emoji: '🍭',
-    image_url: 'https://images.unsplash.com/photo-1605350897762-4cf30eb7cfcd?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop&crop=entropy',
   },
   {
     id: 'sorvete-pote-300ml',
@@ -247,7 +243,7 @@ export const products = [
     description: 'Sorvete premium em pote. Escolha 2 sabores diferentes.',
     prices: { unique: 18.00 },
     emoji: '🍦',
-    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop',
   },
   {
     id: 'sorvete-pote-500ml',
@@ -256,7 +252,7 @@ export const products = [
     description: 'Sorvete premium grande. Escolha 3 sabores diferentes.',
     prices: { unique: 26.00 },
     emoji: '🍦',
-    image_url: 'https://images.unsplash.com/photo-1563805042-7684c019e1cd?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&h=300&fit=crop&crop=top',
   },
 
   // ── MILKSHAKES ──────────────────────────────────────────────────────
@@ -267,7 +263,7 @@ export const products = [
     description: 'Cremoso milk shake de açaí fresco. 400ml.',
     prices: { unique: 22.00 },
     emoji: '🥛',
-    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=300&h=300&fit=crop',
   },
   {
     id: 'shake-morango',
@@ -276,7 +272,7 @@ export const products = [
     description: 'Refrescante com morango natural e sorvete. 400ml.',
     prices: { unique: 20.00 },
     emoji: '🥛',
-    image_url: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=300&h=300&fit=crop',
   },
   {
     id: 'shake-chocolate',
@@ -285,7 +281,7 @@ export const products = [
     description: 'Cremoso de chocolate belga com leite integral. 400ml.',
     prices: { unique: 20.00 },
     emoji: '🥛',
-    image_url: 'https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1570197571499-166b36435e9f?w=300&h=300&fit=crop',
   },
   {
     id: 'shake-banana',
@@ -294,7 +290,7 @@ export const products = [
     description: 'Clássico com banana e toque de canela. 400ml.',
     prices: { unique: 18.00 },
     emoji: '🥛',
-    image_url: 'https://images.unsplash.com/photo-1481671703460-040cb8a2d909?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1481671703460-040cb8a2d909?w=300&h=300&fit=crop',
   },
   {
     id: 'shake-misto',
@@ -303,7 +299,7 @@ export const products = [
     description: 'Combinação de morango, banana e chocolate. 500ml.',
     prices: { unique: 25.00 },
     emoji: '🥛',
-    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1572490122747-3e9c1b589ac0?w=300&h=300&fit=crop',
   },
 
   // ── BEBIDAS ─────────────────────────────────────────────────────────
@@ -314,7 +310,7 @@ export const products = [
     description: 'Água mineral com ou sem gás.',
     prices: { unique: 5.00 },
     emoji: '💧',
-    image_url: 'https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=300&h=300&fit=crop',
   },
   {
     id: 'suco-natural-300',
@@ -323,7 +319,7 @@ export const products = [
     description: 'Laranja, limão ou maracujá. Fresco do dia.',
     prices: { unique: 10.00 },
     emoji: '🍊',
-    image_url: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd01e3e?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1599599810694-b5ac4dd01e3e?w=300&h=300&fit=crop',
   },
   {
     id: 'refrigerante-lata',
@@ -332,7 +328,7 @@ export const products = [
     description: 'Coca-Cola, Sprite ou Guaraná gelado.',
     prices: { unique: 6.50 },
     emoji: '🥤',
-    image_url: 'https://images.unsplash.com/photo-1554866585-d34d2c3aee6c?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1554866585-d34d2c3aee6c?w=300&h=300&fit=crop',
   },
   {
     id: 'energetico',
@@ -341,7 +337,7 @@ export const products = [
     description: 'Energy drink premium para mais energia.',
     prices: { unique: 12.00 },
     emoji: '⚡',
-    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f80?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f80?w=300&h=300&fit=crop',
   },
   {
     id: 'cha-gelado',
@@ -350,7 +346,7 @@ export const products = [
     description: 'Chá gelado de frutas vermelhas. Refrescante.',
     prices: { unique: 8.00 },
     emoji: '🫖',
-    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f81?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1599599810724-8249cba80f81?w=300&h=300&fit=crop',
   },
 
   // ── LANCHES ─────────────────────────────────────────────────────────
@@ -361,7 +357,7 @@ export const products = [
     description: 'Croissant fresco, amanteigado e crocante.',
     prices: { unique: 8.50 },
     emoji: '🥐',
-    image_url: 'https://images.unsplash.com/photo-1527521060660-15cd12a73e0e?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1527521060660-15cd12a73e0e?w=300&h=300&fit=crop',
   },
   {
     id: 'muffin-chocolate',
@@ -370,7 +366,7 @@ export const products = [
     description: 'Muffin com gotas de chocolate belga.',
     prices: { unique: 9.00 },
     emoji: '🧁',
-    image_url: 'https://images.unsplash.com/photo-1609779871055-72a50e5eaa8e?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1609779871055-72a50e5eaa8e?w=300&h=300&fit=crop',
   },
   {
     id: 'brownie',
@@ -379,7 +375,7 @@ export const products = [
     description: 'Brownie denso e delicioso de chocolate.',
     prices: { unique: 10.00 },
     emoji: '🍫',
-    image_url: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=300&h=300&fit=crop',
   },
   {
     id: 'cookie-gotas',
@@ -388,7 +384,7 @@ export const products = [
     description: 'Cookie crocante com gotas de chocolate.',
     prices: { unique: 6.50 },
     emoji: '🍪',
-    image_url: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300&h=300&fit=crop',
   },
   {
     id: 'bolo-fatia',
@@ -397,6 +393,6 @@ export const products = [
     description: 'Bolo do dia conforme disponibilidade.',
     prices: { unique: 11.00 },
     emoji: '🍰',
-    image_url: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop',
+    image_url: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop',
   },
 ]

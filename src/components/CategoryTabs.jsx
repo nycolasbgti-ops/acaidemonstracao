@@ -24,7 +24,7 @@ export default function CategoryTabs({ categories, selected, onChange }) {
   }, [selected])
 
   return (
-    <div className="sticky top-16 z-30 bg-acai-bg/95 backdrop-blur-sm border-b border-white/5 py-2.5">
+    <div className="sticky top-16 z-30 bg-zinc-950 border-b border-white/[0.06] py-2.5">
       <div ref={containerRef} className="flex gap-1.5 overflow-x-auto px-4 max-w-6xl mx-auto scrollbar-hide">
         {categories.map(cat => (
           <button

@@ -10,16 +10,13 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
 
   useEffect(() => {
     if (!categories.length) return
-
     const visible = new Set()
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) visible.add(e.target.dataset.catId)
           else                   visible.delete(e.target.dataset.catId)
         })
-
         for (const cat of categories) {
           if (visible.has(cat.id)) {
             onCategoryChangeRef.current?.(cat.id)
@@ -27,12 +24,8 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
           }
         }
       },
-      {
-        rootMargin: '-20% 0px -70% 0px',
-        threshold: 0,
-      },
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 },
     )
-
     Object.values(sectionRefs.current).forEach(el => { if (el) observer.observe(el) })
     return () => observer.disconnect()
   }, [categories])
@@ -48,29 +41,29 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
             key={cat.id}
             data-cat-id={cat.id}
             ref={el => { sectionRefs.current[cat.id] = el }}
-            className={`${idx === 0 ? 'pt-5' : 'pt-9'}`}
+            className={idx === 0 ? 'pt-5' : 'pt-8'}
           >
-            {/* Cabeçalho da categoria */}
-            <div className="max-w-6xl mx-auto px-4 mb-4">
-              <div className="flex items-center gap-2.5">
-                {cat.icon && (cat.icon.startsWith('http') || cat.icon.startsWith('/'))
-                  ? <img src={cat.icon} alt={cat.name} className="w-5 h-5 object-contain flex-shrink-0 opacity-80" />
-                  : <span className="text-xl leading-none">{cat.icon}</span>
+            {/* Cabeçalho da seção */}
+            <div className="max-w-lg mx-auto px-4 mb-2">
+              <div className="flex items-center gap-2">
+                {cat.icon && !cat.icon.startsWith('http')
+                  ? <span className="text-sm leading-none">{cat.icon}</span>
+                  : <img src={cat.icon} alt={cat.name} className="w-4 h-4 object-contain opacity-60" />
                 }
-                <h2 className="font-semibold text-white/80 text-sm tracking-normal">
+                <h2 className="text-xs font-semibold tracking-widest uppercase text-zinc-500">
                   {cat.name}
                 </h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-1" />
               </div>
             </div>
 
-            {/* Grid de produtos */}
-            <div className="max-w-6xl mx-auto px-4">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {products.map(product => (
+            {/* Lista horizontal */}
+            <div className="max-w-lg mx-auto px-4">
+              <div className="bg-zinc-900 rounded-2xl overflow-hidden">
+                {products.map((product, i) => (
                   <ProductCard
                     key={product.id}
                     product={product}
+                    isLast={i === products.length - 1}
                     onClick={() => onSelectProduct(product)}
                   />
                 ))}
@@ -83,50 +76,44 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
   )
 }
 
-function ProductCard({ product, onClick }) {
+function ProductCard({ product, isLast, onClick }) {
   const basePrice = getBasePrice(product.prices)
 
   return (
     <button
       onClick={onClick}
-      className="flex flex-col h-full bg-zinc-900 rounded-2xl overflow-hidden
-                 active:scale-[0.97] transition-all duration-150 text-left
-                 border border-white/5 hover:border-white/10 group"
+      className={`w-full flex items-center gap-4 px-4 py-4 text-left
+                  active:bg-white/[0.03] transition-colors
+                  ${!isLast ? 'border-b border-white/[0.06]' : ''}`}
     >
-      {/* Imagem */}
-      <div className="w-full aspect-square overflow-hidden relative flex-shrink-0">
+      {/* Imagem quadrada */}
+      <div className="w-[88px] h-[88px] rounded-xl overflow-hidden flex-shrink-0">
         <ImageWithFallback
           src={product.image_url || ''}
           alt={product.name}
           emoji={product.emoji ?? '🍧'}
           className="w-full h-full"
         />
-        <div className="absolute inset-0 bg-black/0 group-active:bg-black/15 transition-all" />
       </div>
 
-      {/* Conteúdo */}
-      <div className="flex-1 flex flex-col p-3">
-        <h3 className="font-semibold text-white text-[13px] leading-snug line-clamp-2 mb-1">
+      {/* Informações */}
+      <div className="flex-1 min-w-0 flex flex-col self-stretch py-0.5">
+        <h3 className="text-[15px] font-medium text-white leading-snug line-clamp-1">
           {product.name}
         </h3>
-
-        <p className="text-[11px] text-zinc-400 line-clamp-2 flex-1 mb-2.5 leading-relaxed">
+        <p className="text-[13px] text-zinc-400 line-clamp-2 leading-relaxed mt-0.5 flex-1">
           {product.description}
         </p>
-
-        <div className="flex items-center justify-between">
-          <span className="text-violet-300 font-semibold text-sm leading-none">
+        <div className="flex items-center justify-between mt-2.5">
+          <span className="text-[15px] font-semibold text-white">
             {fmt(basePrice)}
           </span>
-
-          <span
-            className="w-7 h-7 rounded-full bg-white/5 border border-white/12
-                       flex items-center justify-center text-white/50 text-[18px]
-                       leading-none font-light group-hover:border-white/20
-                       group-hover:text-white/70 transition-all flex-shrink-0"
+          <div
+            className="w-7 h-7 rounded-full border border-white/[0.18] flex items-center justify-center
+                       text-white/55 text-[18px] font-light leading-none"
           >
             +
-          </span>
+          </div>
         </div>
       </div>
     </button>

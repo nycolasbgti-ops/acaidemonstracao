@@ -4,40 +4,43 @@ export default function BottomNav({ cartCount, onHomeClick, onCartClick, onOrder
   const NavItem = ({ id, label, icon, onClick, isActive }) => (
     <button
       onClick={onClick}
-      className={`flex-1 flex flex-col items-center justify-center py-3 px-2 transition-all ${
-        isActive ? 'text-acai-accent' : 'text-acai-text-muted hover:text-acai-text'
+      className={`flex-1 flex flex-col items-center justify-center py-3 gap-[5px] transition-colors ${
+        isActive ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'
       }`}
     >
-      <div className="relative flex items-center justify-center mb-1.5">
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="relative">
+        <svg className="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             strokeWidth={isActive ? 2 : 1.5}>
           {icon === 'home' && (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-              d="M3 12l2.834-2.834a2 2 0 012.828 0L12 13l3.338-3.338a2 2 0 012.828 0L21 20M3 6h18M3 6v12a2 2 0 002 2h14a2 2 0 002-2V6" />
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
           )}
           {icon === 'cart' && (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
           )}
           {icon === 'orders' && (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
           )}
         </svg>
+
         {icon === 'cart' && cartCount > 0 && (
-          <span className="absolute -top-1 -right-2 w-5 h-5 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-full text-white
-                           text-xs font-bold flex items-center justify-center shadow-lg shadow-acai-accent/40">
+          <span className="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px]
+                           bg-white text-zinc-900 text-[9px] font-bold rounded-full
+                           flex items-center justify-center px-[3px]">
             {cartCount > 9 ? '9+' : cartCount}
           </span>
         )}
       </div>
-      <span className="text-xs font-medium">{label}</span>
+      <span className="text-[10px] font-medium tracking-wide">{label}</span>
     </button>
   )
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-acai-bg to-acai-surface border-t border-acai-border
-                    backdrop-blur-lg z-40 max-w-lg mx-auto shadow-lg shadow-acai-primary/10">
-      <div className="flex items-center justify-around">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 max-w-lg mx-auto
+                    bg-zinc-900 border-t border-white/[0.08]">
+      <div className="flex items-center">
         <NavItem id="home"   label="Início"   icon="home"   isActive={activeTab === 'home'}   onClick={onHomeClick} />
         <NavItem id="cart"   label="Carrinho" icon="cart"   isActive={activeTab === 'cart'}   onClick={onCartClick} />
         <NavItem id="orders" label="Pedidos"  icon="orders" isActive={activeTab === 'orders'} onClick={onOrdersClick} />

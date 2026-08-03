@@ -21,7 +21,7 @@ const AcaiLogo = () => (
 
 export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick }) {
   return (
-    <header className="sticky top-0 z-40 bg-gradient-to-b from-acai-bg/95 to-acai-surface/80 backdrop-blur-xl border-b border-acai-border">
+    <header className="sticky top-0 z-40 bg-zinc-900 border-b border-white/[0.08]">
       <div className="max-w-lg mx-auto px-4 h-16 flex items-center justify-between">
 
         {/* Logo — esquerda */}
@@ -35,9 +35,9 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           {/* Ícone de info da loja */}
           <button
             onClick={onInfoClick}
-            className="w-9 h-9 flex items-center justify-center bg-acai-surface rounded-full
-                       border border-acai-border text-acai-text-muted transition-all active:scale-95
-                       hover:text-acai-accent hover:border-acai-accent hover:bg-acai-raised"
+            className="w-9 h-9 flex items-center justify-center bg-white/[0.05] rounded-full
+                       border border-white/[0.08] text-zinc-400 transition-all active:scale-95
+                       hover:text-white hover:border-white/20"
             aria-label="Informações da loja"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,11 +50,10 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           {cartCount > 0 ? (
             <button
               onClick={onCartClick}
-              className="flex items-center gap-2 bg-gradient-to-r from-acai-accent to-acai-accent-lt px-3 py-2 rounded-full
-                         active:scale-95 transition-all shadow-lg shadow-acai-accent/40 text-white text-sm
-                         hover:shadow-xl hover:shadow-acai-accent/50"
+              className="flex items-center gap-2 bg-white text-zinc-900 px-3.5 py-2 rounded-full
+                         active:scale-95 transition-all text-sm font-semibold"
             >
-              <span className="text-xs font-bold bg-black/30 rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="text-xs font-bold bg-zinc-900/20 rounded-full w-5 h-5 flex items-center justify-center">
                 {cartCount}
               </span>
               <span className="text-xs font-bold">{fmt(cartTotal)}</span>
@@ -62,9 +61,9 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           ) : (
             <button
               onClick={onCartClick}
-              className="w-9 h-9 flex items-center justify-center bg-acai-surface rounded-full
-                         border border-acai-border text-acai-text-muted transition-all active:scale-95
-                         hover:text-acai-accent hover:border-acai-accent hover:bg-acai-raised"
+              className="w-9 h-9 flex items-center justify-center bg-white/[0.05] rounded-full
+                         border border-white/[0.08] text-zinc-400 transition-all active:scale-95
+                         hover:text-white hover:border-white/20"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
