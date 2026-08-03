@@ -1,18 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import { fmt, getBasePrice } from '../utils/price'
+import ImageWithFallback from './ImageWithFallback'
 
 export default function Menu({ categories, byCategory, onSelectProduct, onCategoryChange }) {
   const sectionRefs         = useRef({})
   const onCategoryChangeRef = useRef(onCategoryChange)
 
-  // Mantém o ref atualizado sem recriar o observer a cada render
   useEffect(() => { onCategoryChangeRef.current = onCategoryChange })
 
-  // IntersectionObserver — detecta qual seção está no "terço superior" da tela
   useEffect(() => {
     if (!categories.length) return
 
-    // Rastreia quais seções estão dentro da zona ativa em tempo real
     const visible = new Set()
 
     const observer = new IntersectionObserver(
@@ -22,7 +20,6 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
           else                   visible.delete(e.target.dataset.catId)
         })
 
-        // Percorre categorias em ordem DOM e reporta a primeira visível (mais ao topo)
         for (const cat of categories) {
           if (visible.has(cat.id)) {
             onCategoryChangeRef.current?.(cat.id)
@@ -31,8 +28,6 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
         }
       },
       {
-        // Corta 20% do topo (cobre header + tabs ~120px) e 70% da base
-        // → zona ativa ≈ terço superior da viewport, onde o título da seção entra
         rootMargin: '-20% 0px -70% 0px',
         threshold: 0,
       },
@@ -53,29 +48,33 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
             key={cat.id}
             data-cat-id={cat.id}
             ref={el => { sectionRefs.current[cat.id] = el }}
-            className={`px-4 ${idx === 0 ? 'pt-4' : 'pt-8'}`}
+            className={`${idx === 0 ? 'pt-4' : 'pt-8'}`}
           >
             {/* Cabeçalho da categoria */}
-            <div className="flex items-center gap-2 mb-4">
-              {cat.icon && (cat.icon.startsWith('http') || cat.icon.startsWith('/'))
-                ? <img src={cat.icon} alt={cat.name} className="w-7 h-7 object-contain flex-shrink-0" />
-                : <span className="text-xl leading-none">{cat.icon}</span>
-              }
-              <h2 className="font-bold text-acai-text text-sm tracking-widest uppercase">
-                {cat.name}
-              </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-acai-primary/40 to-transparent ml-1" />
+            <div className="max-w-6xl mx-auto px-4 mb-5">
+              <div className="flex items-center gap-3">
+                {cat.icon && (cat.icon.startsWith('http') || cat.icon.startsWith('/'))
+                  ? <img src={cat.icon} alt={cat.name} className="w-7 h-7 object-contain flex-shrink-0" />
+                  : <span className="text-2xl leading-none">{cat.icon}</span>
+                }
+                <h2 className="font-bold text-acai-text text-base tracking-widest uppercase">
+                  {cat.name}
+                </h2>
+                <div className="flex-1 h-px bg-gradient-to-r from-acai-primary/40 to-transparent ml-1" />
+              </div>
             </div>
 
-            {/* Grid de produtos */}
-            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
-              {products.map(product => (
-                <ProductGridCard
-                  key={product.id}
-                  product={product}
-                  onClick={() => onSelectProduct(product)}
-                />
-              ))}
+            {/* Grid de produtos - Centralizado com max-width */}
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+                {products.map(product => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onClick={() => onSelectProduct(product)}
+                  />
+                ))}
+              </div>
             </div>
           </section>
         )
@@ -84,54 +83,54 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
   )
 }
 
-function ProductGridCard({ product, onClick }) {
+function ProductCard({ product, onClick }) {
   const basePrice = getBasePrice(product.prices)
 
   return (
     <button
       onClick={onClick}
-      className="flex flex-col bg-acai-surface rounded-2xl overflow-hidden
+      className="flex flex-col h-full bg-[#1A0B2E] rounded-2xl overflow-hidden
                  active:scale-[0.96] transition-all duration-150 text-left
-                 border border-acai-border hover:border-acai-primary/50 group
-                 hover:shadow-lg-premium hover:shadow-acai-primary/20"
+                 border border-white/5 hover:border-lime-400/30 group
+                 hover:shadow-lg hover:shadow-lime-400/10"
     >
-      {/* Imagem */}
-      <div className="w-full aspect-square bg-gradient-to-br from-acai-primary/30 to-acai-accent/10
-                      flex items-center justify-center overflow-hidden relative">
-        {product.image_url ? (
-          <img
-            src={product.image_url}
-            alt={product.name}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full h-full bg-acai-raised">
-            <span className="text-4xl opacity-40">{product.emoji ?? '🍧'}</span>
-          </div>
-        )}
+      {/* Imagem com aspect ratio 1:1 compacto */}
+      <div className="w-full aspect-square bg-gradient-to-br from-acai-primary/20 to-acai-accent/10
+                      flex items-center justify-center overflow-hidden relative flex-shrink-0">
+        <ImageWithFallback
+          src={product.image_url || ''}
+          alt={product.name}
+          className="w-full h-full"
+        />
         <div className="absolute inset-0 bg-black/0 group-active:bg-black/20 transition-all" />
       </div>
 
-      {/* Conteúdo */}
-      <div className="flex-1 flex flex-col p-3">
-        <h3 className="font-bold text-sm text-acai-text leading-snug line-clamp-2 mb-1">
+      {/* Conteúdo - Compacto e elegante */}
+      <div className="flex-1 flex flex-col p-3 md:p-3.5">
+        {/* Título */}
+        <h3 className="font-semibold text-acai-text text-sm leading-snug line-clamp-2 mb-1">
           {product.name}
         </h3>
-        <p className="text-xs text-acai-text-muted line-clamp-1 flex-1">
+
+        {/* Descrição */}
+        <p className="text-xs text-gray-300 line-clamp-2 flex-1 mb-2">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-acai-border">
-          <span className="text-acai-gold font-bold text-sm">
+        {/* Rodapé: Preço e Botão */}
+        <div className="flex items-center justify-between pt-2 border-t border-white/5">
+          {/* Preço - Verde suave ou dourado elegante */}
+          <span className="text-lime-400 font-bold text-sm leading-none">
             {fmt(basePrice)}
           </span>
+
+          {/* Botão + Compacto */}
           <button
             onClick={(e) => { e.stopPropagation(); onClick() }}
-            className="w-7 h-7 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-full flex items-center justify-center
-                       text-white text-lg leading-none shadow-lg shadow-acai-accent/40
-                       font-light active:scale-90 transition-transform flex-shrink-0
-                       hover:shadow-xl hover:shadow-acai-accent/50"
+            className="w-7 h-7 bg-lime-400 hover:bg-lime-500 rounded-lg flex items-center justify-center
+                       text-black text-base leading-none shadow-md shadow-lime-400/30
+                       font-semibold active:scale-90 transition-all flex-shrink-0
+                       hover:shadow-lg hover:shadow-lime-400/50"
           >
             +
           </button>
