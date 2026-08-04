@@ -6,7 +6,7 @@ export default function ImageWithFallback({ src, alt = 'Produto', emoji = '🍧'
 
   if (!src || hasError) {
     return (
-      <div className={`w-full h-full bg-gradient-to-br from-zinc-800 via-zinc-850 to-zinc-900 flex items-center justify-center ${className}`}>
+      <div className={`w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center ${className}`}>
         <span className="text-5xl select-none opacity-80">{emoji}</span>
       </div>
     )
@@ -15,7 +15,7 @@ export default function ImageWithFallback({ src, alt = 'Produto', emoji = '🍧'
   return (
     <div className={`w-full h-full overflow-hidden relative ${className}`}>
       {isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse" />
       )}
       <img
         src={src}

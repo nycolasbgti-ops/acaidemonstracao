@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { api } from '../api'
 
 const STATUS_LABEL = {
-  new:        { label: 'Recebido',    color: 'text-yellow-400',  bg: 'bg-yellow-400/10' },
-  preparing:  { label: 'Preparando', color: 'text-blue-400',    bg: 'bg-blue-400/10'   },
-  ready:      { label: 'Pronto',     color: 'text-green-400',   bg: 'bg-green-400/10'  },
-  delivered:  { label: 'Entregue',   color: 'text-gray-400',    bg: 'bg-gray-400/10'   },
-  cancelled:  { label: 'Cancelado',  color: 'text-red-400',     bg: 'bg-red-400/10'    },
+  new:        { label: 'Recebido',    color: 'text-yellow-700',  bg: 'bg-yellow-50 border border-yellow-200' },
+  preparing:  { label: 'Preparando', color: 'text-blue-700',    bg: 'bg-blue-50 border border-blue-200'     },
+  ready:      { label: 'Pronto',     color: 'text-emerald-700', bg: 'bg-emerald-50 border border-emerald-200' },
+  delivered:  { label: 'Entregue',   color: 'text-gray-600',    bg: 'bg-gray-100 border border-gray-200'    },
+  cancelled:  { label: 'Cancelado',  color: 'text-red-700',     bg: 'bg-red-50 border border-red-200'       },
 }
 
 const fmt = (v) => `R$ ${Number(v || 0).toFixed(2).replace('.', ',')}`
@@ -39,10 +39,10 @@ export default function OrdersView() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 pt-6 pb-32">
+    <div className="flex-1 overflow-y-auto bg-gray-50 px-4 pt-6 pb-32">
       <div className="max-w-lg mx-auto">
 
-        <h2 className="text-xl font-bold text-white mb-1">Meus Pedidos</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-1">Meus Pedidos</h2>
         <p className="text-sm text-gray-500 mb-6">Digite seu WhatsApp para consultar seus pedidos.</p>
 
         <form onSubmit={handleSearch} className="flex gap-2 mb-6">
@@ -51,12 +51,16 @@ export default function OrdersView() {
             value={phone}
             onChange={e => setPhone(e.target.value)}
             placeholder="(00) 00000-0000"
-            className="flex-1 bg-acai-raised border border-acai-border rounded-2xl px-4 py-3 text-white placeholder-acai-text-dim outline-none focus:ring-2 focus:ring-acai-accent text-sm transition-all"
+            className="flex-1 bg-white border border-gray-300 rounded-xl px-4 py-3
+                       text-gray-900 placeholder-gray-400 outline-none
+                       focus:ring-2 focus:ring-purple-500 focus:border-purple-400
+                       text-sm transition-all shadow-sm"
           />
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-3 bg-gradient-to-r from-acai-accent to-acai-accent-lt rounded-2xl text-sm font-bold text-white active:scale-95 transition-all disabled:opacity-50 flex-shrink-0"
+            className="px-5 py-3 bg-purple-700 hover:bg-purple-800 rounded-xl text-sm font-semibold
+                       text-white active:scale-95 transition-all disabled:opacity-50 flex-shrink-0 shadow-sm"
           >
             {loading ? (
               <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -68,13 +72,15 @@ export default function OrdersView() {
         </form>
 
         {error && (
-          <p className="text-sm text-red-400 bg-red-500/10 rounded-xl px-4 py-3 mb-4">{error}</p>
+          <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4">
+            {error}
+          </p>
         )}
 
         {orders !== null && orders.length === 0 && (
           <div className="text-center py-12">
             <span className="text-4xl block mb-3">🔍</span>
-            <p className="text-gray-400 text-sm">Nenhum pedido encontrado para esse número.</p>
+            <p className="text-gray-500 text-sm">Nenhum pedido encontrado para esse número.</p>
           </div>
         )}
 
@@ -87,11 +93,11 @@ export default function OrdersView() {
                 hour: '2-digit', minute: '2-digit',
               })
               return (
-                <div key={order.id} className="bg-acai-raised rounded-2xl p-4 border border-purple-800/20">
+                <div key={order.id} className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div>
-                      <p className="text-xs text-gray-500">{date}</p>
-                      <p className="text-sm font-bold text-white mt-0.5">{order.customer_name}</p>
+                      <p className="text-xs text-gray-400">{date}</p>
+                      <p className="text-sm font-bold text-gray-900 mt-0.5">{order.customer_name}</p>
                     </div>
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0 ${st.bg} ${st.color}`}>
                       {st.label}
@@ -100,18 +106,18 @@ export default function OrdersView() {
 
                   <div className="space-y-1 mb-3">
                     {(order.items ?? []).map((item, i) => (
-                      <div key={i} className="flex justify-between text-xs text-gray-400">
+                      <div key={i} className="flex justify-between text-xs text-gray-500">
                         <span>{item.qty ?? 1}× {item.name}</span>
                         <span>{fmt(item.price * (item.qty ?? 1))}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-purple-800/20">
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-200">
                     <span className="text-xs text-gray-500">
                       {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
                     </span>
-                    <span className="text-sm font-bold text-acai-accent">{fmt(order.total)}</span>
+                    <span className="text-sm font-bold text-emerald-600">{fmt(order.total)}</span>
                   </div>
                 </div>
               )

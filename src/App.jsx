@@ -141,7 +141,7 @@ export default function App() {
 
   // ── Menu principal ────────────────────────────────────────────
   return (
-    <div className="h-screen bg-zinc-950 text-acai-text flex flex-col overflow-hidden">
+    <div className="h-screen bg-gray-50 text-gray-900 flex flex-col overflow-hidden">
       <Header
         cartCount={cartCount}
         cartTotal={cartTotal}
