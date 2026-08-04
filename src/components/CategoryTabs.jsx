@@ -7,7 +7,7 @@ function CategoryIcon({ icon, name }) {
       <img
         src={icon}
         alt={name}
-        className="w-4 h-4 object-contain flex-shrink-0 opacity-80"
+        className="w-4 h-4 object-contain flex-shrink-0 opacity-70"
       />
     )
   }
@@ -24,7 +24,7 @@ export default function CategoryTabs({ categories, selected, onChange }) {
   }, [selected])
 
   return (
-    <div className="sticky top-16 z-30 bg-zinc-950 border-b border-white/[0.06] py-2.5">
+    <div className="sticky top-16 z-30 bg-white border-b border-gray-200 py-2.5">
       <div ref={containerRef} className="flex gap-1.5 overflow-x-auto px-4 max-w-6xl mx-auto scrollbar-hide">
         {categories.map(cat => (
           <button
@@ -35,8 +35,8 @@ export default function CategoryTabs({ categories, selected, onChange }) {
               flex-shrink-0 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full
               text-[11px] font-medium transition-all duration-200 active:scale-95 whitespace-nowrap
               ${selected === cat.id
-                ? 'bg-violet-500/15 text-violet-200 border border-violet-400/25'
-                : 'bg-white/5 text-zinc-400 border border-white/5 hover:border-white/10 hover:text-zinc-200 hover:bg-white/[0.07]'}
+                ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                : 'bg-gray-100 text-gray-600 border border-gray-200 hover:bg-gray-200 hover:text-gray-900'}
             `}
           >
             <CategoryIcon icon={cat.icon} name={cat.name} />

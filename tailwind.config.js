@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         // ── Tema Açaí Premium ──────────────────────────────────
-        // Cores base - Dark Mode
-        'acai-dark':       '#0A0806',  // Preto profundo
-        'acai-bg':         '#1a0f2e',  // Fundo principal (roxo muito escuro)
-        'acai-surface':    '#2a1a47',  // Superfícies de componentes
-        'acai-raised':     '#3d2561',  // Elementos elevados
-        'acai-border':     '#5a3a7d',  // Bordas
+        // Cores base - Light Mode
+        'acai-dark':       '#F9FAFB',  // Fundo raiz (gray-50)
+        'acai-bg':         '#F9FAFB',  // Fundo principal (gray-50)
+        'acai-surface':    '#FFFFFF',  // Superfícies de componentes (white)
+        'acai-raised':     '#F3F4F6',  // Elementos elevados (gray-100)
+        'acai-border':     '#E5E7EB',  // Bordas (gray-200)
         
         // Cores primárias - Roxo Açaí Profundo
         'acai-primary':    '#6B21A8',  // Roxo premium vibrante
@@ -37,9 +37,9 @@ export default {
         'acai-info':       '#06B6D4',  // Info (cyan)
         
         // Cores Neutras
-        'acai-text':       '#F3F4F6',  // Texto principal (cinza claro)
-        'acai-text-muted': '#9CA3AF',  // Texto secundário (cinza médio)
-        'acai-text-dim':   '#6B7280',  // Texto terciário (cinza escuro)
+        'acai-text':       '#111827',  // Texto principal (gray-900)
+        'acai-text-muted': '#6B7280',  // Texto secundário (gray-500)
+        'acai-text-dim':   '#9CA3AF',  // Texto terciário (gray-400)
       },
       keyframes: {
         shake: {

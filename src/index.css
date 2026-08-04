@@ -13,8 +13,8 @@
 
 html, body {
   overscroll-behavior: none;
-  background-color: #0A0806;
-  color: #F3F4F6;
+  background-color: #F9FAFB;
+  color: #111827;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

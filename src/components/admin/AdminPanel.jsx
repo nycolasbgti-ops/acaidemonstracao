@@ -3,6 +3,7 @@ import { api } from '../../api'
 import { fmt } from '../../utils/price'
 import MenuManager from './MenuManager'
 import AddonsManager from './AddonsManager'
+import Logo from '../Logo'
 
 const N8N_WEBHOOK_URL = 'https://n8n.nycolasdev.com.br/webhook/saiu-entrega'
 
@@ -15,7 +16,7 @@ const STATUS = {
   new:        { label: 'Novo',            icon: '🆕', bg: 'bg-blue-500',   next: 'preparing',  nextBtn: 'Iniciar Preparo'  },
   preparing:  { label: 'Em Preparo',      icon: '👨‍🍳', bg: 'bg-yellow-500', next: 'delivering', nextBtn: 'Saiu p/ Entrega' },
   delivering: { label: 'Saiu p/ Entrega', icon: '🛵', bg: 'bg-orange-500', next: 'delivered',  nextBtn: 'Marcar Entregue' },
-  delivered:  { label: 'Entregue',        icon: '✅', bg: 'bg-green-600',  next: null,         nextBtn: null              },
+  delivered:  { label: 'Entregue',        icon: '✅', bg: 'bg-emerald-600',  next: null,         nextBtn: null              },
 }
 
 const ORDER_TABS = [
@@ -56,18 +57,9 @@ function buildComanda(order) {
   }).join('\n')
 
   const parts = [
-    sep,
-    '          AÇAÍ CONCEPT',
-    sep,
-    `Pedido: #${id4}`,
-    '',
-    'Cliente:',
-    order.customer_name,
-    '',
-    'Telefone:',
-    order.customer_phone,
+    sep, '          AÇAÍ CONCEPT', sep,
+    `Pedido: #${id4}`, '', 'Cliente:', order.customer_name, '', 'Telefone:', order.customer_phone,
   ]
-
   if (order.address) parts.push('', 'Endereço:', order.address)
   parts.push(div, itemLines)
   if (order.notes) parts.push('', 'Observação:', order.notes)
@@ -93,15 +85,15 @@ function PrintModal({ order, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-      <div className="bg-acai-surface rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh]">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-acai-border flex-shrink-0">
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh] shadow-xl border border-gray-200">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 flex-shrink-0">
           <div>
-            <p className="font-bold text-base">🖨️ Imprimir Comanda</p>
+            <p className="font-bold text-base text-gray-900">🖨️ Imprimir Comanda</p>
             <p className="text-xs text-gray-500 mt-0.5">Edite antes de imprimir se necessário</p>
           </div>
           <button onClick={onClose}
-            className="w-10 h-10 bg-[#242424] rounded-full flex items-center justify-center text-gray-400 text-sm active:scale-95 transition-all flex-shrink-0">
+            className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-sm active:scale-95 transition-all flex-shrink-0 hover:bg-gray-200">
             ✕
           </button>
         </div>
@@ -112,19 +104,19 @@ function PrintModal({ order, onClose }) {
             onChange={e => setText(e.target.value)}
             rows={14}
             spellCheck={false}
-            className="w-full bg-[#242424] rounded-xl px-3 py-3 font-mono text-xs text-gray-200
-                       outline-none focus:ring-2 focus:ring-purple-700 resize-none leading-relaxed transition-all"
+            className="w-full bg-gray-50 rounded-xl px-3 py-3 font-mono text-xs text-gray-800
+                       outline-none focus:ring-2 focus:ring-purple-500 resize-none leading-relaxed transition-all border border-gray-200"
           />
         </div>
 
         <div className="flex gap-3 px-4 pb-5 flex-shrink-0">
           <button onClick={onClose}
-            className="flex-1 py-3.5 bg-[#242424] rounded-2xl text-sm font-semibold text-gray-400 active:scale-95 transition-all">
+            className="flex-1 py-3.5 bg-gray-100 rounded-2xl text-sm font-semibold text-gray-600 active:scale-95 transition-all hover:bg-gray-200">
             Cancelar
           </button>
           <button onClick={handlePrint}
             className="flex-1 py-3.5 bg-purple-700 text-white rounded-2xl text-sm font-bold
-                       active:scale-95 transition-all shadow-md shadow-purple-900/30 flex items-center justify-center gap-2">
+                       active:scale-95 transition-all shadow-sm hover:bg-purple-800 flex items-center justify-center gap-2">
             🖨️ Confirmar Impressão
           </button>
         </div>
@@ -145,12 +137,12 @@ function OrderCard({ order, onAdvance, onPrint }) {
   }
 
   return (
-    <div className={`bg-acai-surface rounded-2xl p-4 mb-3 ${order.status === 'new' ? 'ring-1 ring-blue-500/40' : ''}`}>
+    <div className={`bg-white rounded-2xl p-4 mb-3 border shadow-sm ${order.status === 'new' ? 'border-blue-200 ring-1 ring-blue-100' : 'border-gray-200'}`}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="font-bold text-base leading-snug">{order.customer_name}</p>
-          <p className="text-sm text-gray-400">{order.customer_phone}</p>
-          <p className="text-xs text-gray-600 mt-0.5">{timeAgo(order.created_at)}</p>
+          <p className="font-bold text-base text-gray-900 leading-snug">{order.customer_name}</p>
+          <p className="text-sm text-gray-500">{order.customer_phone}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{timeAgo(order.created_at)}</p>
         </div>
         <span className={`${cfg.bg} text-white text-xs font-bold px-2.5 py-1 rounded-full flex-shrink-0`}>
           {cfg.icon} {cfg.label}
@@ -160,43 +152,43 @@ function OrderCard({ order, onAdvance, onPrint }) {
       <div className="space-y-1 mb-3">
         {(order.items || []).map((item, i) => (
           <div key={i} className="flex justify-between text-sm">
-            <span className="text-gray-300 pr-2">{item.qty || 1}× {item.name}</span>
-            <span className="text-purple-400 font-medium flex-shrink-0">{fmt(item.price * (item.qty || 1))}</span>
+            <span className="text-gray-700 pr-2">{item.qty || 1}× {item.name}</span>
+            <span className="text-purple-600 font-medium flex-shrink-0">{fmt(item.price * (item.qty || 1))}</span>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-between py-2.5 border-t border-b border-acai-border mb-3">
+      <div className="flex items-center justify-between py-2.5 border-t border-b border-gray-200 mb-3">
         <div className="flex gap-1.5 flex-wrap">
-          <span className="text-xs bg-[#242424] px-2 py-0.5 rounded-full text-gray-400">
+          <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-500">
             {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
           </span>
-          <span className="text-xs bg-[#242424] px-2 py-0.5 rounded-full text-gray-400">
+          <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-500">
             {PAYMENT_LABELS[order.payment_method] || order.payment_method}
           </span>
         </div>
-        <span className="font-bold text-base text-white">{fmt(order.total)}</span>
+        <span className="font-bold text-base text-gray-900">{fmt(order.total)}</span>
       </div>
 
       {order.address && (
         <p className="text-xs text-gray-500 mb-3 flex gap-1.5"><span>📍</span><span>{order.address}</span></p>
       )}
       {order.notes && (
-        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-3 py-2 mb-3">
-          <p className="text-xs text-yellow-300">📝 {order.notes}</p>
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-3 py-2 mb-3">
+          <p className="text-xs text-yellow-700">📝 {order.notes}</p>
         </div>
       )}
 
       <div className="flex gap-2">
         <button onClick={() => onPrint(order)}
-          className="flex-1 py-3 bg-[#242424] rounded-xl text-sm font-semibold text-gray-300
-                     active:scale-[0.97] transition-all flex items-center justify-center gap-1.5">
+          className="flex-1 py-3 bg-gray-100 rounded-xl text-sm font-semibold text-gray-700
+                     active:scale-[0.97] transition-all hover:bg-gray-200 flex items-center justify-center gap-1.5">
           🖨️ Imprimir
         </button>
         {cfg.next && (
           <button onClick={advance} disabled={busy}
             className="flex-1 py-3 bg-purple-700 rounded-xl font-bold text-sm text-white
-                       active:scale-[0.97] transition-all disabled:opacity-50 shadow-md shadow-purple-900/30">
+                       active:scale-[0.97] transition-all disabled:opacity-50 shadow-sm hover:bg-purple-800">
             {busy ? '...' : cfg.nextBtn}
           </button>
         )}
@@ -204,8 +196,6 @@ function OrderCard({ order, onAdvance, onPrint }) {
     </div>
   )
 }
-
-// ── Painel de Pedidos ─────────────────────────────────────────
 
 function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
   const [activeTab,  setActiveTab]  = useState('new')
@@ -216,11 +206,11 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
 
   return (
     <>
-      <div className="flex border-b border-acai-border bg-[#0A0A0A]">
+      <div className="flex border-b border-gray-200 bg-white">
         {ORDER_TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             className={`flex-1 py-3 text-xs sm:text-sm font-semibold relative transition-colors whitespace-nowrap ${
-              activeTab === tab.key ? 'text-white' : 'text-gray-600'
+              activeTab === tab.key ? 'text-gray-900' : 'text-gray-400'
             }`}>
             {tab.label}
             {tab.key === 'new' && newCount > 0 && (
@@ -246,10 +236,10 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
         ) : !connOk ? (
           <div className="text-center py-16 px-4">
             <span className="text-5xl block mb-4">⚠️</span>
-            <p className="text-gray-300 font-semibold mb-1">Erro de conexão</p>
+            <p className="text-gray-900 font-semibold mb-1">Erro de conexão</p>
             <p className="text-gray-500 text-sm mb-5">Não foi possível conectar à API.</p>
             <button onClick={onRefetch}
-              className="px-5 py-2.5 bg-acai-surface rounded-xl text-sm font-semibold">
+              className="px-5 py-2.5 bg-gray-100 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-200">
               Tentar novamente
             </button>
           </div>
@@ -267,8 +257,6 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
     </>
   )
 }
-
-// ── Configurações ─────────────────────────────────────────────
 
 function SettingsPanel() {
   const [form,    setForm]    = useState({ pix_key: '', whatsapp_number: '' })
@@ -299,7 +287,7 @@ function SettingsPanel() {
     }
   }
 
-  const inputCls = 'w-full bg-[#242424] rounded-xl px-4 py-3 text-white placeholder-gray-600 outline-none focus:ring-2 focus:ring-purple-700 transition-all text-sm font-mono'
+  const inputCls = 'w-full bg-gray-50 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm font-mono border border-gray-200'
 
   if (loading) return (
     <div className="flex items-center justify-center py-16">
@@ -310,55 +298,44 @@ function SettingsPanel() {
   return (
     <div className="space-y-5">
       <div>
-        <h3 className="text-lg font-bold mb-1">Configurações</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-1">Configurações</h3>
         <p className="text-xs text-gray-500">Alterações entram em vigor imediatamente para todos os clientes.</p>
       </div>
 
-      {error && <p className="text-red-400 text-sm bg-red-500/10 rounded-xl px-4 py-2">{error}</p>}
+      {error && <p className="text-red-600 text-sm bg-red-50 rounded-xl px-4 py-2 border border-red-200">{error}</p>}
 
-      <div className="bg-acai-surface rounded-2xl p-4">
-        <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">💠 Chave Pix</label>
-        <input
-          type="text"
-          value={form.pix_key}
+      <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
+        <label className="text-xs text-purple-700 font-semibold uppercase tracking-widest block mb-2">💠 Chave Pix</label>
+        <input type="text" value={form.pix_key}
           onChange={e => setForm(f => ({ ...f, pix_key: e.target.value }))}
           placeholder="CPF, CNPJ, e-mail, telefone ou chave aleatória"
-          className={inputCls}
-        />
+          className={inputCls} />
       </div>
 
-      <div className="bg-acai-surface rounded-2xl p-4">
-        <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">📱 Número do WhatsApp</label>
-        <input
-          type="text"
-          value={form.whatsapp_number}
+      <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
+        <label className="text-xs text-purple-700 font-semibold uppercase tracking-widest block mb-2">📱 Número do WhatsApp</label>
+        <input type="text" value={form.whatsapp_number}
           onChange={e => setForm(f => ({ ...f, whatsapp_number: e.target.value }))}
           placeholder="5511999999999"
-          className={inputCls}
-        />
-        <p className="text-xs text-gray-600 mt-2">Formato internacional sem + ou espaços. Ex.: 5511999999999</p>
+          className={inputCls} />
+        <p className="text-xs text-gray-400 mt-2">Formato internacional sem + ou espaços. Ex.: 5511999999999</p>
       </div>
 
-      <button
-        onClick={handleSave}
-        disabled={saving}
+      <button onClick={handleSave} disabled={saving}
         className={`w-full py-4 rounded-2xl font-bold text-sm transition-all active:scale-95 disabled:opacity-50 ${
-          saved ? 'bg-green-500 text-white' : 'bg-purple-700 text-white shadow-md shadow-purple-900/30'
-        }`}
-      >
+          saved ? 'bg-emerald-600 text-white' : 'bg-purple-700 text-white hover:bg-purple-800 shadow-sm'
+        }`}>
         {saving ? 'Salvando...' : saved ? '✓ Salvo com sucesso!' : 'Salvar Configurações'}
       </button>
     </div>
   )
 }
 
-// ── AdminPanel root ───────────────────────────────────────────
-
 const MAIN_TABS = [
-  { key: 'orders',   label: '📋 Pedidos'       },
-  { key: 'menu',     label: '🍧 Cardápio'      },
-  { key: 'addons',   label: '🧂 Adicionais'    },
-  { key: 'settings', label: '⚙️ Config'        },
+  { key: 'orders',   label: '📋 Pedidos'    },
+  { key: 'menu',     label: '🍧 Cardápio'   },
+  { key: 'addons',   label: '🧂 Adicionais' },
+  { key: 'settings', label: '⚙️ Config'     },
 ]
 
 export default function AdminPanel({ onBack }) {
@@ -378,7 +355,6 @@ export default function AdminPanel({ onBack }) {
     fetchOrders()
 
     const sse = api.ordersEvents()
-
     sse.addEventListener('order-insert', e => {
       setOrders(prev => [JSON.parse(e.data), ...prev])
     })
@@ -395,7 +371,6 @@ export default function AdminPanel({ onBack }) {
   const handleAdvance = async (order, status) => {
     try {
       await api.updateOrder(order.id, { status })
-
       if (status === 'delivering') {
         const pedido = (order.items || []).map(item => {
           let detail = item.name
@@ -406,11 +381,7 @@ export default function AdminPanel({ onBack }) {
         fetch(N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            nome:     order.customer_name,
-            telefone: formatPhone(order.customer_phone),
-            pedido,
-          }),
+          body: JSON.stringify({ nome: order.customer_name, telefone: formatPhone(order.customer_phone), pedido }),
         }).catch(err => console.error('Webhook n8n falhou:', err))
       }
     } catch (e) {
@@ -420,31 +391,36 @@ export default function AdminPanel({ onBack }) {
 
   const newCount = orders.filter(o => o.status === 'new').length
 
+  const subtitles = {
+    orders:   'Pedidos em tempo real',
+    menu:     'Gerenciar cardápio',
+    addons:   'Massas, caldas e acompanhamentos',
+    settings: 'Chave Pix e WhatsApp',
+  }
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
+    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-acai-border
-                      px-4 h-16 flex items-center gap-3">
+      <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-xl border-b border-gray-200
+                      px-4 h-16 flex items-center gap-3 shadow-sm">
         <div className="flex-1">
-          <h1 className="text-lg font-bold leading-tight">Painel Admin</h1>
-          <p className="text-xs text-gray-500">
-            {{ orders: 'Pedidos em tempo real', menu: 'Gerenciar cardápio', addons: 'Massas, caldas e acompanhamentos', settings: 'Chave Pix e WhatsApp' }[mainTab]}
-          </p>
+          <Logo className="h-8 w-auto object-contain mb-0.5" />
+          <p className="text-xs text-gray-500">{subtitles[mainTab]}</p>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className={`w-2 h-2 rounded-full ${connOk ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
-          <span className={`text-xs font-medium ${connOk ? 'text-green-400' : 'text-red-400'}`}>
+          <div className={`w-2 h-2 rounded-full ${connOk ? 'bg-emerald-500 animate-pulse' : 'bg-red-400'}`} />
+          <span className={`text-xs font-medium ${connOk ? 'text-emerald-600' : 'text-red-500'}`}>
             {connOk ? 'Ao vivo' : 'Offline'}
           </span>
         </div>
       </div>
 
       {/* Main tabs */}
-      <div className="flex border-b border-acai-border bg-[#0A0A0A]">
+      <div className="flex border-b border-gray-200 bg-white">
         {MAIN_TABS.map(tab => (
           <button key={tab.key} onClick={() => setMainTab(tab.key)}
             className={`flex-1 py-3 text-[11px] sm:text-sm font-semibold relative transition-colors ${
-              mainTab === tab.key ? 'text-white' : 'text-gray-500'
+              mainTab === tab.key ? 'text-gray-900' : 'text-gray-400'
             }`}>
             {tab.label}
             {tab.key === 'orders' && newCount > 0 && (

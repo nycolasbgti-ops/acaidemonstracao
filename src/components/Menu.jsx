@@ -50,15 +50,15 @@ export default function Menu({ categories, byCategory, onSelectProduct, onCatego
                   ? <span className="text-sm leading-none">{cat.icon}</span>
                   : <img src={cat.icon} alt={cat.name} className="w-4 h-4 object-contain opacity-60" />
                 }
-                <h2 className="text-xs font-semibold tracking-widest uppercase text-zinc-500">
+                <h2 className="text-xl font-bold text-gray-900">
                   {cat.name}
                 </h2>
               </div>
             </div>
 
-            {/* Lista horizontal */}
+            {/* Lista de produtos */}
             <div className="max-w-lg mx-auto px-4">
-              <div className="bg-zinc-900 rounded-2xl overflow-hidden">
+              <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
                 {products.map((product, i) => (
                   <ProductCard
                     key={product.id}
@@ -83,8 +83,8 @@ function ProductCard({ product, isLast, onClick }) {
     <button
       onClick={onClick}
       className={`w-full flex items-center gap-4 px-4 py-4 text-left
-                  active:bg-white/[0.03] transition-colors
-                  ${!isLast ? 'border-b border-white/[0.06]' : ''}`}
+                  hover:bg-gray-50 active:bg-gray-100 transition-colors
+                  ${!isLast ? 'border-b border-gray-200' : ''}`}
     >
       {/* Imagem quadrada */}
       <div className="w-[88px] h-[88px] rounded-xl overflow-hidden flex-shrink-0">
@@ -98,19 +98,19 @@ function ProductCard({ product, isLast, onClick }) {
 
       {/* Informações */}
       <div className="flex-1 min-w-0 flex flex-col self-stretch py-0.5">
-        <h3 className="text-[15px] font-medium text-white leading-snug line-clamp-1">
+        <h3 className="text-[15px] font-semibold text-gray-900 leading-snug line-clamp-1">
           {product.name}
         </h3>
-        <p className="text-[13px] text-zinc-400 line-clamp-2 leading-relaxed mt-0.5 flex-1">
+        <p className="text-[13px] text-gray-500 line-clamp-2 leading-relaxed mt-0.5 flex-1">
           {product.description}
         </p>
         <div className="flex items-center justify-between mt-2.5">
-          <span className="text-[15px] font-semibold text-white">
+          <span className="text-[15px] font-bold text-emerald-600">
             {fmt(basePrice)}
           </span>
           <div
-            className="w-7 h-7 rounded-full border border-white/[0.18] flex items-center justify-center
-                       text-white/55 text-[18px] font-light leading-none"
+            className="w-7 h-7 rounded-full bg-purple-700 flex items-center justify-center
+                       text-white text-[18px] font-light leading-none"
           >
             +
           </div>
