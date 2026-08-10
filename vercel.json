@@ -1,4 +1,7 @@
 {
   "buildCommand": "CI=false DISABLE_ESLINT_PLUGIN=true react-scripts build",
-  "outputDirectory": "build"
+  "outputDirectory": "build",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index.js" }
+  ]
 }
