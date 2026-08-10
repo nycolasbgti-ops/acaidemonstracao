@@ -2,9 +2,6 @@
   "name": "acai-concept-app",
   "private": true,
   "version": "1.0.0",
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "CI=false react-scripts build",
