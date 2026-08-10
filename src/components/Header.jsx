@@ -1,16 +1,15 @@
 import React from 'react'
-import Logo from './Logo'
 
 const fmt = (v) => `R$ ${Number(v || 0).toFixed(2).replace('.', ',')}`
 
 export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick }) {
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-lg mx-auto px-4 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-zinc-950 border-b border-zinc-800 shadow-sm">
+      <div className="max-w-lg mx-auto px-4 h-20 flex items-center justify-between">
 
         {/* Logo — esquerda */}
         <div className="flex items-center flex-1">
-          <Logo className="h-8 sm:h-10 w-auto object-contain" />
+          <img src="/logo.png" alt="Luma Açaí" className="h-14 sm:h-16 w-auto object-contain" />
         </div>
 
         {/* Ações — direita */}
@@ -18,9 +17,9 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           {/* Ícone de info da loja */}
           <button
             onClick={onInfoClick}
-            className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full
-                       border border-gray-200 text-gray-500 transition-all active:scale-95
-                       hover:text-gray-900 hover:bg-gray-200"
+            className="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-full
+                       border border-zinc-700 text-gray-400 transition-all active:scale-95
+                       hover:text-white hover:bg-zinc-700"
             aria-label="Informações da loja"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,8 +32,8 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           {cartCount > 0 ? (
             <button
               onClick={onCartClick}
-              className="flex items-center gap-2 bg-gray-900 text-white px-3.5 py-2 rounded-full
-                         active:scale-95 transition-all text-sm font-semibold"
+              className="flex items-center gap-2 bg-purple-900 text-white px-3.5 py-2 rounded-full
+                         active:scale-95 transition-all text-sm font-semibold hover:bg-purple-800"
             >
               <span className="text-xs font-bold bg-white/20 rounded-full w-5 h-5 flex items-center justify-center">
                 {cartCount}
@@ -44,9 +43,9 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
           ) : (
             <button
               onClick={onCartClick}
-              className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full
-                         border border-gray-200 text-gray-500 transition-all active:scale-95
-                         hover:text-gray-900 hover:bg-gray-200"
+              className="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-full
+                         border border-zinc-700 text-gray-400 transition-all active:scale-95
+                         hover:text-white hover:bg-zinc-700"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}

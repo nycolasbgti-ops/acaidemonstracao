@@ -369,11 +369,11 @@ app.get('/api/settings', async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('settings')
-      .select('pix_key, whatsapp_number')
+      .select('pix_key, whatsapp_number, banner_url')
       .eq('id', 1)
       .single()
     if (error) throw error
-    res.json(data ?? { pix_key: '', whatsapp_number: '' })
+    res.json(data ?? { pix_key: '', whatsapp_number: '', banner_url: null })
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
@@ -381,12 +381,12 @@ app.get('/api/settings', async (req, res) => {
 
 app.patch('/api/settings', async (req, res) => {
   try {
-    const { pix_key, whatsapp_number } = req.body
+    const { pix_key, whatsapp_number, banner_url } = req.body
     const { data, error } = await supabase
       .from('settings')
-      .update({ pix_key, whatsapp_number })
+      .update({ pix_key, whatsapp_number, banner_url })
       .eq('id', 1)
-      .select('pix_key, whatsapp_number')
+      .select('pix_key, whatsapp_number, banner_url')
       .single()
     if (error) throw error
     res.json(data)

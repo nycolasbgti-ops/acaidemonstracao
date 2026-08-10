@@ -11,11 +11,12 @@ CREATE TABLE IF NOT EXISTS settings (
   id               SMALLINT  PRIMARY KEY DEFAULT 1,
   pix_key          TEXT      NOT NULL DEFAULT '',
   whatsapp_number  TEXT      NOT NULL DEFAULT '',
+  banner_url       TEXT,
   CONSTRAINT settings_single_row CHECK (id = 1)
 );
 
-INSERT INTO settings (id, pix_key, whatsapp_number)
-VALUES (1, '', '')
+INSERT INTO settings (id, pix_key, whatsapp_number, banner_url)
+VALUES (1, '', '', NULL)
 ON CONFLICT (id) DO NOTHING;
 
 

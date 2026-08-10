@@ -38,25 +38,25 @@ export default function FlavorPickerModal({ product, onClose, onAdd }) {
     <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fadeIn" onClick={onClose} />
 
-      <div className="relative bg-white rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-xl">
+      <div className="relative bg-zinc-900 rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-xl">
 
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-0 flex-shrink-0">
-          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          <div className="w-10 h-1 bg-zinc-700 rounded-full" />
         </div>
 
         {/* Cabeçalho */}
-        <div className="px-5 pt-3 pb-4 border-b border-gray-200 flex-shrink-0 flex items-start justify-between gap-3">
+        <div className="px-5 pt-3 pb-4 border-b border-zinc-800 flex-shrink-0 flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <h2 className="text-[17px] font-semibold text-gray-900 leading-snug">{product.name}</h2>
-            <p className="text-sm text-gray-500 mt-0.5">{fmt(unitPrice)} por unidade</p>
+            <h2 className="text-[17px] font-semibold text-white leading-snug">{product.name}</h2>
+            <p className="text-sm text-gray-400 mt-0.5">{fmt(unitPrice)} por unidade</p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 mt-0.5 bg-gray-100 rounded-full flex items-center justify-center
-                       hover:bg-gray-200 transition-all active:scale-90 flex-shrink-0"
+            className="w-8 h-8 mt-0.5 bg-zinc-800 rounded-full flex items-center justify-center
+                       hover:bg-zinc-700 transition-all active:scale-90 flex-shrink-0"
           >
-            <svg className="w-[14px] h-[14px] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-[14px] h-[14px] text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -65,14 +65,14 @@ export default function FlavorPickerModal({ product, onClose, onAdd }) {
         {/* Seção de sabores */}
         <div className="px-5 pt-5 pb-2 flex-shrink-0">
           <div className="flex items-center justify-between gap-3">
-            <h3 className="text-[15px] font-semibold text-gray-900">Escolha os Sabores</h3>
+            <h3 className="text-[15px] font-semibold text-white">Escolha os Sabores</h3>
             {totalQty > 0 && (
-              <span className="text-[11px] font-medium bg-purple-100 text-purple-700 rounded px-2 py-0.5 flex-shrink-0">
+              <span className="text-[11px] font-medium bg-purple-900 text-purple-200 rounded px-2 py-0.5 flex-shrink-0">
                 {totalQty} un.
               </span>
             )}
           </div>
-          <p className="text-[12px] text-gray-400 mt-1">Use + e − para escolher a quantidade de cada sabor</p>
+          <p className="text-[12px] text-gray-500 mt-1">Use + e − para escolher a quantidade de cada sabor</p>
         </div>
 
         {/* Lista de sabores */}
@@ -85,32 +85,32 @@ export default function FlavorPickerModal({ product, onClose, onAdd }) {
                 <div
                   key={name}
                   className={`flex items-center justify-between px-5 py-4 transition-colors
-                              ${q > 0 ? 'bg-purple-50' : ''}
-                              ${!isLast ? 'border-b border-gray-200' : ''}`}
+                              ${q > 0 ? 'bg-purple-950/40' : ''}
+                              ${!isLast ? 'border-b border-zinc-800' : ''}`}
                 >
-                  <span className={`text-[15px] flex-1 ${q > 0 ? 'text-gray-900 font-medium' : 'text-gray-700'}`}>
+                  <span className={`text-[15px] flex-1 ${q > 0 ? 'text-white font-medium' : 'text-gray-300'}`}>
                     {name}
                   </span>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => dec(name)}
                       disabled={q === 0}
-                      className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center
-                                 text-gray-600 text-lg font-light active:scale-90 transition-transform
-                                 hover:border-gray-400 hover:text-gray-900 disabled:opacity-25 disabled:cursor-not-allowed"
+                      className="w-7 h-7 rounded-full border border-zinc-700 flex items-center justify-center
+                                 text-gray-400 text-lg font-light active:scale-90 transition-transform
+                                 hover:border-zinc-600 hover:text-white disabled:opacity-25 disabled:cursor-not-allowed"
                     >
                       −
                     </button>
                     <span className={`text-[15px] font-semibold w-5 text-center tabular-nums ${
-                      q > 0 ? 'text-gray-900' : 'text-gray-300'
+                      q > 0 ? 'text-white' : 'text-zinc-600'
                     }`}>
                       {q}
                     </span>
                     <button
                       onClick={() => inc(name)}
-                      className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center
-                                 text-gray-600 text-lg font-light active:scale-90 transition-transform
-                                 hover:border-gray-400 hover:text-gray-900"
+                      className="w-7 h-7 rounded-full border border-zinc-700 flex items-center justify-center
+                                 text-gray-400 text-lg font-light active:scale-90 transition-transform
+                                 hover:border-zinc-600 hover:text-white"
                     >
                       +
                     </button>
@@ -123,9 +123,9 @@ export default function FlavorPickerModal({ product, onClose, onAdd }) {
         </div>
 
         {/* Rodapé */}
-        <div className="border-t border-gray-200 bg-white px-5 pt-4 pb-8 flex-shrink-0">
+        <div className="border-t border-zinc-800 bg-zinc-900 px-5 pt-4 pb-8 flex-shrink-0">
           {totalQty > 0 && (
-            <p className="text-xs text-gray-400 mb-3 truncate">
+            <p className="text-xs text-gray-500 mb-3 truncate">
               {Object.entries(qtys).filter(([, q]) => q > 0).map(([n, q]) => `${q}× ${n}`).join(' · ')}
             </p>
           )}
@@ -135,8 +135,8 @@ export default function FlavorPickerModal({ product, onClose, onAdd }) {
             className={`w-full py-3.5 rounded-2xl font-semibold text-[15px] flex items-center justify-between px-5
                         transition-all active:scale-[0.98] ${
               totalQty > 0
-                ? 'bg-purple-700 text-white hover:bg-purple-800'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                ? 'bg-purple-900 text-white hover:bg-purple-800'
+                : 'bg-zinc-800 text-gray-500 cursor-not-allowed'
             }`}
           >
             <span>{totalQty > 0 ? 'Adicionar' : 'Escolha pelo menos 1 sabor'}</span>

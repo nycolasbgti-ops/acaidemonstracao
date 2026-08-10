@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS settings (
   pix_key          TEXT      NOT NULL DEFAULT '',
   whatsapp_number  TEXT      NOT NULL DEFAULT '',
   store_name       TEXT      NOT NULL DEFAULT 'Açaí Concept',
+  banner_url       TEXT,
   CONSTRAINT settings_single_row CHECK (id = 1)
 );
 
-INSERT INTO settings (id, pix_key, whatsapp_number, store_name)
-VALUES (1, '', '', 'Açaí Concept')
+INSERT INTO settings (id, pix_key, whatsapp_number, store_name, banner_url)
+VALUES (1, '', '', 'Açaí Concept', NULL)
 ON CONFLICT (id) DO NOTHING;
 
 

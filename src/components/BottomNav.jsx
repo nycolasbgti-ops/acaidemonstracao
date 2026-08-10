@@ -5,7 +5,7 @@ export default function BottomNav({ cartCount, onHomeClick, onCartClick, onOrder
     <button
       onClick={onClick}
       className={`flex-1 flex flex-col items-center justify-center py-3 gap-[5px] transition-colors ${
-        isActive ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'
+        isActive ? 'text-white' : 'text-gray-500 hover:text-gray-300'
       }`}
     >
       <div className="relative">
@@ -27,7 +27,7 @@ export default function BottomNav({ cartCount, onHomeClick, onCartClick, onOrder
 
         {icon === 'cart' && cartCount > 0 && (
           <span className="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px]
-                           bg-gray-900 text-white text-[9px] font-bold rounded-full
+                           bg-purple-900 text-white text-[9px] font-bold rounded-full
                            flex items-center justify-center px-[3px]">
             {cartCount > 9 ? '9+' : cartCount}
           </span>
@@ -39,7 +39,7 @@ export default function BottomNav({ cartCount, onHomeClick, onCartClick, onOrder
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 max-w-lg mx-auto
-                    bg-white border-t border-gray-200 shadow-md">
+                    bg-zinc-950 border-t border-zinc-800 shadow-md">
       <div className="flex items-center">
         <NavItem id="home"   label="Início"   icon="home"   isActive={activeTab === 'home'}   onClick={onHomeClick} />
         <NavItem id="cart"   label="Carrinho" icon="cart"   isActive={activeTab === 'cart'}   onClick={onCartClick} />

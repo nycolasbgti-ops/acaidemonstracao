@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 
-export default function AdminLogin({ onLogin, onClose }) {
-  const [pin, setPin]     = useState('')
+const ADMIN_PIN  = process.env.REACT_APP_ADMIN_PIN || '123456'
+const PIN_LENGTH = ADMIN_PIN.length
+
+export default function AdminLogin({ onSuccess, onClose }) {
+  const [pin,   setPin]   = useState('')
   const [error, setError] = useState(false)
   const [shake, setShake] = useState(false)
 
   const handleDigit = (d) => {
-    if (pin.length >= 4) return
+    if (shake || pin.length >= PIN_LENGTH) return
     const next = pin + d
     setPin(next)
     setError(false)
 
-    if (next.length === 4) {
-      const ok = onLogin(next)
-      if (!ok) {
+    if (next.length === PIN_LENGTH) {
+      if (next === ADMIN_PIN) {
+        onSuccess()
+      } else {
         setError(true)
         setShake(true)
         setTimeout(() => { setShake(false); setPin('') }, 600)
@@ -32,31 +36,19 @@ export default function AdminLogin({ onLogin, onClose }) {
     <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative bg-white rounded-t-3xl p-6 pb-10 w-full max-w-sm mx-auto animate-slideUp shadow-xl">
+      <div className="relative bg-zinc-900 rounded-t-3xl p-6 pb-10 w-full max-w-sm mx-auto animate-slideUp shadow-xl border-t border-zinc-800">
         <div className="flex justify-center mb-1">
-          <div className="w-10 h-1 bg-gray-300 rounded-full" />
-        </div>
-
-        {/* Icon + title */}
-        <div className="text-center mt-4 mb-8">
-          <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h2 className="text-xl font-bold text-gray-900">Painel Administrativo</h2>
-          <p className="text-sm text-gray-500 mt-1">Digite o PIN de acesso</p>
+          <div className="w-10 h-1 bg-zinc-700 rounded-full" />
         </div>
 
         {/* PIN dots */}
-        <div className={`flex justify-center gap-5 mb-8 ${shake ? 'animate-shake' : ''}`}>
-          {[0, 1, 2, 3].map(i => (
+        <div className={`flex justify-center gap-3 my-8 ${shake ? 'animate-shake' : ''}`}>
+          {Array.from({ length: PIN_LENGTH }).map((_, i) => (
             <div key={i}
-              className={`w-4 h-4 rounded-full transition-all duration-200 ${
+              className={`w-3.5 h-3.5 rounded-full transition-all duration-200 ${
                 i < pin.length
-                  ? error ? 'bg-red-500 scale-110' : 'bg-purple-700 scale-110'
-                  : 'bg-gray-200'
+                  ? error ? 'bg-red-500 scale-110' : 'bg-purple-500 scale-110'
+                  : 'bg-zinc-700'
               }`}
             />
           ))}
@@ -69,20 +61,13 @@ export default function AdminLogin({ onLogin, onClose }) {
             return (
               <button key={i}
                 onClick={() => key === '⌫' ? handleDel() : handleDigit(String(key))}
-                className={`h-14 rounded-2xl text-lg font-semibold transition-all active:scale-90
-                  ${key === '⌫'
-                    ? 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                  }`}>
+                className="h-14 rounded-2xl text-lg font-semibold transition-all active:scale-90
+                           bg-zinc-800 text-white hover:bg-zinc-700">
                 {key}
               </button>
             )
           })}
         </div>
-
-        {error && (
-          <p className="text-center text-red-600 text-sm mt-4">PIN incorreto. Tente novamente.</p>
-        )}
       </div>
     </div>
   )

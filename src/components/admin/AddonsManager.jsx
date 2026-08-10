@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { api } from '../../api'
+import { supabase } from '../../lib/supabaseClient'
 import { fmt } from '../../utils/price'
 
 const CATEGORIES = [
@@ -30,7 +30,7 @@ const inputCls = 'w-full bg-[#242424] rounded-xl px-4 py-3 text-white placeholde
 function Field({ label, children }) {
   return (
     <div>
-      <label className="text-xs text-gray-500 block mb-1.5">{label}</label>
+      <label className="text-xs text-gray-400 block mb-1.5">{label}</label>
       {children}
     </div>
   )
@@ -79,7 +79,7 @@ function AddonForm({ initial, onSave, onCancel, saving }) {
           placeholder="0,00"
           className={inputCls}
         />
-        <p className="text-xs text-gray-600 mt-1">
+        <p className="text-xs text-gray-400 mt-1">
           Deixe em 0,00 para acompanhamento/calda grátis. Use um valor para extras pagos.
         </p>
       </Field>
@@ -122,7 +122,8 @@ export default function AddonsManager() {
 
   const load = async () => {
     try {
-      const data = await api.getAddons()
+      const { data, error } = await supabase.from('addons').select('*').order('category').order('order_position')
+      if (error) throw error
       setAddons(data)
     } catch (e) {
       setError(e.message)
@@ -138,11 +139,13 @@ export default function AddonsManager() {
     setError('')
     try {
       if (editing) {
-        const updated = await api.updateAddon(editing.id, form)
-        setAddons(prev => prev.map(a => a.id === editing.id ? updated : a))
+        const { data, error } = await supabase.from('addons').update(form).eq('id', editing.id).select().single()
+        if (error) throw error
+        setAddons(prev => prev.map(a => a.id === editing.id ? data : a))
       } else {
-        const created = await api.createAddon(form)
-        setAddons(prev => [...prev, created])
+        const { data, error } = await supabase.from('addons').insert({ ...form, active: true }).select().single()
+        if (error) throw error
+        setAddons(prev => [...prev, data])
       }
       setScreen('list')
       setEditing(null)
@@ -155,8 +158,9 @@ export default function AddonsManager() {
 
   const toggleActive = async (addon) => {
     try {
-      const updated = await api.updateAddon(addon.id, { active: !addon.active })
-      setAddons(prev => prev.map(a => a.id === addon.id ? updated : a))
+      const { data, error } = await supabase.from('addons').update({ active: !addon.active }).eq('id', addon.id).select().single()
+      if (error) throw error
+      setAddons(prev => prev.map(a => a.id === addon.id ? data : a))
     } catch (e) {
       setError(e.message)
     }
@@ -165,7 +169,8 @@ export default function AddonsManager() {
   const del = async (addon) => {
     if (!window.confirm(`Excluir "${addon.name}"?`)) return
     try {
-      await api.deleteAddon(addon.id)
+      const { error } = await supabase.from('addons').delete().eq('id', addon.id)
+      if (error) throw error
       setAddons(prev => prev.filter(a => a.id !== addon.id))
     } catch (e) {
       setError(e.message)
@@ -211,7 +216,7 @@ export default function AddonsManager() {
       <div className="flex items-center justify-between mb-5">
         <div>
           <h3 className="text-lg font-bold">Adicionais</h3>
-          <p className="text-xs text-gray-500">Massas, caldas, acompanhamentos e extras do builder</p>
+          <p className="text-xs text-gray-400">Massas, caldas, acompanhamentos e extras do builder</p>
         </div>
         <button
           onClick={() => { setEditing(null); setScreen('form') }}
@@ -241,7 +246,7 @@ export default function AddonsManager() {
       {visibleList.length === 0 ? (
         <div className="text-center py-12">
           <span className="text-4xl block mb-3">{catInfo?.icon}</span>
-          <p className="text-gray-500 text-sm">Nenhum item em {catInfo?.label}.</p>
+          <p className="text-gray-400 text-sm">Nenhum item em {catInfo?.label}.</p>
           <button
             onClick={() => { setEditing(null); setScreen('form') }}
             className="mt-4 px-5 py-2.5 bg-[#1A1A1A] rounded-full text-sm font-semibold text-gray-300 active:scale-95 transition-all">
@@ -259,7 +264,7 @@ export default function AddonsManager() {
                 <p className="text-xs mt-0.5">
                   {Number(addon.price) > 0
                     ? <span className="text-amber-400">+ {fmt(addon.price)}</span>
-                    : <span className="text-gray-500">Grátis</span>
+                    : <span className="text-gray-400">Grátis</span>
                   }
                 </p>
               </div>
@@ -267,7 +272,7 @@ export default function AddonsManager() {
                 <button
                   onClick={() => toggleActive(addon)}
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-xs transition-colors ${
-                    addon.active ? 'bg-green-500/15 text-green-400' : 'bg-[#2C2C2E] text-gray-500'
+                    addon.active ? 'bg-green-500/15 text-green-400' : 'bg-[#2C2C2E] text-gray-400'
                   }`}
                   title={addon.active ? 'Desativar' : 'Ativar'}>
                   {addon.active ? '●' : '○'}
@@ -297,7 +302,7 @@ export default function AddonsManager() {
 
       <div className="mt-6 bg-[#1A1A1A] rounded-2xl p-4 border border-purple-800/20">
         <p className="text-xs text-purple-400 font-semibold mb-1">💡 Como funciona</p>
-        <p className="text-xs text-gray-500 leading-relaxed">
+        <p className="text-xs text-gray-400 leading-relaxed">
           <strong className="text-gray-300">Massas</strong> aparecem como seleção obrigatória. <strong className="text-gray-300">Caldas</strong> e <strong className="text-gray-300">Acompanhamentos</strong> são opcionais (grátis). <strong className="text-gray-300">Extras</strong> com preço &gt; 0 são cobrados à parte no builder.
         </p>
       </div>

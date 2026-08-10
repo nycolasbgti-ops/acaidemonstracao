@@ -1,5 +1,4 @@
 import React from 'react'
-import Logo from './Logo'
 
 const HOURS = [
   { day: 'Segunda',  slots: ['13:00 - 17:30', '19:00 - 22:00'] },
@@ -20,37 +19,37 @@ export default function StoreInfoModal({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-white rounded-t-3xl max-h-[85vh] overflow-y-auto animate-slide-up shadow-xl"
+        className="w-full max-w-lg bg-zinc-900 rounded-t-3xl max-h-[85vh] overflow-y-auto animate-slide-up shadow-xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-2">
-          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          <div className="w-10 h-1 bg-zinc-700 rounded-full" />
         </div>
 
         {/* Logo + nome */}
-        <div className="flex flex-col items-center pt-4 pb-5 px-6 border-b border-gray-200">
-          <Logo className="h-16 w-auto object-contain" />
-          <p className="text-xs text-gray-500 mt-2">Sorveteria & Açaiteria</p>
+        <div className="flex flex-col items-center pt-4 pb-5 px-6 border-b border-zinc-800">
+          <img src="/logo.png" alt="Luma Açaí" className="h-16 w-auto object-contain" />
+          <p className="text-xs text-gray-400 mt-2">Sorveteria & Açaiteria</p>
         </div>
 
         <div className="px-6 pt-4 pb-2 space-y-5">
 
           {/* WhatsApp */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex-shrink-0 bg-gray-100 rounded-2xl flex items-center justify-center">
+            <div className="w-10 h-10 flex-shrink-0 bg-zinc-800 rounded-2xl flex items-center justify-center">
               <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.528 5.845L.057 23.716a.5.5 0 00.61.637l6.037-1.583A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 01-5.012-1.374l-.36-.213-3.724.977.994-3.634-.234-.374A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-gray-500 mb-0.5">WhatsApp</p>
+              <p className="text-xs text-gray-400 mb-0.5">WhatsApp</p>
               <a
                 href="https://wa.me/5511999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-gray-900 active:opacity-70"
+                className="text-sm font-medium text-white active:opacity-70"
               >
                 (11) 99999-9999
               </a>
@@ -59,7 +58,7 @@ export default function StoreInfoModal({ onClose }) {
 
           {/* Endereço */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex-shrink-0 bg-gray-100 rounded-2xl flex items-center justify-center">
+            <div className="w-10 h-10 flex-shrink-0 bg-zinc-800 rounded-2xl flex items-center justify-center">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -68,8 +67,8 @@ export default function StoreInfoModal({ onClose }) {
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-gray-500 mb-0.5">Endereço</p>
-              <p className="text-sm text-gray-900 leading-snug">
+              <p className="text-xs text-gray-400 mb-0.5">Endereço</p>
+              <p className="text-sm text-white leading-snug">
                 Rua Exemplo, 123<br />
                 Centro, Sua Cidade – SP
               </p>
@@ -77,7 +76,7 @@ export default function StoreInfoModal({ onClose }) {
                 href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-gray-500 hover:text-gray-900 transition-colors mt-1 inline-block active:opacity-70"
+                className="text-xs text-gray-400 hover:text-white transition-colors mt-1 inline-block active:opacity-70"
               >
                 Abrir no Google Maps →
               </a>
@@ -87,21 +86,21 @@ export default function StoreInfoModal({ onClose }) {
           {/* Horários */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-10 h-10 flex-shrink-0 bg-gray-100 rounded-2xl flex items-center justify-center">
+              <div className="w-10 h-10 flex-shrink-0 bg-zinc-800 rounded-2xl flex items-center justify-center">
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-sm font-semibold text-gray-900">Horário de Funcionamento</p>
+              <p className="text-sm font-semibold text-white">Horário de Funcionamento</p>
             </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden divide-y divide-gray-200">
+            <div className="bg-zinc-800 border border-zinc-700 rounded-2xl overflow-hidden divide-y divide-zinc-700">
               {HOURS.map(({ day, slots }) => (
                 <div key={day} className="flex items-center justify-between px-4 py-2.5">
-                  <span className="text-xs text-gray-500 w-16 flex-shrink-0">{day}</span>
+                  <span className="text-xs text-gray-400 w-16 flex-shrink-0">{day}</span>
                   <div className="flex flex-col items-end gap-0.5">
                     {slots.map(s => (
-                      <span key={s} className="text-xs font-medium text-gray-900">{s}</span>
+                      <span key={s} className="text-xs font-medium text-white">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -115,8 +114,8 @@ export default function StoreInfoModal({ onClose }) {
         <div className="px-6 pt-3 pb-6">
           <button
             onClick={onClose}
-            className="w-full py-3.5 bg-gray-100 rounded-2xl text-sm font-semibold text-gray-600
-                       active:scale-95 transition-all hover:bg-gray-200"
+            className="w-full py-3.5 bg-zinc-800 rounded-2xl text-sm font-semibold text-gray-300
+                       active:scale-95 transition-all hover:bg-zinc-700"
           >
             Fechar
           </button>

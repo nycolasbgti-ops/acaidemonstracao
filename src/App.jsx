@@ -13,10 +13,9 @@ import StoreInfoModal from './components/StoreInfoModal'
 import OrdersView from './components/OrdersView'
 import AdminLogin from './components/admin/AdminLogin'
 import AdminPanel from './components/admin/AdminPanel'
-import { ADMIN_PIN } from './data/menu'
 
 export default function App() {
-  const { categories, byCategory, addons, loading, error } = useMenu()
+  const { categories, byCategory, addons, bannerUrl, loading, error } = useMenu()
 
   const [view,           setView]          = useState('menu')
   const [cart,           setCart]          = useState([])
@@ -34,7 +33,7 @@ export default function App() {
   const isScrollingToSection   = useRef(false)
   const scrollTimeoutRef       = useRef(null)
 
-  // Link secreto: ?admin na URL abre o login
+  // Link secreto: ?admin na URL abre o login por PIN
   useEffect(() => {
     if (window.location.search.includes('admin')) setAdminLogin(true)
   }, [])
@@ -114,13 +113,8 @@ export default function App() {
     }
   }
 
-  const handleAdminLogin = (pin) => {
-    if (pin === ADMIN_PIN) {
-      setView('admin')
-      setAdminLogin(false)
-      return true
-    }
-    return false
+  const handleAdminLogout = () => {
+    setView('menu')
   }
 
   const handleOrderConfirmed = (order) => {
@@ -131,7 +125,7 @@ export default function App() {
   }
 
   // ── Views ─────────────────────────────────────────────────────
-  if (view === 'admin') return <AdminPanel onBack={() => setView('menu')} />
+  if (view === 'admin') return <AdminPanel onLogout={handleAdminLogout} />
   if (view === 'checkout') {
     return <CheckoutView cart={cart} total={cartTotal} onBack={() => setView('menu')} onConfirm={handleOrderConfirmed} />
   }
@@ -141,7 +135,7 @@ export default function App() {
 
   // ── Menu principal ────────────────────────────────────────────
   return (
-    <div className="h-screen bg-gray-50 text-gray-900 flex flex-col overflow-hidden">
+    <div className="h-screen bg-black text-white flex flex-col overflow-hidden">
       <Header
         cartCount={cartCount}
         cartTotal={cartTotal}
@@ -171,6 +165,7 @@ export default function App() {
             <Menu
               categories={categories}
               byCategory={byCategory}
+              bannerUrl={bannerUrl}
               onSelectProduct={handleProductClick}
               onCategoryChange={handleCategoryChange}
             />
@@ -224,7 +219,10 @@ export default function App() {
       {showStoreInfo && <StoreInfoModal onClose={() => setShowStoreInfo(false)} />}
 
       {showAdminLogin && (
-        <AdminLogin onLogin={handleAdminLogin} onClose={() => setAdminLogin(false)} />
+        <AdminLogin
+          onSuccess={() => { setView('admin'); setAdminLogin(false) }}
+          onClose={() => setAdminLogin(false)}
+        />
       )}
     </div>
   )
@@ -233,8 +231,8 @@ export default function App() {
 function LoadingState() {
   return (
     <div className="flex flex-col items-center justify-center pt-24 gap-4">
-      <div className="w-10 h-10 border-2 border-acai-accent border-t-transparent rounded-full animate-spin" />
-      <p className="text-sm text-acai-text-muted">Carregando cardápio...</p>
+      <div className="w-10 h-10 border-2 border-purple-700 border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm text-gray-400">Carregando cardápio...</p>
     </div>
   )
 }
@@ -243,9 +241,9 @@ function ErrorState({ message }) {
   return (
     <div className="px-6 pt-24 text-center">
       <span className="text-5xl block mb-4">⚠️</span>
-      <p className="text-acai-text font-semibold mb-2">Não foi possível carregar o cardápio</p>
+      <p className="text-white font-semibold mb-2">Não foi possível carregar o cardápio</p>
       {message && (
-        <p className="text-acai-text-muted text-xs font-mono bg-acai-surface rounded-xl px-4 py-3 mt-3 text-left break-all">
+        <p className="text-gray-400 text-xs font-mono bg-zinc-900 rounded-xl px-4 py-3 mt-3 text-left break-all">
           {message}
         </p>
       )}

@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
-import { api } from '../api'
-import { categories as mockCategories, products as mockProducts, ACAI_BASES, ACAI_TOPPINGS, ACAI_EXTRAS } from '../data/menu'
+import { supabase } from '../lib/supabaseClient'
 
-const normalizeAddon = (a) => ({ key: a.id ?? a.key, label: a.name, price: Number(a.price) })
+const normalizeAddon = (a) => ({ key: a.id, label: a.name, price: Number(a.price) })
 
 function groupAddons(list) {
   const grouped = { massa: [], calda: [], acompanhamento: [], extra: [] }
   for (const a of (list || [])) {
-    if (a.active === false) continue
     if (grouped[a.category]) grouped[a.category].push(normalizeAddon(a))
   }
   return grouped
@@ -17,37 +15,43 @@ export function useMenu() {
   const [categories, setCategories] = useState([])
   const [products,   setProducts]   = useState([])
   const [addons,     setAddons]     = useState({ massa: [], calda: [], acompanhamento: [], extra: [] })
+  const [bannerUrl,  setBannerUrl]  = useState(null)
   const [loading,    setLoading]    = useState(true)
   const [error,      setError]      = useState(null)
 
   useEffect(() => {
-    api.getMenu()
-      .then(({ categories, products, addons: rawAddons, toppings }) => {
-        setCategories(categories)
-        setProducts(products)
-
-        if (rawAddons?.length) {
-          setAddons(groupAddons(rawAddons))
-        } else if (toppings?.length) {
-          // Fallback: legado com tabela toppings (price=0 → acompanhamento, price>0 → extra)
-          setAddons({
-            massa:          [],
-            calda:          [],
-            acompanhamento: toppings.filter(t => Number(t.price) === 0).map(normalizeAddon),
-            extra:          toppings.filter(t => Number(t.price) > 0).map(normalizeAddon),
-          })
-        }
+    supabase
+      .from('settings')
+      .select('banner_url')
+      .eq('id', 1)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error
+        setBannerUrl(data?.banner_url || null)
       })
-      .catch(() => {
-        setCategories(mockCategories)
-        setProducts(mockProducts)
-        setAddons({
-          massa:          ACAI_BASES.map(b => ({ key: b.key, label: b.label, price: 0 })),
-          calda:          [],
-          acompanhamento: ACAI_TOPPINGS.map(t => ({ key: t.key, label: t.label, price: 0 })),
-          extra:          ACAI_EXTRAS.map(e => ({ key: e.key, label: e.label, price: Number(e.price) })),
-        })
-        setError('Modo demonstração — conecte o Supabase para dados reais.')
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    Promise.all([
+      supabase.from('categories').select('*').eq('active', true).order('order_position'),
+      supabase.from('products').select('*').eq('active', true).order('order_position'),
+      supabase.from('addons').select('*').eq('active', true).order('category').order('order_position'),
+    ])
+      .then(([catRes, prodRes, addonRes]) => {
+        if (catRes.error)   throw catRes.error
+        if (prodRes.error)  throw prodRes.error
+        if (addonRes.error) throw addonRes.error
+
+        setCategories(catRes.data || [])
+        setProducts(prodRes.data || [])
+        setAddons(groupAddons(addonRes.data))
+      })
+      .catch((e) => {
+        console.error('Erro ao carregar cardápio do Supabase:', e)
+        setCategories([])
+        setProducts([])
+        setError('Cardápio indisponível no momento.')
       })
       .finally(() => setLoading(false))
   }, [])
@@ -58,5 +62,5 @@ export function useMenu() {
     return acc
   }, {})
 
-  return { categories, products, byCategory, addons, loading, error }
+  return { categories, products, byCategory, addons, bannerUrl, loading, error }
 }

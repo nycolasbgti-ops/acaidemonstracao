@@ -6,27 +6,27 @@ function CartItem({ item, onUpdateQty, onRemove }) {
   const qty = item.qty || 1
 
   return (
-    <div className="flex items-start gap-3 py-4 border-b border-gray-200 last:border-0">
+    <div className="flex items-start gap-3 py-4 border-b border-zinc-800 last:border-0">
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-sm text-gray-900 leading-snug">{item.name}</p>
+        <p className="font-semibold text-sm text-white leading-snug">{item.name}</p>
 
         {item.type === 'acai' && (
           <div className="mt-1 space-y-0.5">
             {item.base && (
-              <p className="text-xs text-gray-500 leading-relaxed">🍧 {item.base.label}</p>
+              <p className="text-xs text-gray-400 leading-relaxed">🍧 {item.base.label}</p>
             )}
             {item.caldas?.length > 0 && (
-              <p className="text-xs text-gray-500 leading-relaxed">
+              <p className="text-xs text-gray-400 leading-relaxed">
                 🍯 {item.caldas.map(c => c.label).join(', ')}
               </p>
             )}
             {item.toppings?.length > 0 && (
-              <p className="text-xs text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-500 leading-relaxed">
                 + {item.toppings.map(t => t.label).join(', ')}
               </p>
             )}
             {item.extras?.length > 0 && (
-              <p className="text-xs text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-500 leading-relaxed">
                 ✨ {item.extras.map(e => e.label).join(', ')}
               </p>
             )}
@@ -35,20 +35,20 @@ function CartItem({ item, onUpdateQty, onRemove }) {
 
         {item.type === 'flavored' && item.flavors?.length > 0 && (
           <div className="mt-1">
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-gray-400 leading-relaxed">
               {item.flavors.filter(f => f.qty > 0).map(f => `${f.qty}× ${f.name}`).join(', ')}
             </p>
           </div>
         )}
 
-        <p className="text-gray-900 font-semibold mt-2 text-sm">{fmt(item.price * qty)}</p>
+        <p className="text-white font-semibold mt-2 text-sm">{fmt(item.price * qty)}</p>
       </div>
 
       <div className="flex items-center gap-2 flex-shrink-0 mt-0.5">
         <button
           onClick={() => onRemove(item.cartId)}
           className="w-8 h-8 rounded-full flex items-center justify-center
-                     active:scale-90 transition-transform text-red-400 hover:text-red-600"
+                     active:scale-90 transition-transform text-red-500 hover:text-red-400"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -56,19 +56,19 @@ function CartItem({ item, onUpdateQty, onRemove }) {
           </svg>
         </button>
 
-        <div className="flex items-center gap-2 bg-gray-100 rounded-full px-1 py-1">
+        <div className="flex items-center gap-2 bg-zinc-800 rounded-full px-1 py-1">
           <button
             onClick={() => onUpdateQty(item.cartId, -1)}
             className="w-7 h-7 rounded-full flex items-center justify-center text-base
-                       active:scale-90 transition-transform text-gray-600 hover:text-gray-900"
+                       active:scale-90 transition-transform text-gray-400 hover:text-white"
           >
             −
           </button>
-          <span className="text-sm font-semibold text-gray-900 w-4 text-center">{qty}</span>
+          <span className="text-sm font-semibold text-white w-4 text-center">{qty}</span>
           <button
             onClick={() => onUpdateQty(item.cartId, 1)}
-            className="w-7 h-7 rounded-full bg-gray-900 flex items-center justify-center text-base
-                       text-white font-bold active:scale-90 transition-transform"
+            className="w-7 h-7 rounded-full bg-purple-900 flex items-center justify-center text-base
+                       text-white font-bold active:scale-90 transition-transform hover:bg-purple-800"
           >
             +
           </button>
@@ -88,18 +88,18 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
         onClick={onClose}
       />
 
-      <div className="relative bg-white rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-xl">
+      <div className="relative bg-zinc-900 rounded-t-3xl max-h-[85vh] flex flex-col animate-slideUp shadow-xl">
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
-          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          <div className="w-10 h-1 bg-zinc-700 rounded-full" />
         </div>
 
         {/* Header */}
-        <div className="px-5 pt-2 pb-4 border-b border-gray-200 flex-shrink-0 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-900">Seu Carrinho</h2>
+        <div className="px-5 pt-2 pb-4 border-b border-zinc-800 flex-shrink-0 flex items-center justify-between">
+          <h2 className="text-xl font-semibold text-white">Seu Carrinho</h2>
           <button
             onClick={onClose}
-            className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors px-1"
+            className="text-sm font-medium text-gray-400 hover:text-white transition-colors px-1"
           >
             Fechar
           </button>
@@ -107,15 +107,15 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
 
         {cart.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center py-16 px-5">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-5 border border-gray-200">
+            <div className="w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center mb-5 border border-zinc-700">
               <span className="text-4xl">🍧</span>
             </div>
-            <p className="text-gray-900 font-semibold">Carrinho vazio</p>
-            <p className="text-gray-500 text-sm mt-1 text-center">Monte seu açaí e adicione ao carrinho.</p>
+            <p className="text-white font-semibold">Carrinho vazio</p>
+            <p className="text-gray-400 text-sm mt-1 text-center">Monte seu açaí e adicione ao carrinho.</p>
             <button
               onClick={onClose}
-              className="mt-6 px-6 py-2.5 bg-gray-900 rounded-full text-sm font-semibold
-                         text-white active:scale-95 transition-transform"
+              className="mt-6 px-6 py-2.5 bg-purple-900 rounded-full text-sm font-semibold
+                         text-white active:scale-95 transition-transform hover:bg-purple-800"
             >
               Ver cardápio
             </button>
@@ -133,16 +133,16 @@ export default function CartBottomSheet({ open, cart, total, onClose, onRemove, 
               ))}
             </div>
 
-            <div className="px-5 pt-4 pb-8 border-t border-gray-200 flex-shrink-0 bg-white">
+            <div className="px-5 pt-4 pb-8 border-t border-zinc-800 flex-shrink-0 bg-zinc-900">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-500 font-medium text-sm">Total do pedido</span>
-                <span className="text-2xl font-bold text-gray-900">{fmt(total)}</span>
+                <span className="text-gray-400 font-medium text-sm">Total do pedido</span>
+                <span className="text-2xl font-bold text-white">{fmt(total)}</span>
               </div>
               <button
                 onClick={onCheckout}
                 className="w-full py-4 bg-emerald-600 rounded-2xl font-semibold text-[15px]
                            text-white active:scale-[0.98] transition-all
-                           flex items-center justify-center gap-2 shadow-sm"
+                           flex items-center justify-center gap-2 shadow-sm hover:bg-emerald-500"
               >
                 <span>Finalizar Pedido</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

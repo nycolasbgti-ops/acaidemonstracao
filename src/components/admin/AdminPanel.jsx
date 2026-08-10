@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { api } from '../../api'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { supabase } from '../../lib/supabaseClient'
 import { fmt } from '../../utils/price'
+import { uploadImage } from '../../utils/uploadImage'
 import MenuManager from './MenuManager'
 import AddonsManager from './AddonsManager'
 import Logo from '../Logo'
@@ -78,7 +79,7 @@ function PrintModal({ order, onClose }) {
       `<!DOCTYPE html><html><head><title>Comanda #${String(order.id || '').slice(-4)}</title>` +
       `<style>@media print{body{margin:0}}body{margin:8px}</style></head><body>` +
       `<pre style="font-family:monospace;font-size:14px;white-space:pre-wrap">${escaped}</pre>` +
-      `<script>window.onload=function(){window.print();setTimeout(function(){window.close()},500)}<\/script>` +
+      `<script>window.onload=function(){window.print();setTimeout(function(){window.close()},500)}</script>` +
       `</body></html>`
     )
     win.document.close()
@@ -86,14 +87,14 @@ function PrintModal({ order, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh] shadow-xl border border-gray-200">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 flex-shrink-0">
+      <div className="bg-zinc-900 rounded-2xl w-full max-w-sm flex flex-col max-h-[90vh] shadow-xl border border-zinc-800">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800 flex-shrink-0">
           <div>
-            <p className="font-bold text-base text-gray-900">🖨️ Imprimir Comanda</p>
-            <p className="text-xs text-gray-500 mt-0.5">Edite antes de imprimir se necessário</p>
+            <p className="font-bold text-base text-white">🖨️ Imprimir Comanda</p>
+            <p className="text-xs text-gray-400 mt-0.5">Edite antes de imprimir se necessário</p>
           </div>
           <button onClick={onClose}
-            className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-sm active:scale-95 transition-all flex-shrink-0 hover:bg-gray-200">
+            className="w-10 h-10 bg-zinc-800 rounded-full flex items-center justify-center text-gray-400 text-sm active:scale-95 transition-all flex-shrink-0 hover:bg-zinc-700 hover:text-white">
             ✕
           </button>
         </div>
@@ -104,14 +105,14 @@ function PrintModal({ order, onClose }) {
             onChange={e => setText(e.target.value)}
             rows={14}
             spellCheck={false}
-            className="w-full bg-gray-50 rounded-xl px-3 py-3 font-mono text-xs text-gray-800
-                       outline-none focus:ring-2 focus:ring-purple-500 resize-none leading-relaxed transition-all border border-gray-200"
+            className="w-full bg-zinc-800 rounded-xl px-3 py-3 font-mono text-xs text-white
+                       outline-none focus:ring-2 focus:ring-purple-500 resize-none leading-relaxed transition-all border border-zinc-700"
           />
         </div>
 
         <div className="flex gap-3 px-4 pb-5 flex-shrink-0">
           <button onClick={onClose}
-            className="flex-1 py-3.5 bg-gray-100 rounded-2xl text-sm font-semibold text-gray-600 active:scale-95 transition-all hover:bg-gray-200">
+            className="flex-1 py-3.5 bg-zinc-800 rounded-2xl text-sm font-semibold text-white active:scale-95 transition-all hover:bg-zinc-700">
             Cancelar
           </button>
           <button onClick={handlePrint}
@@ -137,11 +138,11 @@ function OrderCard({ order, onAdvance, onPrint }) {
   }
 
   return (
-    <div className={`bg-white rounded-2xl p-4 mb-3 border shadow-sm ${order.status === 'new' ? 'border-blue-200 ring-1 ring-blue-100' : 'border-gray-200'}`}>
+    <div className={`bg-zinc-900 rounded-2xl p-4 mb-3 border shadow-sm ${order.status === 'new' ? 'border-blue-500/40 ring-1 ring-blue-500/20' : 'border-zinc-800'}`}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="font-bold text-base text-gray-900 leading-snug">{order.customer_name}</p>
-          <p className="text-sm text-gray-500">{order.customer_phone}</p>
+          <p className="font-bold text-base text-white leading-snug">{order.customer_name}</p>
+          <p className="text-sm text-gray-400">{order.customer_phone}</p>
           <p className="text-xs text-gray-400 mt-0.5">{timeAgo(order.created_at)}</p>
         </div>
         <span className={`${cfg.bg} text-white text-xs font-bold px-2.5 py-1 rounded-full flex-shrink-0`}>
@@ -152,37 +153,37 @@ function OrderCard({ order, onAdvance, onPrint }) {
       <div className="space-y-1 mb-3">
         {(order.items || []).map((item, i) => (
           <div key={i} className="flex justify-between text-sm">
-            <span className="text-gray-700 pr-2">{item.qty || 1}× {item.name}</span>
-            <span className="text-purple-600 font-medium flex-shrink-0">{fmt(item.price * (item.qty || 1))}</span>
+            <span className="text-gray-300 pr-2">{item.qty || 1}× {item.name}</span>
+            <span className="text-purple-400 font-medium flex-shrink-0">{fmt(item.price * (item.qty || 1))}</span>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-between py-2.5 border-t border-b border-gray-200 mb-3">
+      <div className="flex items-center justify-between py-2.5 border-t border-b border-zinc-800 mb-3">
         <div className="flex gap-1.5 flex-wrap">
-          <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-500">
+          <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded-full text-gray-400">
             {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
           </span>
-          <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-500">
+          <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded-full text-gray-400">
             {PAYMENT_LABELS[order.payment_method] || order.payment_method}
           </span>
         </div>
-        <span className="font-bold text-base text-gray-900">{fmt(order.total)}</span>
+        <span className="font-bold text-base text-white">{fmt(order.total)}</span>
       </div>
 
       {order.address && (
-        <p className="text-xs text-gray-500 mb-3 flex gap-1.5"><span>📍</span><span>{order.address}</span></p>
+        <p className="text-xs text-gray-400 mb-3 flex gap-1.5"><span>📍</span><span>{order.address}</span></p>
       )}
       {order.notes && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-3 py-2 mb-3">
-          <p className="text-xs text-yellow-700">📝 {order.notes}</p>
+        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-3 py-2 mb-3">
+          <p className="text-xs text-yellow-400">📝 {order.notes}</p>
         </div>
       )}
 
       <div className="flex gap-2">
         <button onClick={() => onPrint(order)}
-          className="flex-1 py-3 bg-gray-100 rounded-xl text-sm font-semibold text-gray-700
-                     active:scale-[0.97] transition-all hover:bg-gray-200 flex items-center justify-center gap-1.5">
+          className="flex-1 py-3 bg-zinc-800 rounded-xl text-sm font-semibold text-white
+                     active:scale-[0.97] transition-all hover:bg-zinc-700 flex items-center justify-center gap-1.5">
           🖨️ Imprimir
         </button>
         {cfg.next && (
@@ -197,7 +198,7 @@ function OrderCard({ order, onAdvance, onPrint }) {
   )
 }
 
-function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
+function OrdersPanel({ orders, loading, connOk, connErrorMsg, onAdvance, onRefetch }) {
   const [activeTab,  setActiveTab]  = useState('new')
   const [printModal, setPrintModal] = useState(null)
 
@@ -206,11 +207,11 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
 
   return (
     <>
-      <div className="flex border-b border-gray-200 bg-white">
+      <div className="flex border-b border-zinc-800 bg-zinc-950">
         {ORDER_TABS.map(tab => (
           <button key={tab.key} onClick={() => setActiveTab(tab.key)}
             className={`flex-1 py-3 text-xs sm:text-sm font-semibold relative transition-colors whitespace-nowrap ${
-              activeTab === tab.key ? 'text-gray-900' : 'text-gray-400'
+              activeTab === tab.key ? 'text-white' : 'text-gray-400'
             }`}>
             {tab.label}
             {tab.key === 'new' && newCount > 0 && (
@@ -231,22 +232,27 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <div className="w-8 h-8 border-2 border-purple-700 border-t-transparent rounded-full animate-spin" />
-            <p className="text-sm text-gray-500">Carregando pedidos...</p>
+            <p className="text-sm text-gray-400">Carregando pedidos...</p>
           </div>
         ) : !connOk ? (
           <div className="text-center py-16 px-4">
             <span className="text-5xl block mb-4">⚠️</span>
-            <p className="text-gray-900 font-semibold mb-1">Erro de conexão</p>
-            <p className="text-gray-500 text-sm mb-5">Não foi possível conectar à API.</p>
+            <p className="text-white font-semibold mb-1">Erro de conexão</p>
+            <p className="text-gray-400 text-sm mb-1">Não foi possível conectar à API.</p>
+            {connErrorMsg && (
+              <p className="text-red-400 text-xs font-mono bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 mb-5 text-left break-all">
+                {connErrorMsg}
+              </p>
+            )}
             <button onClick={onRefetch}
-              className="px-5 py-2.5 bg-gray-100 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-200">
+              className="px-5 py-2.5 bg-zinc-800 rounded-xl text-sm font-semibold text-white hover:bg-zinc-700">
               Tentar novamente
             </button>
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
             <span className="text-5xl block mb-4">{STATUS[activeTab]?.icon || '📋'}</span>
-            <p className="text-gray-500 font-medium">Nenhum pedido aqui</p>
+            <p className="text-gray-400 font-medium">Nenhum pedido aqui</p>
           </div>
         ) : (
           filtered.map(order => (
@@ -259,25 +265,66 @@ function OrdersPanel({ orders, loading, connOk, onAdvance, onRefetch }) {
 }
 
 function SettingsPanel() {
-  const [form,    setForm]    = useState({ pix_key: '', whatsapp_number: '' })
-  const [loading, setLoading] = useState(true)
-  const [saving,  setSaving]  = useState(false)
-  const [saved,   setSaved]   = useState(false)
-  const [error,   setError]   = useState('')
+  const [form,      setForm]      = useState({ pix_key: '', whatsapp_number: '', banner_url: '' })
+  const [loading,    setLoading]    = useState(true)
+  const [saving,     setSaving]     = useState(false)
+  const [saved,      setSaved]      = useState(false)
+  const [error,      setError]      = useState('')
+  const [uploading,  setUploading]  = useState(false)
+  const bannerFileRef = useRef(null)
 
   useEffect(() => {
-    api.getSettings()
-      .then(data => setForm({ pix_key: data.pix_key || '', whatsapp_number: data.whatsapp_number || '' }))
+    supabase
+      .from('settings')
+      .select('pix_key, whatsapp_number, banner_url')
+      .eq('id', 1)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error
+        setForm({
+          pix_key:         data?.pix_key || '',
+          whatsapp_number: data?.whatsapp_number || '',
+          banner_url:      data?.banner_url || '',
+        })
+      })
       .catch(e => setError(e.message))
       .finally(() => setLoading(false))
   }, [])
+
+  const handleBannerFile = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    setUploading(true)
+    setError('')
+    try {
+      const { url } = await uploadImage(file)
+      const { error } = await supabase.from('settings').update({ banner_url: url }).eq('id', 1)
+      if (error) throw error
+      setForm(f => ({ ...f, banner_url: url }))
+      setSaved(true)
+      setTimeout(() => setSaved(false), 3000)
+    } catch (err) {
+      setError('Erro no upload: ' + err.message)
+    } finally {
+      setUploading(false)
+      e.target.value = ''
+    }
+  }
 
   const handleSave = async () => {
     setSaving(true)
     setSaved(false)
     setError('')
     try {
-      await api.updateSettings({ pix_key: form.pix_key.trim(), whatsapp_number: form.whatsapp_number.trim() })
+      const { error } = await supabase
+        .from('settings')
+        .update({
+          pix_key:         form.pix_key.trim(),
+          whatsapp_number: form.whatsapp_number.trim(),
+          banner_url:      form.banner_url.trim() || null,
+        })
+        .eq('id', 1)
+      if (error) throw error
       setSaved(true)
       setTimeout(() => setSaved(false), 3000)
     } catch (e) {
@@ -287,7 +334,7 @@ function SettingsPanel() {
     }
   }
 
-  const inputCls = 'w-full bg-gray-50 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm font-mono border border-gray-200'
+  const inputCls = 'w-full bg-zinc-800 rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-purple-500 transition-all text-sm font-mono border border-zinc-700'
 
   if (loading) return (
     <div className="flex items-center justify-center py-16">
@@ -298,27 +345,66 @@ function SettingsPanel() {
   return (
     <div className="space-y-5">
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-1">Configurações</h3>
-        <p className="text-xs text-gray-500">Alterações entram em vigor imediatamente para todos os clientes.</p>
+        <h3 className="text-lg font-bold text-white mb-1">Configurações</h3>
+        <p className="text-xs text-gray-400">Alterações entram em vigor imediatamente para todos os clientes.</p>
       </div>
 
-      {error && <p className="text-red-600 text-sm bg-red-50 rounded-xl px-4 py-2 border border-red-200">{error}</p>}
+      {error && <p className="text-red-400 text-sm bg-red-500/10 rounded-xl px-4 py-2 border border-red-500/20">{error}</p>}
 
-      <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
-        <label className="text-xs text-purple-700 font-semibold uppercase tracking-widest block mb-2">💠 Chave Pix</label>
+      <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800 shadow-sm">
+        <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">💠 Chave Pix</label>
         <input type="text" value={form.pix_key}
           onChange={e => setForm(f => ({ ...f, pix_key: e.target.value }))}
           placeholder="CPF, CNPJ, e-mail, telefone ou chave aleatória"
           className={inputCls} />
       </div>
 
-      <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
-        <label className="text-xs text-purple-700 font-semibold uppercase tracking-widest block mb-2">📱 Número do WhatsApp</label>
+      <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800 shadow-sm">
+        <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">📱 Número do WhatsApp</label>
         <input type="text" value={form.whatsapp_number}
           onChange={e => setForm(f => ({ ...f, whatsapp_number: e.target.value }))}
           placeholder="5511999999999"
           className={inputCls} />
         <p className="text-xs text-gray-400 mt-2">Formato internacional sem + ou espaços. Ex.: 5511999999999</p>
+      </div>
+
+      <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800 shadow-sm">
+        <label className="text-xs text-purple-400 font-semibold uppercase tracking-widest block mb-2">🖼️ Banner Promocional</label>
+        <input type="text" value={form.banner_url}
+          onChange={e => setForm(f => ({ ...f, banner_url: e.target.value }))}
+          placeholder="https://exemplo.com/banner.jpg"
+          className={inputCls} />
+
+        <input
+          ref={bannerFileRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleBannerFile}
+        />
+        <button
+          type="button"
+          onClick={() => bannerFileRef.current?.click()}
+          disabled={uploading}
+          className="w-full mt-2.5 py-3 bg-zinc-800 border border-zinc-700 rounded-xl text-sm font-semibold
+                     text-white active:scale-95 transition-all disabled:opacity-50 hover:bg-zinc-700
+                     flex items-center justify-center gap-2">
+          {uploading ? (
+            <>
+              <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            <>📁 Enviar imagem do computador</>
+          )}
+        </button>
+
+        <p className="text-xs text-gray-400 mt-2">Cole uma URL ou envie um arquivo do computador. Deixe em branco para não exibir nenhum banner no cardápio.</p>
+        {form.banner_url && (
+          <img src={form.banner_url} alt="Pré-visualização do banner"
+            className="w-full h-24 object-cover rounded-xl mt-3 border border-zinc-800"
+            onError={e => { e.target.style.display = 'none' }} />
+        )}
       </div>
 
       <button onClick={handleSave} disabled={saving}
@@ -338,39 +424,62 @@ const MAIN_TABS = [
   { key: 'settings', label: '⚙️ Config'     },
 ]
 
-export default function AdminPanel({ onBack }) {
+export default function AdminPanel({ onLogout }) {
   const [mainTab,       setMainTab]       = useState('orders')
   const [orders,        setOrders]        = useState([])
   const [ordersLoading, setOrdersLoading] = useState(true)
   const [connOk,        setConnOk]        = useState(true)
+  const [connErrorMsg,  setConnErrorMsg]  = useState('')
 
   const fetchOrders = useCallback(() => {
-    api.getOrders()
-      .then(data => { setOrders(data); setConnOk(true) })
-      .catch(() => setConnOk(false))
+    supabase
+      .from('orders')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(200)
+      .then(({ data, error }) => {
+        if (error) throw error
+        setOrders(data)
+        setConnOk(true)
+        setConnErrorMsg('')
+      })
+      .catch((err) => {
+        console.error('Erro Supabase:', err)
+        setConnErrorMsg(err.message || 'Erro desconhecido')
+        setConnOk(false)
+      })
       .finally(() => setOrdersLoading(false))
   }, [])
 
   useEffect(() => {
     fetchOrders()
 
-    const sse = api.ordersEvents()
-    sse.addEventListener('order-insert', e => {
-      setOrders(prev => [JSON.parse(e.data), ...prev])
-    })
-    sse.addEventListener('order-update', e => {
-      const updated = JSON.parse(e.data)
-      setOrders(prev => prev.map(o => o.id === updated.id ? updated : o))
-    })
-    sse.addEventListener('connected', () => setConnOk(true))
-    sse.onerror = () => setConnOk(false)
+    const channel = supabase
+      .channel('admin-orders')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, payload => {
+        setOrders(prev => [payload.new, ...prev])
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'orders' }, payload => {
+        setOrders(prev => prev.map(o => o.id === payload.new.id ? payload.new : o))
+      })
+      .subscribe((status, err) => {
+        if (status === 'SUBSCRIBED') {
+          setConnOk(true)
+          setConnErrorMsg('')
+        } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+          console.error('Erro Supabase Realtime:', status, err)
+          setConnErrorMsg(err?.message || `Realtime: ${status} (tabela "orders" está na publicação supabase_realtime?)`)
+          setConnOk(false)
+        }
+      })
 
-    return () => sse.close()
+    return () => { supabase.removeChannel(channel) }
   }, [fetchOrders])
 
   const handleAdvance = async (order, status) => {
     try {
-      await api.updateOrder(order.id, { status })
+      const { error } = await supabase.from('orders').update({ status }).eq('id', order.id)
+      if (error) throw error
       if (status === 'delivering') {
         const pedido = (order.items || []).map(item => {
           let detail = item.name
@@ -399,28 +508,34 @@ export default function AdminPanel({ onBack }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-xl border-b border-gray-200
+      <div className="sticky top-0 z-10 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800
                       px-4 h-16 flex items-center gap-3 shadow-sm">
         <div className="flex-1">
           <Logo className="h-8 w-auto object-contain mb-0.5" />
-          <p className="text-xs text-gray-500">{subtitles[mainTab]}</p>
+          <p className="text-xs text-gray-400">{subtitles[mainTab]}</p>
         </div>
-        <div className="flex items-center gap-1.5">
-          <div className={`w-2 h-2 rounded-full ${connOk ? 'bg-emerald-500 animate-pulse' : 'bg-red-400'}`} />
-          <span className={`text-xs font-medium ${connOk ? 'text-emerald-600' : 'text-red-500'}`}>
-            {connOk ? 'Ao vivo' : 'Offline'}
-          </span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <div className={`w-2 h-2 rounded-full ${connOk ? 'bg-emerald-500 animate-pulse' : 'bg-red-400'}`} />
+            <span className={`text-xs font-medium ${connOk ? 'text-emerald-400' : 'text-red-400'}`}>
+              {connOk ? 'Ao vivo' : 'Offline'}
+            </span>
+          </div>
+          <button onClick={onLogout}
+            className="text-xs font-semibold text-gray-400 hover:text-white transition-colors">
+            Sair
+          </button>
         </div>
       </div>
 
       {/* Main tabs */}
-      <div className="flex border-b border-gray-200 bg-white">
+      <div className="flex border-b border-zinc-800 bg-zinc-950">
         {MAIN_TABS.map(tab => (
           <button key={tab.key} onClick={() => setMainTab(tab.key)}
             className={`flex-1 py-3 text-[11px] sm:text-sm font-semibold relative transition-colors ${
-              mainTab === tab.key ? 'text-gray-900' : 'text-gray-400'
+              mainTab === tab.key ? 'text-white' : 'text-gray-400'
             }`}>
             {tab.label}
             {tab.key === 'orders' && newCount > 0 && (
@@ -442,6 +557,7 @@ export default function AdminPanel({ onBack }) {
             orders={orders}
             loading={ordersLoading}
             connOk={connOk}
+            connErrorMsg={connErrorMsg}
             onAdvance={handleAdvance}
             onRefetch={fetchOrders}
           />

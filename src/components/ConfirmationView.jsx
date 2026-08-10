@@ -37,19 +37,19 @@ function buildWAMessage(order) {
 function OrderItemLine({ item }) {
   const qty = item.qty || 1
   return (
-    <div className="py-1.5 border-b border-gray-200 last:border-0">
+    <div className="py-1.5 border-b border-zinc-800 last:border-0">
       <div className="flex justify-between text-sm">
-        <span className="text-gray-700 pr-2">{qty}× {item.name}</span>
-        <span className="text-purple-600 font-semibold flex-shrink-0">{fmt(item.price * qty)}</span>
+        <span className="text-gray-300 pr-2">{qty}× {item.name}</span>
+        <span className="text-purple-400 font-semibold flex-shrink-0">{fmt(item.price * qty)}</span>
       </div>
       {item.type === 'acai' && (
         <div className="mt-0.5 space-y-0.5">
-          {item.base && <p className="text-xs text-gray-500">{item.base.label}</p>}
+          {item.base && <p className="text-xs text-gray-400">{item.base.label}</p>}
           {item.toppings?.length > 0 && (
-            <p className="text-xs text-gray-400">+ {item.toppings.map(t => t.label).join(', ')}</p>
+            <p className="text-xs text-gray-500">+ {item.toppings.map(t => t.label).join(', ')}</p>
           )}
           {item.extras?.length > 0 && (
-            <p className="text-xs text-gray-400">✨ {item.extras.map(e => e.label).join(', ')}</p>
+            <p className="text-xs text-gray-500">✨ {item.extras.map(e => e.label).join(', ')}</p>
           )}
         </div>
       )}
@@ -80,18 +80,18 @@ export default function ConfirmationView({ order, onNewOrder }) {
   }
 
   const OrderCard = () => (
-    <div className="bg-white rounded-2xl p-4 mb-5 text-left border border-gray-200 shadow-sm">
-      <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Seu pedido</p>
+    <div className="bg-zinc-900 rounded-2xl p-4 mb-5 text-left border border-zinc-800 shadow-sm">
+      <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Seu pedido</p>
       {(order.items || []).map((item, i) => <OrderItemLine key={i} item={item} />)}
-      <div className="flex justify-between pt-3 mt-1 border-t border-gray-200 font-bold">
-        <span className="text-gray-900">Total</span>
-        <span className="text-xl text-purple-700">{fmt(order.total)}</span>
+      <div className="flex justify-between pt-3 mt-1 border-t border-zinc-800 font-bold">
+        <span className="text-white">Total</span>
+        <span className="text-xl text-purple-400">{fmt(order.total)}</span>
       </div>
-      <div className="mt-3 pt-3 border-t border-gray-200 flex flex-wrap gap-2">
-        <span className="text-xs bg-gray-100 px-2.5 py-1 rounded-full text-gray-500">
+      <div className="mt-3 pt-3 border-t border-zinc-800 flex flex-wrap gap-2">
+        <span className="text-xs bg-zinc-800 px-2.5 py-1 rounded-full text-gray-400">
           {order.delivery_type === 'delivery' ? '🛵 Entrega' : '🏪 Retirada'}
         </span>
-        <span className="text-xs bg-gray-100 px-2.5 py-1 rounded-full text-gray-500">
+        <span className="text-xs bg-zinc-800 px-2.5 py-1 rounded-full text-gray-400">
           {PAYMENT_LABELS[order.payment_method] || order.payment_method}
         </span>
       </div>
@@ -112,25 +112,25 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
   const NewOrderButton = () => (
     <button onClick={onNewOrder}
-      className="w-full py-3.5 bg-gray-100 rounded-2xl font-semibold text-gray-600 border border-gray-200
-                 active:scale-[0.98] transition-all text-sm hover:bg-gray-200">
+      className="w-full py-3.5 bg-zinc-800 rounded-2xl font-semibold text-gray-300 border border-zinc-700
+                 active:scale-[0.98] transition-all text-sm hover:bg-zinc-700">
       Fazer novo pedido
     </button>
   )
 
   if (order.payment_method === 'pix') {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-5 py-10">
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center px-5 py-10">
         <div className="max-w-sm w-full text-center">
           <div className={`w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-7
-                           transition-all duration-500 ${tick ? 'bg-purple-100 scale-100' : 'scale-50 opacity-0'}`}>
+                           transition-all duration-500 ${tick ? 'bg-purple-950/60 scale-100' : 'scale-50 opacity-0'}`}>
             <span className={`text-5xl transition-all duration-500 delay-200 ${tick ? 'opacity-100' : 'opacity-0'}`}>
               ⏳
             </span>
           </div>
 
-          <h1 className="text-3xl font-extrabold mb-2 text-purple-700">Aguardando Pagamento!</h1>
-          <p className="text-gray-500 text-[15px] mb-8 leading-relaxed">
+          <h1 className="text-3xl font-extrabold mb-2 text-purple-400">Aguardando Pagamento!</h1>
+          <p className="text-gray-400 text-[15px] mb-8 leading-relaxed">
             Para que o seu pedido seja confirmado e vá para<br />
             o preparo, pague a chave Pix abaixo e envie o<br />
             comprovante no nosso WhatsApp.
@@ -138,22 +138,22 @@ export default function ConfirmationView({ order, onNewOrder }) {
 
           <OrderCard />
 
-          <div className="bg-white border border-purple-200 rounded-2xl p-4 mb-5 text-left shadow-sm">
-            <p className="text-xs font-semibold text-purple-700 uppercase tracking-widest mb-3">Chave Pix</p>
+          <div className="bg-zinc-900 border border-purple-800 rounded-2xl p-4 mb-5 text-left shadow-sm">
+            <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Chave Pix</p>
             <div className="flex items-center gap-2 mb-2.5">
-              <p className="flex-1 font-mono text-sm bg-gray-50 rounded-xl px-3 py-2.5 text-gray-900 truncate select-all border border-gray-200">
+              <p className="flex-1 font-mono text-sm bg-zinc-800 rounded-xl px-3 py-2.5 text-white truncate select-all border border-zinc-700">
                 {settings.pix_key || '—'}
               </p>
               <button onClick={handleCopy}
                 className={`flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 ${
-                  copied ? 'bg-emerald-600 text-white' : 'bg-purple-700 text-white hover:bg-purple-800'
+                  copied ? 'bg-emerald-600 text-white' : 'bg-purple-900 text-white hover:bg-purple-800'
                 }`}>
                 {copied ? '✓ Copiado!' : 'Copiar'}
               </button>
             </div>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-gray-400 leading-relaxed">
               Acesse seu banco, escolha Pix e cole a chave acima.
-              O valor a pagar é <span className="text-purple-700 font-semibold">{fmt(order.total)}</span>.
+              O valor a pagar é <span className="text-purple-400 font-semibold">{fmt(order.total)}</span>.
             </p>
           </div>
 
@@ -165,20 +165,20 @@ export default function ConfirmationView({ order, onNewOrder }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-5 py-10">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-5 py-10">
       <div className="max-w-sm w-full text-center">
         <div className={`w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-7
-                         transition-all duration-500 ${tick ? 'bg-emerald-100 scale-100' : 'scale-50 opacity-0'}`}>
+                         transition-all duration-500 ${tick ? 'bg-emerald-950/60 scale-100' : 'scale-50 opacity-0'}`}>
           <svg
-            className={`w-14 h-14 text-emerald-600 transition-all duration-500 delay-200 ${tick ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-14 h-14 text-emerald-400 transition-all duration-500 delay-200 ${tick ? 'opacity-100' : 'opacity-0'}`}
             fill="none" stroke="currentColor" viewBox="0 0 24 24"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
 
-        <h1 className="text-3xl font-extrabold mb-2 text-gray-900">Pedido Confirmado!</h1>
-        <p className="text-gray-500 text-[15px] mb-8 leading-relaxed">
+        <h1 className="text-3xl font-extrabold mb-2 text-white">Pedido Confirmado!</h1>
+        <p className="text-gray-400 text-[15px] mb-8 leading-relaxed">
           Recebemos seu pedido e já estamos<br />preparando tudo com muito carinho.
         </p>
 
