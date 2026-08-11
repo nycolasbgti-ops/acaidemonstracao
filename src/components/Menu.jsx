@@ -49,7 +49,9 @@ export default function Menu({ categories, byCategory, bannerUrl, onSelectProduc
     <div className="pb-32">
       {bannerUrl && (
         <div className="max-w-lg mx-auto px-4 pt-3">
-          <img src={bannerUrl} alt="Promoções" className="w-full h-36 sm:h-44 object-cover rounded-2xl mb-4" />
+          <div className="w-full min-h-[160px] h-48 sm:h-56 rounded-2xl overflow-hidden mb-4">
+            <img src={bannerUrl} alt="Promoções" className="w-full h-full object-cover object-center" />
+          </div>
         </div>
       )}
 
