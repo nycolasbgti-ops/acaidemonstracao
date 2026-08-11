@@ -9,7 +9,7 @@ export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick 
 
         {/* Logo — esquerda */}
         <div className="flex items-center flex-1">
-          <img src="/logo.png" alt="Luma Açaí" className="h-20 sm:h-24 w-auto object-contain" />
+          <img src="/logo.png" alt="Luma Açaí" className="h-24 sm:h-28 w-auto object-contain" />
         </div>
 
         {/* Ações — direita */}
