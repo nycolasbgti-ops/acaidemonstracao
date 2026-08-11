@@ -5,11 +5,11 @@ const fmt = (v) => `R$ ${Number(v || 0).toFixed(2).replace('.', ',')}`
 export default function Header({ cartCount, cartTotal, onCartClick, onInfoClick }) {
   return (
     <header className="sticky top-0 z-40 bg-zinc-950 border-b border-zinc-800 shadow-sm">
-      <div className="max-w-lg mx-auto px-4 h-20 flex items-center justify-between">
+      <div className="max-w-lg mx-auto px-4 h-28 flex items-center justify-between">
 
         {/* Logo — esquerda */}
         <div className="flex items-center flex-1">
-          <img src="/logo.png" alt="Luma Açaí" className="h-14 sm:h-16 w-auto object-contain" />
+          <img src="/logo.png" alt="Luma Açaí" className="h-20 sm:h-24 w-auto object-contain" />
         </div>
 
         {/* Ações — direita */}
