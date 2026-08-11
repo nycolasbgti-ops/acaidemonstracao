@@ -139,7 +139,7 @@ export default function App() {
   // ── Menu principal ────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div ref={stickyHeaderRef} className="sticky top-0 z-50 flex flex-col bg-zinc-950">
+      <div ref={stickyHeaderRef} className="sticky top-0 z-50 flex flex-col bg-zinc-950 pt-[env(safe-area-inset-top)]">
         <Header
           cartCount={cartCount}
           cartTotal={cartTotal}
