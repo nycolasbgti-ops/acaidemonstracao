@@ -253,7 +253,32 @@ VALUES
   ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Chá Gelado 400ml',
    'Chá gelado de frutas vermelhas. Refrescante.',
    '{"unique": 8.00}', 0, '🫖',
-   'https://images.unsplash.com/photo-1599599810724-8249cba80f81?w=500&h=500&fit=crop', true, 5)
+   'https://images.unsplash.com/photo-1599599810724-8249cba80f81?w=500&h=500&fit=crop', true, 5),
+
+  ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Coca-Cola Lata 350ml',
+   'Coca-Cola gelada, lata 350ml.',
+   '{"unique": 6.50}', 0, '🥤',
+   'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&h=500&fit=crop', true, 6),
+
+  ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Guaraná Lata 350ml',
+   'Guaraná Antarctica gelado, lata 350ml.',
+   '{"unique": 6.50}', 0, '🥤',
+   'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&h=500&fit=crop', true, 7),
+
+  ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Água sem Gás 500ml',
+   'Água mineral natural sem gás.',
+   '{"unique": 4.00}', 0, '💧',
+   'https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=500&h=500&fit=crop', true, 8),
+
+  ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Água com Gás 500ml',
+   'Água mineral gaseificada bem gelada.',
+   '{"unique": 4.50}', 0, '🫧',
+   'https://images.unsplash.com/photo-1602088113235-229c19758e9f?w=500&h=500&fit=crop', true, 9),
+
+  ((SELECT id FROM categories WHERE slug = 'bebidas'), 'Suco Natural de Uva 300ml',
+   'Suco natural de uva, feito na hora.',
+   '{"unique": 10.00}', 0, '🍇',
+   'https://images.unsplash.com/photo-1599599810694-b5ac4dd01e3e?w=500&h=500&fit=crop', true, 10)
 ON CONFLICT DO NOTHING;
 
 

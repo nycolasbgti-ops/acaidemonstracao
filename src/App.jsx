@@ -29,7 +29,7 @@ export default function App() {
   const [navTab,         setNavTab]        = useState('home')
 
   // Refs para scroll spy
-  const scrollContainerRef     = useRef(null)
+  const stickyHeaderRef        = useRef(null)
   const isScrollingToSection   = useRef(false)
   const scrollTimeoutRef       = useRef(null)
 
@@ -57,10 +57,11 @@ export default function App() {
     isScrollingToSection.current = true
     setActiveCatId(catId)
 
-    const root = scrollContainerRef.current
-    const section = root?.querySelector(`[data-cat-id="${catId}"]`)
-    if (root && section) {
-      root.scrollTo({ top: section.offsetTop - 8, behavior: 'smooth' })
+    const section = document.querySelector(`[data-cat-id="${catId}"]`)
+    if (section) {
+      const headerHeight = stickyHeaderRef.current?.offsetHeight || 0
+      const top = section.getBoundingClientRect().top + window.scrollY - headerHeight - 8
+      window.scrollTo({ top, behavior: 'smooth' })
     }
 
     clearTimeout(scrollTimeoutRef.current)
@@ -133,15 +134,27 @@ export default function App() {
     return <ConfirmationView order={confirmedOrder} onNewOrder={() => { setConfirmedOrder(null); setView('menu'); setNavTab('home') }} />
   }
 
+  const showCategoryTabs = navTab !== 'orders' && !loading && categories.length > 0
+
   // ── Menu principal ────────────────────────────────────────────
   return (
-    <div className="h-screen bg-black text-white flex flex-col overflow-hidden">
-      <Header
-        cartCount={cartCount}
-        cartTotal={cartTotal}
-        onCartClick={() => { setCartOpen(true); setNavTab('cart') }}
-        onInfoClick={() => setShowStoreInfo(true)}
-      />
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      <div ref={stickyHeaderRef} className="sticky top-0 z-50 flex flex-col bg-zinc-950">
+        <Header
+          cartCount={cartCount}
+          cartTotal={cartTotal}
+          onCartClick={() => { setCartOpen(true); setNavTab('cart') }}
+          onInfoClick={() => setShowStoreInfo(true)}
+        />
+
+        {showCategoryTabs && (
+          <CategoryTabs
+            categories={categories}
+            selected={activeCatId}
+            onChange={handleTabChange}
+          />
+        )}
+      </div>
 
       {navTab === 'orders' ? (
         <OrdersView />
@@ -150,27 +163,15 @@ export default function App() {
       ) : categories.length === 0 ? (
         <ErrorState message={error} />
       ) : (
-        <>
-
-          <CategoryTabs
+        <main>
+          <Menu
             categories={categories}
-            selected={activeCatId}
-            onChange={handleTabChange}
+            byCategory={byCategory}
+            bannerUrl={bannerUrl}
+            onSelectProduct={handleProductClick}
+            onCategoryChange={handleCategoryChange}
           />
-
-          <main
-            ref={scrollContainerRef}
-            className="flex-1 overflow-y-auto"
-          >
-            <Menu
-              categories={categories}
-              byCategory={byCategory}
-              bannerUrl={bannerUrl}
-              onSelectProduct={handleProductClick}
-              onCategoryChange={handleCategoryChange}
-            />
-          </main>
-        </>
+        </main>
       )}
 
       {/* Modal de montagem do açaí */}
